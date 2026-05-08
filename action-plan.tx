@@ -1,0 +1,107 @@
+/* ==========================================================================================
+    page strcutre
+========================================================================================== */
+
+/index.html        → content (Netflix style)
+/workspace.html    → .md learning view
+/snippets.html     → submission form
+/about.html        → about + manual
+/css/style.css     → your custom styles
+
+1. Add :root tokens
+2. Add .page-shell-wide and .page-shell-content
+3. Add .layout-reading / standard / wide
+4. Apply page-shell-content to about/snippets/content pages
+5. Apply page-shell-wide to homepage/workspace
+6. Remove old random margins/padding per page
+
+/* ==========================================================================================
+    Foundation
+========================================================================================== */
+
+
+# Global CSS foundation:
+
+The correct mental model:
+
+1. Bootstrap = foundation (structure)
+
+grid (container, row, col)
+layout
+responsive behaviour
+basic components (nav, cards, forms)
+
+2. Your CSS = design layer (on top)
+
+colours
+spacing tweaks
+branding
+custom UI (glass nav, sidebar, etc.)
+
+/* ==========================================================================================
+    ROOT SETTINGS
+========================================================================================== */
+
+:root {
+  --color-bg: #0f1117;
+  --color-surface: #171b24;
+  --color-surface-soft: #202633;
+
+  --color-text: #f5f5f7;
+  --color-muted: #a1a1aa;
+  --color-link: #0d6efd;
+
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+
+  --shadow-soft: 0 20px 60px rgba(0, 0, 0, 0.35);
+
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+}
+
+Then your base styles:
+
+/* ==========================================================================================
+    GLOBAL BASE
+========================================================================================== */
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+  color: var(--color-link);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+Then use variables everywhere:
+
+.custom-card {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+}
+
+This means later, instead of changing 50 colours, you change one value in :root.
+
+So your CSS order should be:
+
+1. root variables
+2. global/base styles
+3. Bootstrap overrides
+4. layout sections
+5. components
+6. page-specific styles
+7. media queries
+
+That will make the project feel much more professional.

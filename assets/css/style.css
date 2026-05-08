@@ -1,70 +1,1284 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Oswald:wght@200..700&display=swap');
+/* ==========================================================================================
 
-/* asterisk wildcard selector to override default styles added by the browser */
+   1. GLOBAL DESIGN TOKENS
 
-* {
-  padding: 0;
-  margin: 0;
+   DESCRIPTION:
+   This section is the design system for the whole site. It stores colours, spacing,
+   typography, layout widths, shadows, glass effects, transitions, buttons, and z-index values.
+
+   KEY IDEA:
+   Most repeated visual values should live here first. The rest of the CSS should use these
+   variables instead of inventing new hardcoded colours, spacing, shadows, or sizes.
+
+   WATCH OUT:
+   If you add a raw colour later, ask yourself whether it should become a token instead.
+
+========================================================================================== */
+
+:root {
+  /* ==========================================
+     1.1 COLOURS
+
+     DESCRIPTION:
+     These tokens control the main dark theme, card surfaces, text colours, links,
+     accent colours, and utility colours.
+
+     IMPORTANT:
+     Keep raw hex colours mostly in this section. Page and component CSS should usually
+     reference these variables instead of repeating hex values.
+  ========================================== */
+
+  --color-bg: #111318;
+  --color-bg-soft: #171d24;
+  --color-bg-blue: #26354a;
+
+  --color-card: rgba(24, 27, 33, 0.76);
+  --color-card-strong: rgba(24, 27, 33, 0.86);
+  --color-card-hover: rgba(32, 36, 44, 0.88);
+
+  --color-surface: #20242c;
+  --color-surface-dark: #171d24;
+
+  --color-text: #f5f7fa;
+  --color-text-soft: #d8dde6;
+  --color-text-muted: #9aa3b2;
+  --color-text-faint: #6e6e73;
+
+  --color-link: #8fd3ff;
+  --color-accent: #0d6efd;
+  --color-danger: #e50914;
+
+  --color-white: #ffffff;
+  --color-black: #111318;
+
+  /* ==========================================
+     1.2 BORDERS
+
+     DESCRIPTION:
+     Shared border strengths for glass panels, cards, buttons, separators, and page sections.
+
+     KEY IDEA:
+     Using border tokens keeps the glass UI consistent across the site.
+  ========================================== */
+
+  --border-soft: 1px solid rgba(255, 255, 255, 0.08);
+  --border-medium: 1px solid rgba(255, 255, 255, 0.12);
+  --border-strong: 1px solid rgba(255, 255, 255, 0.18);
+
+  /* ==========================================
+     1.3 RADIUS
+
+     DESCRIPTION:
+     Shared corner radius values. Small radii are used for compact cards/buttons;
+     large radii are used for glass panels and sidebars.
+  ========================================== */
+
+  --radius-xs: 6px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 22px;
+  --radius-2xl: 24px;
+  --radius-3xl: 32px;
+  --radius-pill: 999px;
+  --radius-circle: 50%;
+
+
+  /* ==========================================
+     1.4 SPACING
+
+     DESCRIPTION:
+     Reusable spacing steps for padding, margins, gaps, and layout rhythm.
+
+     KEY IDEA:
+     These are small, reusable steps. Use them instead of random one-off numbers where possible.
+  ========================================== */
+
+  --space-1: 4px;
+  --space-2: 6px;
+  --space-3: 8px;
+  --space-4: 10px;
+  --space-5: 12px;
+  --space-6: 14px;
+  --space-7: 16px;
+  --space-8: 18px;
+  --space-9: 20px;
+  --space-10: 24px;
+  --space-11: 28px;
+  --space-12: 32px;
+  --space-13: 40px;
+  --space-14: 48px;
+  --space-15: 56px;
+  --space-16: 64px;
+  --space-17: 80px;
+  --space-18: 96px;
+  --space-19: 120px;
+
+  /* ==========================================
+     1.5 LAYOUT WIDTHS
+
+     DESCRIPTION:
+     Shared layout measurements for the sidebar, content offsets, page containers,
+     page padding, and footer spacing.
+
+     CHANGED:
+     The old hardcoded offsets like 200px and 320px are now named tokens.
+     This makes it clear that normal pages and markdown pages intentionally align differently.
+  ========================================== */
+
+  --sidebar-width: 260px;
+  --sidebar-offset: 16px;
+  --sidebar-gap: 48px;
+
+  /* DESKTOP DEFAULT:
+     Normal content pages move away from the fixed sidebar by this amount. */
+  --content-sidebar-offset: 200px;
+
+  /* DESKTOP DEFAULT:
+     Markdown reading pages use a wider offset because the reading layout needs more room. */
+  --markdown-sidebar-offset: 320px;
+
+  --container-reading: 820px;
+  --container-standard: 1040px;
+  --container-wide: 1480px;
+
+  --page-padding-x: 48px;
+  --page-padding-y: 56px;
+  --footer-height-space: 96px;
+
+  /* Mobile navigation */
+
+  --mobile-nav-inset: 20px;
+  --mobile-nav-width: 320px;
+  --mobile-nav-height: 50px;
+  --mobile-tool-size: 50px;
+  --mobile-tool-gap: 10px;
+
+  /* ==========================================
+     1.6 TYPOGRAPHY
+
+     DESCRIPTION:
+     Font families, text sizes, heading sizes, line heights, and letter-spacing values.
+
+     KEY IDEA:
+     Typography tokens help headings, cards, buttons, and reading pages feel connected.
+  ========================================== */
+
+  --font-main: Arial, sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+
+  --text-xs: 11px;
+  --text-sm: 12px;
+  --text-md: 14px;
+  --text-base: 15px;
+  --text-lg: 16px;
+  --text-xl: 18px;
+  --text-2xl: 22px;
+  --text-3xl: 24px;
+  --text-4xl: 28px;
+
+  --hero-title: clamp(42px, 7vw, 76px);
+  --page-title: clamp(34px, 4vw, 54px);
+  --section-title: 24px;
+  --card-title: 20px;
+
+  --line-tight: 0.95;
+  --line-normal: 1.45;
+  --line-reading: 1.7;
+
+  --tracking-tight: -0.05em;
+  --tracking-heading: -0.04em;
+  --tracking-eyebrow: 0.08em;
+
+  /* ==========================================
+     1.7 SHADOWS
+
+     DESCRIPTION:
+     Shared shadow styles for cards, glass panels, sidebars, and hover effects.
+
+     WATCH OUT:
+     Avoid adding lots of new shadow values later. Too many different shadows make the UI feel messy.
+  ========================================== */
+
+  --shadow-card: 0 22px 60px rgba(0, 0, 0, 0.34);
+  --shadow-card-hover: 0 30px 80px rgba(0, 0, 0, 0.46);
+  --shadow-sidebar: 0 30px 80px rgba(0, 0, 0, 0.45);
+  --shadow-soft: 0 12px 28px rgba(0, 0, 0, 0.32);
+
+  /* ==========================================
+     1.8 GLASS EFFECTS
+
+     DESCRIPTION:
+     Shared glass background and blur values used by sidebars, cards, dropdowns,
+     and floating panels.
+  ========================================== */
+
+  --glass-bg: rgba(24, 27, 33, 0.72);
+  --glass-bg-strong: rgba(24, 27, 33, 0.86);
+  --glass-blur: saturate(180%) blur(24px);
+  --glass-blur-heavy: saturate(180%) blur(40px);
+
+  /* ==========================================
+     1.9 TRANSITIONS
+
+     DESCRIPTION:
+     Shared animation timings for hover states, sidebar movement, buttons, and cards.
+
+     KEY IDEA:
+     Keep transition speeds consistent so the site feels intentional.
+  ========================================== */
+
+  --transition-fast: 0.2s ease;
+  --transition-med: 0.25s ease;
+
+  /* ==========================================
+     1.10 BUTTON TOKENS
+
+     DESCRIPTION:
+     Button-specific tokens. These still connect back to the global palette, but keeping
+     them separate makes button styling easier to adjust later.
+
+     IMPORTANT:
+     These tokens are for shared button components only. Avoid styling one-off buttons
+     with unrelated values unless the button is truly unique.
+  ========================================== */
+
+  --btn-radius: var(--radius-xs);
+  --btn-padding: 12px 20px;
+  --btn-font-size: var(--text-md);
+  --btn-font-weight: 700;
+
+  --btn-primary-bg: var(--color-white);
+  --btn-primary-bg-hover: #f2f4f8;
+  --btn-primary-text: var(--color-bg);
+
+  --btn-secondary-bg: rgba(255, 255, 255, 0.18);
+  --btn-secondary-bg-hover: rgba(255, 255, 255, 0.24);
+  --btn-secondary-text: var(--color-white);
+
+  /* ==========================================
+     1.11 Z-INDEX
+
+     DESCRIPTION:
+     Layering tokens for fixed UI elements.
+
+     KEY IDEA:
+     Use these instead of random z-index numbers so the sidebar, tools, footer,
+     and controls stay predictable.
+  ========================================== */
+
+  --z-sidebar: 20;
+  --z-tool: 20;
+  --z-footer: 15;
+  --z-controls: 10;
+}
+
+
+/* ==========================================================================================
+
+   2. BASE RESET
+
+   DESCRIPTION:
+   This section creates predictable browser defaults. It should stay near the top of the file
+   and should not contain page-specific styles.
+
+   KEEP THIS AS BASE CSS:
+   Base CSS should handle global behaviour only: box sizing, body margin, typography inheritance,
+   media overflow safety, and global background.
+
+========================================================================================== */
+
+/* Makes width and height easier to reason about by including padding and borders in element size. */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
-/* general styles acorss site*/
-
+/* Removes default browser margin and allows full-height page layouts. */
+html,
 body {
-  min-height: 100vh;
+  min-height: 100%;
+  margin: 0;
+}
+
+/* 
+   Global page background.
+
+   CHANGED:
+   The duplicated html/body visual styling from the old main CSS should stay removed.
+   Body owns the global background once, which prevents cascade confusion.
+*/
+body {
+  overflow-x: hidden;
+
+  font-family: var(--font-main);
+
+  background:
+    linear-gradient(
+      to top,
+      var(--color-bg) 0%,
+      rgba(17, 19, 24, 0.88) 45%,
+      rgba(17, 19, 24, 0.35) 100%
+    ),
+    linear-gradient(135deg, var(--color-bg-blue), var(--color-bg));
+
+  color: var(--color-text);
+}
+
+/* Prevents images and embedded media from overflowing their containers by default. */
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+}
+
+/* Keeps links controlled by their parent/component styling unless a component overrides them. */
+a {
+  color: inherit;
+}
+
+/* Keeps form controls consistent with the rest of the site typography. */
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Makes buttons easier to style consistently across browsers. */
+button {
+  border: 0;
+}
+
+/* ==========================================================================================
+
+   4. SHARED COMPONENT FOUNDATIONS
+
+   DESCRIPTION:
+   These are reusable visual building blocks. They should stay small and generic so they can
+   be used across cards, panels, widgets, dropdowns, and sections.
+
+   KEY IDEA:
+   Shared classes should not know about specific pages. They should provide reusable style
+   behaviour only.
+
+========================================================================================== */
+
+/*
+   Glass card foundation.
+
+   USE FOR:
+   Cards, panels, widgets, dropdown surfaces, and other glass-style containers.
+
+   IMPORTANT:
+   This class gives the surface style only. Add layout separately on the specific component.
+*/
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+
+  border: var(--border-medium);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-card);
+}
+
+/*
+   Reusable card hover behaviour.
+
+   USE FOR:
+   Elements that should lift slightly on hover.
+
+   WATCH OUT:
+   Do not apply this to elements where scaling/lifting could break layout or overlap text awkwardly.
+*/
+.card-hover {
+  transition:
+    transform var(--transition-fast),
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+/*
+   Hover state for reusable cards.
+
+   DRIFT CHECK:
+   This keeps the same visual design as your original dashboard/card hover:
+   slight lift, stronger background, stronger border, stronger shadow.
+*/
+.card-hover:hover {
+  transform: translateY(-3px);
+  background: var(--color-card-hover);
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: var(--shadow-card-hover);
+}
+
+
+/* ==========================================================================================
+
+   5. SHARED BUTTONS
+
+   DESCRIPTION:
+   Shared button styles for primary and secondary calls to action.
+
+   USE FOR:
+   Both <button> elements and <a> links styled as buttons.
+
+   IMPORTANT:
+   Text decoration is included because some of your buttons are links.
+   Keeping this shared prevents underlined link-buttons from appearing later.
+
+========================================================================================== */
+
+/*
+   Shared button base.
+
+   KEY IDEA:
+   Put the shared layout, sizing, typography, interaction, and transition rules here.
+   Then only put colour differences in .primary-btn and .secondary-btn.
+*/
+.primary-btn,
+.secondary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 44px;
+  padding: var(--btn-padding);
+
+  border: 0;
+  border-radius: var(--btn-radius);
+
+  font-size: var(--btn-font-size);
+  font-weight: var(--btn-font-weight);
+  line-height: 1;
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition:
+    transform var(--transition-fast),
+    background var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+/* Primary action button: strongest call to action. */
+.primary-btn {
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+}
+
+/* Secondary action button: softer glass-style action. */
+.secondary-btn {
+  background: var(--btn-secondary-bg);
+  color: var(--btn-secondary-text);
+
+  /*
+     This is okay here because the secondary button belongs to the glass design language.
+     If performance ever becomes a concern, reduce blur effects globally.
+  */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Shared hover movement for both button types. */
+.primary-btn:hover,
+.secondary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Primary hover colour. */
+.primary-btn:hover {
+  background: var(--btn-primary-bg-hover);
+}
+
+/* Secondary hover colour. */
+.secondary-btn:hover {
+  background: var(--btn-secondary-bg-hover);
+}
+
+/*
+   Keyboard accessibility.
+
+   IMPORTANT:
+   This gives keyboard users a visible focus state without changing the normal visual design.
+*/
+.primary-btn:focus-visible,
+.secondary-btn:focus-visible {
+  outline: 2px solid var(--color-link);
+  outline-offset: 3px;
+}
+
+/* ==========================================================================================
+
+   7. NAVIGATION SYSTEM
+
+   DESCRIPTION:
+   This section controls the fixed left topic sidebar and the fixed right utility tools.
+   It includes the sidebar container, sidebar links, collapsible state, right tool buttons,
+   prompt dropdown, and navigation icons.
+
+   KEY IDEA:
+   Navigation is fixed-position UI, so it must be predictable with z-index, sizing,
+   spacing, and responsive behaviour.
+
+   DRIFT CHECK:
+   This preserves your current design intent:
+   - left glass sidebar
+   - CSS-only collapsed sidebar
+   - right floating circular tool buttons
+   - prompt dropdown
+   - icon-based navigation styling
+
+========================================================================================== */
+
+
+/* ==========================================================================================
+
+   7.1 SHARED NAVIGATION SURFACES
+
+   DESCRIPTION:
+   These shared styles give the sidebar, tool buttons, and prompt dropdown the same
+   glass-panel visual language.
+
+   KEY IDEA:
+   Shared visual styling belongs here so each navigation piece does not repeat the same
+   background, blur, border, and shadow rules.
+
+========================================================================================== */
+
+/*
+   Shared floating glass surface.
+
+   USE FOR:
+   - .topic-sidebar
+   - .tool-link
+   - .prompt-dropdown
+*/
+.topic-sidebar,
+.tool-link,
+.prompt-dropdown {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+
+  border: var(--border-medium);
+  box-shadow: var(--shadow-sidebar);
+}
+
+/*
+   Shared interactive transition.
+
+   DESCRIPTION:
+   These are navigation items that visually respond on hover or interaction.
+
+   IMPORTANT:
+   Keep transition definitions in one place to avoid different nav elements feeling
+   slightly out of sync.
+*/
+.tool-link,
+.sidebar-main-link,
+.topic-file-link,
+.prompt-option,
+.sidebar-toggle-btn {
+  transition:
+    transform var(--transition-fast),
+    background var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    opacity var(--transition-fast);
+}
+
+
+/* ==========================================================================================
+
+   7.2 LEFT TOPIC SIDEBAR
+
+   DESCRIPTION:
+   The main fixed sidebar on the left side of the site. It contains the brand,
+   top-level links, topic groups, and nested file links.
+
+   DESKTOP DEFAULT:
+   The sidebar is fixed, full-height minus its outer offset, and scrollable if its content
+   becomes taller than the viewport.
+
+========================================================================================== */
+
+.topic-sidebar {
+  position: fixed;
+  top: var(--sidebar-offset);
+  left: var(--sidebar-offset);
+  z-index: var(--z-sidebar);
+
+  width: var(--sidebar-width);
+  height: calc(100vh - (var(--sidebar-offset) * 2));
+
+  /*
+     CHANGED:
+     Kept the improved padding from your current CSS.
+     Top padding is 0 because the header owns its own 60px height.
+  */
+  padding: 0 var(--space-7) var(--space-7);
+
+  border-radius: var(--radius-3xl);
+  overflow-y: auto;
+
+  transition:
+    height var(--transition-med),
+    padding var(--transition-med);
+}
+
+/*
+   Hidden checkbox used for CSS-only sidebar collapse.
+
+   IMPORTANT:
+   This enables the collapsed state without JavaScript.
+   The input is hidden visually, but the label/button can still control it.
+*/
+.sidebar-toggle-checkbox {
+  display: none;
+}
+
+/*
+   Sidebar header.
+
+   DESCRIPTION:
+   Holds the brand and the collapse toggle.
+   The fixed height prevents layout shift when the sidebar collapses.
+*/
+.sidebar-header {
+  position: relative;
+  height: 60px;
+
+  display: flex;
+  align-items: center;
+
+  margin-bottom: var(--space-8);
+}
+
+/*
+   Sidebar brand link.
+
+   DESCRIPTION:
+   The main identity/home link inside the sidebar.
+*/
+
+.sidebar-brand {
+  display: inline-flex;
+  align-items: center;
+
+  color: var(--color-white);
+  font-size: var(--text-2xl);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: var(--tracking-heading);
+  text-decoration: none;
+}
+
+.sidebar-brand:hover,
+.sidebar-brand:focus {
+  color: var(--color-white);
+  text-decoration: none;
+}
+
+/*
+   Sidebar collapse toggle button.
+
+   DESCRIPTION:
+   Positioned inside the sidebar header. It appears on sidebar hover so the default
+   sidebar view stays visually clean.
+
+   WATCH OUT:
+   On touch devices, hover is unreliable. Mobile-specific behaviour should be handled
+   in the navigation responsive section later.
+*/
+.sidebar-toggle-btn {
+  position: absolute;
+  top: 50%;
+  right: 0;
+
+  width: 32px;
+  height: 32px;
+
+  display: grid;
+  place-items: center;
+
+  transform: translateY(-50%);
+
+  opacity: 0;
+  border-radius: var(--radius-md);
+
+  color: var(--color-white);
+  cursor: pointer;
+}
+
+.topic-sidebar:hover .sidebar-toggle-btn {
+  opacity: 1;
+}
+
+.sidebar-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+
+/* ==== >>>> SIDEBAR <<<< ============================================================================
+
+   7.3 SIDEBAR SECTIONS AND LINK GROUPS
+   
+   DESCRIPTION: These rules structure the main sidebar content below the header:
+                    standalone links, topic groups, and the vertical topic tree.
+
+========================================================================================== */
+
+/* Standalone sidebar section. USE FOR: Important single links near the top of the sidebar. */
+.sidebar-standalone {
+  margin-bottom: var(--space-7);
+  padding-bottom: var(--space-5);
+  border-bottom: var(--border-medium);
+}
+
+/* Optional ending divider for standalone sidebar groups.*/
+.sidebar-standalone-end {
+  border-bottom: var(--border-medium);
+}
+
+/* Topic tree container. DESCRIPTION: Stacks topic groups vertically with a small consistent gap. */
+.topic-tree {
   display: flex;
   flex-direction: column;
-  color: #3a3a3a;
-  font-family: "Lato", sans-serif;
+  gap: var(--space-2);
 }
 
-/* header */
+/*
+   Topic group wrapper.
 
-header {
-  background-color: #ffffff;
-  padding:0 1rem;
+   DESCRIPTION:
+   Used as the hover parent for showing nested submenu links.
+*/
+.topic-group {
+  position: relative;
+}
+
+
+/* ==========================================================================================
+
+   7.4 MAIN SIDEBAR LINKS
+
+   DESCRIPTION: Top-level navigation links inside the left sidebar.
+
+   KEY IDEA:  These links are large enough to scan quickly and have strong font weight
+              because they represent primary navigation items.
+
+========================================================================================== */
+
+.sidebar-main-link {
+  min-height: 42px;
+  padding: var(--space-5) var(--space-4);
+
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+
+  border-radius: var(--radius-md);
+
+  color: var(--color-text);
+  font-size: var(--text-md);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.sidebar-main-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-white);
+}
+
+
+/* ==========================================================================================
+
+   7.5 SIDEBAR SUBMENUS
+
+   DESCRIPTION:
+   Nested topic/file links shown when hovering a topic group.
+
+   KEY IDEA:
+   The submenu starts collapsed with max-height: 0 and opacity: 0.
+   Hovering the parent group expands it.
+
+   WATCH OUT:
+   max-height animations are simple and fine here, but if a submenu grows taller than 240px,
+   increase the max-height value.
+
+========================================================================================== */
+
+.topic-submenu {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+
+  padding-left: var(--space-8);
+
+  transition:
+    max-height var(--transition-med),
+    opacity var(--transition-fast);
+}
+
+.topic-group:hover .topic-submenu {
+  max-height: 240px;
+  opacity: 1;
+}
+
+/*
+   Small label above nested file links.
+*/
+.topic-folder-label {
+  margin: var(--space-4) 0 var(--space-1);
+
+  color: var(--color-text-soft);
+  font-size: var(--text-sm);
+  font-weight: 800;
+}
+
+/*
+   Nested file/topic link.
+
+   DESCRIPTION:
+   Smaller and softer than the main sidebar link so the hierarchy is clear.
+*/
+.topic-file-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+
+  padding: var(--space-2) var(--space-3);
+
+  border-radius: var(--radius-sm);
+
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.topic-file-link:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-white);
+}
+
+
+/* ==========================================================================================
+
+   7.6 COLLAPSED SIDEBAR STATE
+
+   DESCRIPTION:
+   CSS-only collapsed state controlled by .sidebar-toggle-checkbox.
+
+   IMPORTANT:
+   This uses :has(), which is supported in modern browsers. It is fine for your project,
+   but it is not an old-browser fallback pattern.
+
+   KEY IDEA:
+   When collapsed, the sidebar keeps only the 60px header visible and hides the rest
+   of the navigation content.
+
+========================================================================================== */
+
+/*
+   Collapsed sidebar container.
+
+   CHANGED:
+   Keeps the sidebar height equal to the header height so it becomes a compact pill/panel.
+*/
+.topic-sidebar:has(.sidebar-toggle-checkbox:checked) {
+  height: 60px;
+  overflow: hidden;
+}
+
+/*
+   Removes extra header spacing when collapsed.
+   This prevents the collapsed sidebar from looking taller than needed.
+*/
+.sidebar-toggle-checkbox:checked ~ .sidebar-header {
+  margin-bottom: 0;
+}
+
+/*
+   Hides all navigation content below the header when collapsed.
+*/
+.sidebar-toggle-checkbox:checked ~ .sidebar-standalone,
+.sidebar-toggle-checkbox:checked ~ .topic-tree {
+  display: none;
+}
+
+
+/*
+   Keeps the toggle visible while collapsed so the user can reopen the sidebar.
+*/
+.sidebar-toggle-checkbox:checked ~ .sidebar-header .sidebar-toggle-btn {
+  opacity: 1;
+}
+
+
+/* ==========================================================================================
+
+   7.7 RIGHT TOOL SIDEBAR
+
+   DESCRIPTION:
+   Fixed utility controls on the right side of the screen, such as Prompt and ChatGPT buttons.
+
+   DRIFT CHECK:
+   Your old CSS had two conflicting .tool-link sizes:
+   - first: 88px by 88px
+   - later: 60px by 60px
+
+   CHANGED:
+   This refactor keeps the latest visual direction: compact 60px circular buttons.
+
+========================================================================================== */
+
+.tool-sidebar {
   position: fixed;
-  z-index: 99;
+  top: var(--space-8);
+  right: var(--space-8);
+  z-index: var(--z-tool);
+
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/*
+   Right-side circular tool button.
+
+   USE FOR:
+   Prompt button, ChatGPT button, or similar utility actions.
+
+   IMPORTANT:
+   This is the only .tool-link definition now. Do not redefine .tool-link later
+   unless it is inside a clear mobile media query.
+*/
+.tool-link {
+  width: 60px;
+  height: 60px;
+  padding: 0;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: var(--space-2);
+
+  border-radius: var(--radius-circle);
+
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  font-weight: 800;
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+
+  cursor: pointer;
+}
+
+.tool-link:hover {
+  transform: translateY(-2px);
+  background: var(--glass-bg-strong);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: var(--shadow-card);
+}
+
+
+/* ==========================================================================================
+
+   7.8 PROMPT DROPDOWN
+
+   DESCRIPTION:
+   Dropdown menu shown from the prompt tool button.
+
+   KEY IDEA:
+   The dropdown inherits the shared glass surface but uses a stronger background
+   so menu options remain readable.
+
+========================================================================================== */
+
+/*
+   Wrapper for the prompt button and dropdown.
+*/
+.prompt-menu {
+  position: relative;
+}
+
+/*
+   Prompt dropdown panel.
+
+   DESCRIPTION:
+   Hidden by default and displayed as a small grid when the prompt menu is hovered.
+*/
+.prompt-dropdown {
+  position: absolute;
+  top: calc(100% + var(--space-3));
+  right: 0;
+
+  width: 220px;
+  padding: var(--space-3);
+
+  display: none;
+  gap: var(--space-2);
+
+  background: var(--glass-bg-strong);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+}
+
+/*
+   Opens the prompt dropdown on hover.
+
+   WATCH OUT:
+   Like the sidebar hover behaviour, this works best on desktop.
+   For mobile, a click-based JS toggle may be better later.
+*/
+.prompt-menu:hover .prompt-dropdown {
+  display: grid;
+}
+
+/*
+   Individual prompt dropdown option.
+*/
+.prompt-option {
   width: 100%;
-  box-shadow: 0 2px 2px #3a3a3a;
+  padding: var(--space-4) var(--space-5);
+
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+
+  border: 0;
+  border-radius: var(--radius-md);
+
+  background: transparent;
+  color: var(--color-text-soft);
+
+  font-size: var(--text-md);
+  font-weight: 700;
+  text-align: left;
+
+  cursor: pointer;
 }
 
-header a{
-    text-decoration: none;
-    color: inherit;
+.prompt-option:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-text);
 }
 
-header h1 {
-  font-family: "Oswald", sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: #252525;
+/*
+   Temporary copied state.
+
+   USE FOR:
+   JS feedback after a prompt has been copied.
+*/
+.prompt-option.copied {
+  background: rgba(143, 211, 255, 0.16);
+  color: var(--color-link);
 }
 
-.menu{
-    letter-spacing: 4px;
-    font-size: 110%;
-    list-style: none;
-    /* display: flex; */
+
+/* ==========================================================================================
+
+   7.9 NAVIGATION ICONS
+
+   DESCRIPTION:
+   Shared icon sizing and hover colour behaviour for sidebar links, submenu links,
+   prompt options, and right-side tool buttons.
+
+   DRIFT CHECK:
+   Your old CSS defined .tool-icon twice:
+   - first: 24px
+   - later: 18px
+
+   CHANGED:
+   This refactor keeps the latest 18px tool icon size and removes the duplicate.
+
+========================================================================================== */
+
+/*
+   Main sidebar icons.
+*/
+.nav-icon {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+
+  color: var(--color-text-soft);
+  stroke-width: 2;
 }
 
-.menu li {
-    margin-bottom: 1rem;
+/*
+   Technology icons, if using text/icon-font style icons.
+*/
+.tech-icon {
+  font-size: 18px;
+  line-height: 1;
 }
 
-.active{
-    border-bottom: 1px solid #3a3a3a;
+/*
+   Smaller icons used in nested sidebar links and prompt dropdown options.
+*/
+.submenu-icon,
+.prompt-icon {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 14px;
+
+  color: var(--color-text-muted);
+  stroke-width: 2;
 }
 
-/* main */
+/*
+   Right-side tool button icon.
 
-main {
-  background-color: lightblue;
-  flex: 1 0 auto;
+   IMPORTANT:
+   This is the only .tool-icon definition now.
+*/
+.tool-icon {
+  width: 18px;
+  height: 18px;
+
+  display: block;
+  margin: 0;
+
+  color: var(--color-text-soft);
+  stroke-width: 2;
 }
 
-/* footer */
-
-footer {
-  background-color: orange;
+/*
+   Hover state keeps icon colour consistent with link text.
+*/
+.sidebar-main-link:hover .nav-icon,
+.topic-file-link:hover .submenu-icon,
+.prompt-option:hover .prompt-icon,
+.tool-link:hover .tool-icon {
+  color: var(--color-white);
 }
+
+
+/* ==========================================================================================
+
+   11. FIXED FOOTER
+
+   DESCRIPTION:
+   This section controls the fixed footer that sits at the bottom of the viewport.
+   It includes the footer container, footer text reset, and auto-hide visibility states.
+
+   KEY IDEA:
+   Because the footer is fixed, page sections need enough bottom padding so content does not
+   sit underneath it. That is why the global token --footer-height-space exists.
+
+   DRIFT CHECK:
+   This keeps your original behaviour:
+   - footer is fixed at the bottom
+   - footer is visually subtle
+   - footer starts hidden
+   - footer appears when .is-visible is added
+   - pointer events are disabled while hidden
+
+========================================================================================== */
+
+
+/* ==========================================================================================
+
+   11.1 FOOTER CONTAINER
+
+   DESCRIPTION:
+   Fixed footer bar positioned at the bottom of the page.
+
+   IMPORTANT:
+   This footer overlays the page rather than taking up normal document space.
+   Keep bottom padding on pages using var(--footer-height-space) so content does not collide
+   with it.
+
+========================================================================================== */
+
+.workspace-footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: var(--z-footer);
+
+  padding: 10px var(--space-12);
+
+  background: transparent;
+
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+
+  /*
+     CHANGED:
+     A fixed footer should usually use border-top, not border-bottom.
+     The border separates the footer from the content above it.
+  */
+  border-top: var(--border-medium);
+
+  color: var(--color-text-faint);
+  font-size: 13px;
+  text-align: right;
+}
+
+/*
+   Footer paragraph reset.
+
+   DESCRIPTION:
+   Removes default paragraph margin so the footer height stays predictable.
+*/
+.workspace-footer p {
+  margin: 0;
+}
+
+/* ==========================================================================================
+
+   11.2 AUTO-HIDE FOOTER STATES
+
+   DESCRIPTION:
+   These classes control the footer's hidden and visible states.
+
+   KEY IDEA:
+   The footer starts hidden below the viewport. When JavaScript adds .is-visible,
+   the footer slides into view.
+
+========================================================================================== */
+
+/*
+   Hidden footer state.
+
+   IMPORTANT:
+   pointer-events: none prevents users from accidentally interacting with an invisible footer.
+*/
+.auto-hide-footer {
+  opacity: 0;
+  transform: translateY(100%);
+
+  pointer-events: none;
+
+  transition:
+    opacity var(--transition-med),
+    transform var(--transition-med);
+}
+
+/*
+   Visible footer state.
+
+   DESCRIPTION:
+   Add .is-visible when the footer should appear, such as while scrolling.
+*/
+.auto-hide-footer.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+
+  pointer-events: auto;
+}
+
+

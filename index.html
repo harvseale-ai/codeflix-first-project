@@ -1,73 +1,1088 @@
 <!doctype html>
 <html lang="en">
   <head>
-
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- meta tag for search engines -->
-    <meta
-      name="description"
-      content=" Love Running. Club for runners in Dublin, Ireland. Urban running, trail running, Dublin docklands and Phoenix Park."
-    />
-    <meta
-      name="keywords"
-      content="love running, run, running club, runners, Ireland, Dublin, sport, exercise"
-    />
-    <!-- page title -->
-    <title>Love Running</title>
-    <!-- favicon links -->
+
+    <title>Codeflix | Workspace</title>
+
+    <!-- Bootstrap -->
     <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="assets/favicon/apple-touch-icon.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="assets/favicon/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="assets/favicon/favicon-16x16.png"
-    />
-    <link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico" />
-    <link rel="manifest" href="assets/favicon/site.webmanifest" />
-    <!-- stylesheet link -->
-    <link rel="stylesheet" href="assets/css/style.css" />
-    <!-- /* Google fonts import */ -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- /* NOT IN USE AS IMPORT VIA CSS --font styles import */
-    <link
-      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Oswald:wght@200..700&display=swap"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
-    />   -->
+    />
 
+    <!-- Devicon: tech icons for HTML / CSS / JavaScript -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/pages.css" />
   </head>
+
   <body>
-    <!-- Header -->
-    <header> 
-        <a href="index.html">
-            <h1 id="logo">Love Running</h1>
+    <!-- Workspace Sidebar -->
+    <aside class="topic-sidebar topic-sidebar-mobile">
+      <input
+        type="checkbox"
+        id="sidebarToggle"
+        class="sidebar-toggle-checkbox" 
+        checked
+        
+      />
+        <!-- checked -->
+      <div class="sidebar-header">
+        <a href="index.html" class="sidebar-brand">Codeflix</a>
+        <label
+          for="sidebarToggle"
+          class="sidebar-toggle-btn"
+          aria-label="Toggle sidebar"
+        >
+        <i data-lucide="panel-right" class="nav-icon" style="transform: scaleX(-1);"></i>
+        </label>
+      </div>
+
+      <!-- Standalone workspace button -->
+      <nav class="sidebar-standalone">
+        <a
+          href="workspace.html?file=content/workspace/Padlet.md"
+          class="sidebar-main-link"
+        >
+        <i data-lucide="box" class="nav-icon"></i>          
+        <span>Workspace</span>
         </a>
-        <nav>
-            <ul class="menu">
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="sign-up.html">Sign Up</a></li>
-            </ul>
-        </nav>
-    </header>
+      </nav>
 
-    <!-- Main -->
-    <main> Main content</main>
+      <nav class="sidebar-standalone">
+        <a href="snippets.html" class="sidebar-main-link">
+          <i data-lucide="Blend" class="nav-icon"></i>
+          <span>Snippets</span>
+        </a>
+      </nav>
 
-    <!-- Footer -->
-    <footer> Footer</footer>
+      <nav class="sidebar-standalone">
+        <a href="usage.html" class="sidebar-main-link">
+          <i data-lucide="book-open" class="nav-icon"></i>
+          <span>Usage</span>
+        </a>
+      </nav>
 
-    </body>
-    </html>
+      <nav class="topic-tree" aria-label="Topic navigation">
+        <!-- HTML -->
+        <div class="topic-group">
+          <a href="#" class="sidebar-main-link">
+            <i class="devicon-html5-plain nav-icon tech-icon"></i>
+            <span>HTML</span>
+          </a>
+
+          <div class="topic-submenu">
+            <a
+              href="content.html?file=content/html/01-getting-started/html-cheat-sheet.md"
+              class="topic-file-link"
+            >
+              <i data-lucide="file-text" class="submenu-icon"></i>
+              <span>Cheat Sheet</span>
+            </a>
+
+            <a
+              href="content.html?file=content/html/01-getting-started/resources.md"
+              class="topic-file-link"
+            >
+              <i data-lucide="link" class="submenu-icon"></i>
+              <span>Resources</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- CSS -->
+        <div class="topic-group">
+          <a href="#" class="sidebar-main-link">
+            <i class="devicon-css3-plain nav-icon tech-icon"></i>
+            <span>CSS</span>
+          </a>
+
+          <div class="topic-submenu">
+            <a
+              href="content.html?file=content/css/01-getting-started/css-cheat-sheet.md"
+              class="topic-file-link"
+            >
+              <i data-lucide="file-text" class="submenu-icon"></i>
+              <span>Cheat Sheet</span>
+            </a>
+
+            <a
+              href="content.html?file=content/css/01-getting-started/resources.md"
+              class="topic-file-link"
+            >
+              <i data-lucide="link" class="submenu-icon"></i>
+              <span>Resources</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- JavaScript -->
+        <div class="topic-group">
+          <a href="#" class="sidebar-main-link">
+            <i class="devicon-javascript-plain nav-icon tech-icon"></i>
+            <span>JavaScript</span>
+          </a>
+
+          <div class="topic-submenu">
+            <a
+              href="content.html?file=content/javascript/01-getting-started/js-cheat-sheet.md"
+              class="topic-file-link"
+            >
+              <i data-lucide="file-text" class="submenu-icon"></i>
+              <span>Cheat Sheet</span>
+            </a>
+
+            <a
+              href="content.html?file=content/javascript/01-getting-started/resources.md"
+              class="topic-file-link"
+            >
+              <i data-lucide="link" class="submenu-icon"></i>
+              <span>Resources</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- SQL -->
+        <div class="topic-group">
+          <a href="#" class="sidebar-main-link">
+            <i data-lucide="database" class="nav-icon"></i>
+            <span>SQL</span>
+          </a>
+
+          <div class="topic-submenu">
+            <a
+              href="content.html?file=content/sql/01-getting-started/sql-cheat-sheet.md"
+              class="topic-file-link"
+            >
+              <i data-lucide="file-text" class="submenu-icon"></i>
+              <span>Cheat Sheet</span>
+            </a>
+
+            <a
+              href="content.html?file=content/sql/01-getting-started/resources.md"
+              class="topic-file-link"
+            >
+              <i data-lucide="link" class="submenu-icon"></i>
+              <span>Resources</span>
+            </a>
+          </div>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Right Tool Sidebar -->
+    <aside class="tool-sidebar">
+      <div class="prompt-menu">
+        <button class="tool-link prompt-toggle" type="button">
+          <i data-lucide="bot" class="tool-icon"></i>
+          <!-- <span>Prompt</span> -->
+        </button>
+
+        <div class="prompt-dropdown">
+          <button
+            class="prompt-option"
+            data-prompt="Act as a senior front-end developer. Help me debug this HTML, CSS, or JavaScript issue. Explain what is wrong, why it is happening, and give me the smallest fix possible."
+          >
+            <i data-lucide="bug" class="prompt-icon"></i>
+            <span>Debug</span>
+          </button>
+
+          <button
+            class="prompt-option"
+            data-prompt="Act as a senior UI designer. Review this page layout and suggest small improvements to spacing, hierarchy, typography, and visual consistency. Do not redesign it from scratch."
+          >
+            <i data-lucide="palette" class="prompt-icon"></i>
+            <span>UI Review</span>
+          </button>
+
+          <button
+            class="prompt-option"
+            data-prompt="Act as a front-end code reviewer.
+
+            Review and refactor this CSS with one guiding rule:
+
+            If a rule does not fix a visible problem, create a reusable pattern, or support an intentional system decision, it probably does not need to stay.
+
+            Your goals:
+
+            1. Reduce duplication and remove drift.
+            2. Keep the same visual result.
+            3. Use existing design tokens wherever possible.
+            4. Do not rename classes unless absolutely necessary.
+            5. Do not reinvent the structure or design system.
+            6. Keep page shell, navigation, component, and responsive responsibilities clearly separated.
+            7. Remove dead, repeated, or conflicting rules.
+            8. Preserve any rule that is required for layout, responsiveness, accessibility, or a clear visual decision.
+
+            When reviewing the code, check for:
+
+            * Repeated selectors doing the same job.
+            * Raw colours, spacing, shadows, or sizes that should use tokens.
+            * Responsive rules that override each other unnecessarily.
+            * Page-specific rules leaking into shared components.
+            * Shared component rules becoming too page-specific.
+            * CSS that only exists because of an old bug or previous experiment.
+            * Comments that describe obvious code instead of explaining why the rule exists.
+
+            Return:
+
+            1. The cleaned/refactored CSS.
+            2. A short explanation of the key changes only.
+            3. Any rules you removed and why.
+            4. Any areas that still look risky or worth checking in the browser.
+
+            Do not over-explain. Keep the visual design the same."
+          >
+            <i data-lucide="wand-sparkles" class="prompt-icon"></i>
+            <span>Refactor</span>
+          </button>
+
+          <button
+            class="prompt-option"
+            data-prompt="Act as a coding tutor. Explain this code clearly for a beginner, step by step, without overcomplicating it."
+          >
+            <i data-lucide="graduation-cap" class="prompt-icon"></i>
+            <span>Explain Code</span>
+          </button>
+        </div>
+      </div>
+
+      <a
+        href="https://chat.openai.com"
+        class="tool-link"
+        onclick="
+          window.open(this.href, 'chatgpt', 'width=520,height=720');
+          return false;
+        "
+      >
+        <i data-lucide="astroid" class="tool-icon"></i>
+        <!-- <span>ChatGPT</span> -->
+      </a>
+    </aside>
+
+    <!-- main -->
+    <main class="stream-main">
+      <!-- HERO / FEATURED PROMOTION SECTION -->
+
+      <section class="hero-promo" id="heroPromo">
+        <iframe
+          id="heroPreviewVideo"
+          class="hero-preview-video"
+          src=""
+          title="Hero preview video"
+          allow="autoplay; encrypted-media"
+          referrerpolicy="strict-origin-when-cross-origin"
+        ></iframe>
+
+        <div class="hero-content" id="heroContent">
+          <p class="eyebrow">Featured</p>
+          <h1>Build Your Code Archive</h1>
+          <p class="hero-description">
+            A focused learning workspace for saving notes, snippets, videos, and project resources in one place.
+          </p>
+
+          <div class="hero-actions">
+              <a href="content.html?file=content/html/01-getting-started/html-cheat-sheet.md" class="primary-btn">Start Learning </a>
+              <a href="usage.html" class="secondary-btn">More info</a>
+           </div>
+        </div>
+        </div>
+
+        <div class="hero-video-wrap" id="heroVideoWrap">
+          <iframe
+            id="heroVideo"
+            src=""
+            title="Featured video player"
+            allow="
+              accelerometer;
+              autoplay;
+              clipboard-write;
+              encrypted-media;
+              gyroscope;
+              picture-in-picture;
+              web-share;
+            "
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </section>
+
+      <!-- CONTENT ROW: HTML COMPONENTS -->
+      <section class="content-row-section">
+        <div class="row-header">
+          <h2>HTML Overview</h2>
+
+          <!-- visual buttons for now - can be connected with JS later -->
+          <div class="row-controls">
+            <button
+              type="button"
+              class="row-pill-btn"
+              onclick="scrollRow(this, 'left')"
+              aria-label="Scroll row left"
+            >
+              <span>‹</span>
+            </button>
+
+            <button
+              type="button"
+              class="row-pill-btn"
+              onclick="scrollRow(this, 'right')"
+              aria-label="Scroll row right"
+            >
+              <span>›</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="content-row">
+          <!-- video-content-card -->
+          <article
+            class="content-card video-content-card"
+            data-video="https://www.youtube.com/embed/qz0aGYrrlhU?autoplay=1"
+          >
+            <img
+              class="content-card-img"
+              src="https://img.youtube.com/vi/qz0aGYrrlhU/hqdefault.jpg"
+              alt="HTML Crash Course thumbnail"
+            />
+
+            <h3 class="content-card-title">Crash Course</h3>
+          </article>
+          <!-- >>> END <<< -->
+
+          <!-- video-content-card -->
+          <article
+            class="content-card video-content-card"
+            data-video="https://www.youtube.com/embed/FQdaUv95mR8?autoplay=1"
+          >
+            <img
+              class="content-card-img"
+              src="https://img.youtube.com/vi/FQdaUv95mR8/hqdefault.jpg"
+              alt="HTML Page Structure thumbnail"
+            />
+
+            <h3 class="content-card-title">Page Structure</h3>
+          </article>
+          <!-- >>> END <<< -->
+
+          <!-- video-content-card -->
+          <article
+            class="content-card video-content-card"
+            data-video="https://www.youtube.com/embed/kX3TfdUqpuU?autoplay=1"
+          >
+            <img
+              class="content-card-img"
+              src="https://img.youtube.com/vi/kX3TfdUqpuU/hqdefault.jpg"
+              alt="Semantic HTML thumbnail"
+            />
+
+            <h3 class="content-card-title">Semantic HTML</h3>
+          </article>
+          <!-- >>> END <<< -->
+
+          <!-- video-content-card -->
+          <article
+            class="content-card video-content-card"
+            data-video="https://www.youtube.com/embed/H9zdfZrFUp0?autoplay=1"
+          >
+            <img
+              class="content-card-img"
+              src="https://img.youtube.com/vi/H9zdfZrFUp0/hqdefault.jpg"
+              alt="HTML Forms and Inputs thumbnail"
+            />
+
+            <h3 class="content-card-title">Forms & Inputs</h3>
+          </article>
+          <!-- >>> END <<< -->
+
+          <!-- video-content-card -->
+          <article
+            class="content-card video-content-card"
+            data-video="https://www.youtube.com/embed/e23RA_Uo99o?autoplay=1"
+          >
+            <img
+              class="content-card-img"
+              src="https://img.youtube.com/vi/e23RA_Uo99o/hqdefault.jpg"
+              alt="HTML Tables thumbnail"
+            />
+
+            <h3 class="content-card-title">HTML Tables</h3>
+          </article>
+          <!-- >>> END <<< -->
+
+          <!-- video-content-card -->
+          <article
+            class="content-card video-content-card"
+            data-video="https://www.youtube.com/embed/QbkN8y0usOE?autoplay=1"
+          >
+            <img
+              class="content-card-img"
+              src="https://img.youtube.com/vi/QbkN8y0usOE/hqdefault.jpg"
+              alt="HTML Embedding Media thumbnail"
+            />
+
+            <h3 class="content-card-title">Embedding Media</h3>
+          </article>
+          <!-- >>> END <<< -->
+        </div>
+      </section>
+
+      <!-- CONTENT ROW: CSS COMPONENTS -->
+      <section class="content-row-section">
+        <div class="row-header">
+          <h2>CSS Fundamentals</h2>
+
+          <!-- visual buttons for now - can be connected with JS later -->
+          <div class="row-controls">
+            <button
+              type="button"
+              class="row-pill-btn"
+              onclick="scrollRow(this, 'left')"
+              aria-label="Scroll row left"
+            >
+              <span>‹</span>
+            </button>
+
+            <button
+              type="button"
+              class="row-pill-btn"
+              onclick="scrollRow(this, 'right')"
+              aria-label="Scroll row right"
+            >
+              <span>›</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="content-row">
+          <!-- video-content-card -->
+          <article
+            class="content-card video-content-card"
+            data-video="https://www.youtube.com/embed/yfoY53QXEnI?autoplay=1"
+          >
+            <img
+              class="content-card-img"
+              src="https://img.youtube.com/vi/yfoY53QXEnI/hqdefault.jpg"
+              alt="CSS Crash Course thumbnail"
+            />
+
+            <h3 class="content-card-title">Crash Course</h3>
+          </article>
+          <!-- >>> END <<< -->
+
+          <!-- video-content-card -->
+          <article
+            class="content-card video-content-card"
+            data-video="https://www.youtube.com/embed/l1mER1bV0N0?autoplay=1"
+          >
+            <img
+              class="content-card-img"
+              src="https://img.youtube.com/vi/l1mER1bV0N0/hqdefault.jpg"
+              alt="CSS Selectors thumbnail"
+            />
+
+            <h3 class="content-card-title">Selectors</h3>
+          </article>
+          <!-- >>> END <<< -->
+
+          <!-- video-content-card -->
+          <article
+            class="content-card video-content-card"
+            data-video="https://www.youtube.com/embed/M6coJNLFBWI?autoplay=1"
+          >
+            <img
+              class="content-card-img"
+              src="https://img.youtube.com/vi/M6coJNLFBWI/hqdefault.jpg"
+              alt="CSS Box Model thumbnail"
+            />
+
+            <h3 class="content-card-title">Box Model</h3>
+          </article>
+          <!-- >>> END <<< -->
+
+          <!-- video-content-card -->
+          <article
+            class="content-card video-content-card"
+            data-video="https://www.youtube.com/embed/3YW65K6LcIA?autoplay=1"
+          >
+            <img
+              class="content-card-img"
+              src="https://img.youtube.com/vi/3YW65K6LcIA/hqdefault.jpg"
+              alt="CSS Flexbox thumbnail"
+            />
+
+            <h3 class="content-card-title">Flexbox</h3>
+          </article>
+          <!-- >>> END <<< -->
+
+          <!-- video-content-card -->
+          <article
+            class="content-card video-content-card"
+            data-video="https://www.youtube.com/embed/9zA8cB-54SA?autoplay=1"
+          >
+            <img
+              class="content-card-img"
+              src="https://img.youtube.com/vi/9zA8cB-54SA/hqdefault.jpg"
+              alt="CSS Grid thumbnail"
+            />
+
+            <h3 class="content-card-title">CSS Grid</h3>
+          </article>
+          <!-- >>> END <<< -->
+
+          <!-- video-content-card -->
+          <article
+            class="content-card video-content-card"
+            data-video="https://www.youtube.com/embed/p0bGHP-PXD4?autoplay=1"
+          >
+            <img
+              class="content-card-img"
+              src="https://img.youtube.com/vi/p0bGHP-PXD4/hqdefault.jpg"
+              alt="Responsive CSS thumbnail"
+            />
+
+            <h3 class="content-card-title">Responsive CSS</h3>
+          </article>
+          <!-- >>> END <<< -->
+        </div>
+      </section>
+
+      <!-- CONTENT ROW: JAVASCRIPT BASICS -->
+      <section class="content-row-section">
+        <div class="row-header">
+          <h2>JavaScript Basics</h2>
+
+          <div class="row-controls">
+            <button
+              type="button"
+              class="row-pill-btn"
+              onclick="scrollRow(this, 'left')"
+              aria-label="Scroll row left"
+            >
+              <span>‹</span>
+            </button>
+
+            <button
+              type="button"
+              class="row-pill-btn"
+              onclick="scrollRow(this, 'right')"
+              aria-label="Scroll row right"
+            >
+              <span>›</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="content-row">
+          <!-- video-content-card -->
+          <article
+            class="content-card video-content-card"
+            data-video="https://www.youtube.com/embed/dJvPTRXyc6s?autoplay=1"
+          >
+            <img
+              class="content-card-img"
+              src="https://img.youtube.com/vi/dJvPTRXyc6s/hqdefault.jpg"
+              alt="JavaScript Variables thumbnail"
+            />
+
+            <h3 class="content-card-title">Variables</h3>
+          </article>
+          <!-- >>> END <<< -->
+
+          <!-- video-content-card -->
+          <article
+            class="content-card video-content-card"
+            data-video="https://www.youtube.com/embed/cMt9U6kCWsM?autoplay=1"
+          >
+            <img
+              class="content-card-img"
+              src="https://img.youtube.com/vi/cMt9U6kCWsM/hqdefault.jpg"
+              alt="JavaScript Functions thumbnail"
+            />
+
+            <h3 class="content-card-title">Functions</h3>
+          </article>
+          <!-- >>> END <<< -->
+
+          <!-- video-content-card -->
+          <article
+            class="content-card video-content-card"
+            data-video="https://www.youtube.com/embed/5fb2aPlgoys?autoplay=1"
+          >
+            <img
+              class="content-card-img"
+              src="https://img.youtube.com/vi/5fb2aPlgoys/hqdefault.jpg"
+              alt="JavaScript Events thumbnail"
+            />
+
+            <h3 class="content-card-title">Events</h3>
+          </article>
+          <!-- >>> END <<< -->
+
+          <!-- video-content-card -->
+          <article
+            class="content-card video-content-card"
+            data-video="https://www.youtube.com/embed/3_Mrc1vUglg?autoplay=1"
+          >
+            <img
+              class="content-card-img"
+              src="https://img.youtube.com/vi/3_Mrc1vUglg/hqdefault.jpg"
+              alt="JavaScript Arrays thumbnail"
+            />
+
+            <h3 class="content-card-title">Arrays</h3>
+          </article>
+          <!-- >>> END <<< -->
+
+          <!-- video-content-card -->
+          <article
+            class="content-card video-content-card"
+            data-video="https://www.youtube.com/embed/lfmg-EJ8gm4?autoplay=1"
+          >
+            <img
+              class="content-card-img"
+              src="https://img.youtube.com/vi/lfmg-EJ8gm4/hqdefault.jpg"
+              alt="JavaScript Objects thumbnail"
+            />
+
+            <h3 class="content-card-title">Objects</h3>
+          </article>
+          <!-- >>> END <<< -->
+
+          <!-- video-content-card -->
+          <article
+            class="content-card video-content-card"
+            data-video="https://www.youtube.com/embed/WbG86sMd3SU?autoplay=1"
+          >
+            <img
+              class="content-card-img"
+              src="https://img.youtube.com/vi/WbG86sMd3SU/hqdefault.jpg"
+              alt="JavaScript DOM thumbnail"
+            />
+
+            <h3 class="content-card-title">DOM</h3>
+          </article>
+          <!-- >>> END <<< -->
+        </div>
+      </section>
+
+      <!-- TOP 10 CODEFLIX SECTION -->
+      <section class="top-ten-section">
+        <div class="row-header">
+          <h2>Popular Skills</h2>
+
+          <div class="row-controls">
+            <button
+              type="button"
+              class="row-pill-btn"
+              onclick="scrollRow(this, 'left')"
+              aria-label="Scroll row left"
+            >
+              <span>‹</span>
+            </button>
+
+            <button
+              type="button"
+              class="row-pill-btn"
+              onclick="scrollRow(this, 'right')"
+              aria-label="Scroll row right"
+            >
+              <span>›</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="top-ten-row">
+          <article
+            class="top-ten-card"
+            data-video="https://www.youtube.com/embed/9zA8cB-54SA?autoplay=1"
+          >
+            <span class="rank-number">1</span>
+            <div class="rank-card rank-card-new">
+              <span>CSS Grid</span>
+            </div>
+          </article>
+
+          <article
+            class="top-ten-card"
+            data-video="https://www.youtube.com/embed/3YW65K6LcIA?autoplay=1"
+          >
+            <span class="rank-number">2</span>
+            <div class="rank-card">
+              <span>Flexbox</span>
+            </div>
+          </article>
+
+          <article
+            class="top-ten-card"
+            data-video="https://www.youtube.com/embed/tRZGeaHPoaw?autoplay=1"
+          >
+            <span class="rank-number">3</span>
+            <div class="rank-card rank-card-new">
+              <span>Git Basics</span>
+            </div>
+          </article>
+
+          <article
+            class="top-ten-card"
+            data-video="https://www.youtube.com/embed/HVsySz-h9r4?autoplay=1"
+          >
+            <span class="rank-number">4</span>
+            <div class="rank-card rank-card-new">
+              <span>Terminal</span>
+            </div>
+          </article>
+
+          <article
+            class="top-ten-card"
+            data-video="https://www.youtube.com/embed/5fb2aPlgoys?autoplay=1"
+          >
+            <span class="rank-number">5</span>
+            <div class="rank-card">
+              <span>JavaScript DOM</span>
+            </div>
+          </article>
+
+          <article
+            class="top-ten-card"
+            data-video="https://www.youtube.com/embed/QlZkfmofzHU?autoplay=1"
+          >
+            <span class="rank-number">6</span>
+            <div class="rank-card">
+              <span>Responsive CSS</span>
+            </div>
+          </article>
+
+          <article
+            class="top-ten-card"
+            data-video="https://www.youtube.com/embed/rE2zRhZdjFU?autoplay=1"
+          >
+            <span class="rank-number">7</span>
+            <div class="rank-card">
+              <span>Debugging</span>
+            </div>
+          </article>
+
+          <article
+            class="top-ten-card"
+            data-video="https://www.youtube.com/embed/8JJ101D3knE?autoplay=1"
+          >
+            <span class="rank-number">8</span>
+            <div class="rank-card">
+              <span>Code Comments</span>
+            </div>
+          </article>
+
+          <article
+            class="top-ten-card"
+            data-video="https://www.youtube.com/embed/lfmg-EJ8gm4?autoplay=1"
+          >
+            <span class="rank-number">9</span>
+            <div class="rank-card">
+              <span>Objects</span>
+            </div>
+          </article>
+
+          <article
+            class="top-ten-card"
+            data-video="https://www.youtube.com/embed/H9zdfZrFUp0?autoplay=1"
+          >
+            <span class="rank-number">10</span>
+            <div class="rank-card">
+              <span>Forms & Inputs</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- CONTENT ROW: GIT & TERMINAL -->
+      <section class="content-row-section">
+        <div class="row-header">
+          <h2>Git & Terminal Commands</h2>
+
+          <div class="row-controls">
+            <button
+              type="button"
+              class="row-pill-btn"
+              onclick="scrollRow(this, 'left')"
+              aria-label="Scroll row left"
+            >
+              <span>‹</span>
+            </button>
+
+            <button
+              type="button"
+              class="row-pill-btn"
+              onclick="scrollRow(this, 'right')"
+              aria-label="Scroll row right"
+            >
+              <span>›</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="content-row">
+          <!-- video-content-card -->
+          <article
+            class="content-card video-content-card"
+            data-video="https://www.youtube.com/embed/tRZGeaHPoaw?autoplay=1"
+          >
+            <img
+              class="content-card-img"
+              src="https://img.youtube.com/vi/tRZGeaHPoaw/hqdefault.jpg"
+              alt="Git and GitHub Basics thumbnail"
+            />
+
+            <h3 class="content-card-title">Git & GitHub Basics</h3>
+          </article>
+          <!-- >>> END <<< -->
+
+          <!-- video-content-card -->
+          <article
+            class="content-card video-content-card"
+            data-video="https://www.youtube.com/embed/WbG86sMd3SU?autoplay=1"
+          >
+            <img
+              class="content-card-img"
+              src="https://img.youtube.com/vi/WbG86sMd3SU/hqdefault.jpg"
+              alt="Git Add thumbnail"
+            />
+
+            <h3 class="content-card-title">Git Add</h3>
+          </article>
+          <!-- >>> END <<< -->
+
+          <!-- video-content-card -->
+          <article
+            class="content-card video-content-card"
+            data-video="https://www.youtube.com/embed/HVsySz-h9r4?autoplay=1"
+          >
+            <img
+              class="content-card-img"
+              src="https://img.youtube.com/vi/HVsySz-h9r4/hqdefault.jpg"
+              alt="Command Line Git thumbnail"
+            />
+
+            <h3 class="content-card-title">Command Line Git</h3>
+          </article>
+          <!-- >>> END <<< -->
+
+          <!-- video-content-card -->
+          <article
+            class="content-card video-content-card"
+            data-video="https://www.youtube.com/embed/Njq0_-YUf-s?autoplay=1"
+          >
+            <img
+              class="content-card-img"
+              src="https://img.youtube.com/vi/Njq0_-YUf-s/hqdefault.jpg"
+              alt="Add Commit and Push thumbnail"
+            />
+
+            <h3 class="content-card-title">Add, Commit & Push</h3>
+          </article>
+          <!-- >>> END <<< -->
+
+          <!-- video-content-card -->
+          <article
+            class="content-card video-content-card"
+            data-video="https://www.youtube.com/embed/3rxZNlxD9_E?autoplay=1"
+          >
+            <img
+              class="content-card-img"
+              src="https://img.youtube.com/vi/3rxZNlxD9_E/hqdefault.jpg"
+              alt="Branching Workflow thumbnail"
+            />
+
+            <h3 class="content-card-title">Branching Workflow</h3>
+          </article>
+          <!-- >>> END <<< -->
+
+          <!-- video-content-card -->
+          <article
+            class="content-card video-content-card"
+            data-video="https://www.youtube.com/embed/8JJ101D3knE?autoplay=1"
+          >
+            <img
+              class="content-card-img"
+              src="https://img.youtube.com/vi/8JJ101D3knE/hqdefault.jpg"
+              alt="GitHub Workflow thumbnail"
+            />
+
+            <h3 class="content-card-title">GitHub Workflow</h3>
+          </article>
+          <!-- >>> END <<< -->
+
+          <!-- video-content-card -->
+          <article
+            class="content-card video-content-card"
+            data-video="https://www.youtube.com/embed/rE2zRhZdjFU?autoplay=1"
+          >
+            <img
+              class="content-card-img"
+              src="https://img.youtube.com/vi/rE2zRhZdjFU/hqdefault.jpg"
+              alt="Debugging Git Issues thumbnail"
+            />
+
+            <h3 class="content-card-title">Debugging Git Issues</h3>
+          </article>
+          <!-- >>> END <<< -->
+        </div>
+      </section>
+
+      <!-- CONTENT ROW: PROJECT PATTERNS -->
+      <section class="content-row-section">
+        <div class="row-header">
+          <h2>Project Patterns</h2>
+
+          <div class="row-controls">
+            <button
+              type="button"
+              class="row-pill-btn"
+              onclick="scrollRow(this, 'left')"
+              aria-label="Scroll row left"
+            >
+              <span>‹</span>
+            </button>
+
+            <button
+              type="button"
+              class="row-pill-btn"
+              onclick="scrollRow(this, 'right')"
+              aria-label="Scroll row right"
+            >
+              <span>›</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="content-row page-end">
+          <!-- video-content-card -->
+          <article
+            class="content-card video-content-card"
+            data-video="https://www.youtube.com/embed/QlZkfmofzHU?autoplay=1"
+          >
+            <img
+              class="content-card-img"
+              src="https://img.youtube.com/vi/QlZkfmofzHU/hqdefault.jpg"
+              alt="Responsive Dashboard thumbnail"
+            />
+
+            <h3 class="content-card-title">Responsive Dashboard</h3>
+          </article>
+          <!-- >>> END <<< -->
+
+          <!-- video-content-card -->
+          <article
+            class="content-card video-content-card"
+            data-video="https://www.youtube.com/embed/UALn3klXFBM?autoplay=1"
+          >
+            <img
+              class="content-card-img"
+              src="https://img.youtube.com/vi/UALn3klXFBM/hqdefault.jpg"
+              alt="Admin Dashboard thumbnail"
+            />
+
+            <h3 class="content-card-title">Admin Dashboard</h3>
+          </article>
+          <!-- >>> END <<< -->
+
+          <!-- video-content-card -->
+          <article
+            class="content-card video-content-card"
+            data-video="https://www.youtube.com/embed/vAOMZGSsju4?autoplay=1"
+          >
+            <img
+              class="content-card-img"
+              src="https://img.youtube.com/vi/vAOMZGSsju4/hqdefault.jpg"
+              alt="Card Layouts thumbnail"
+            />
+
+            <h3 class="content-card-title">Card Layouts</h3>
+          </article>
+          <!-- >>> END <<< -->
+
+          <!-- video-content-card -->
+          <article
+            class="content-card video-content-card"
+            data-video="https://www.youtube.com/embed/01YKQmia2Jw?autoplay=1"
+          >
+            <img
+              class="content-card-img"
+              src="https://img.youtube.com/vi/01YKQmia2Jw/hqdefault.jpg"
+              alt="Notes App Pattern thumbnail"
+            />
+
+            <h3 class="content-card-title">Notes App Pattern</h3>
+          </article>
+          <!-- >>> END <<< -->
+
+          <!-- video-content-card -->
+          <article
+            class="content-card video-content-card"
+            data-video="https://www.youtube.com/embed/SeKQSQDUMDQ?autoplay=1"
+          >
+            <img
+              class="content-card-img"
+              src="https://img.youtube.com/vi/SeKQSQDUMDQ/hqdefault.jpg"
+              alt="Checklist App Pattern thumbnail"
+            />
+
+            <h3 class="content-card-title">Checklist App Pattern</h3>
+          </article>
+          <!-- >>> END <<< -->
+
+          <!-- video-content-card -->
+          <article
+            class="content-card video-content-card"
+            data-video="https://www.youtube.com/embed/5fb2aPlgoys?autoplay=1"
+          >
+            <img
+              class="content-card-img"
+              src="https://img.youtube.com/vi/5fb2aPlgoys/hqdefault.jpg"
+              alt="DOM App Patterns thumbnail"
+            />
+
+            <h3 class="content-card-title">DOM App Patterns</h3>
+          </article>
+          <!-- >>> END <<< -->
+        </div>
+      </section>
+    </main>
+
+    <!-- Fixed Footer -->
+    <footer class="workspace-footer auto-hide-footer">
+      <p>Codeflix Workspace · HTML · CSS · JavaScript · SQL</p>
+    </footer>
+
+    <!-- Markdown parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <!-- Your markdown loader -->
+    <script src="assets/js/app.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Lucide: clean UI icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+      lucide.createIcons();
+    </script>
+
+    <script>
+      const sidebarToggle = document.getElementById("sidebarToggle");
+
+      if (sidebarToggle && window.matchMedia("(max-width: 640px)").matches) {
+        sidebarToggle.checked = true;
+      }
+    </script>
+  </body>
+</html>

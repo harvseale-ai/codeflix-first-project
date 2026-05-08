@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Codeflix | Workspace</title>
+
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Devicon: tech icons for HTML / CSS / JavaScript -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/pages.css" />
+  </head>
+
+  <body>
+    <!-- Workspace Sidebar -->
+    <aside class="topic-sidebar topic-sidebar-mobile">
+      <input
+        type="checkbox"
+        id="sidebarToggle"
+        class="sidebar-toggle-checkbox" 
+        
+      />
+        <!-- checked -->
+      <div class="sidebar-header">
+        <a href="index.html" class="sidebar-brand">Codeflix</a>
+        <label
+          for="sidebarToggle"
+          class="sidebar-toggle-btn"
+          aria-label="Toggle sidebar"
+        >
+          ☰
+        </label>
+      </div>
+
+      <!-- Standalone workspace button -->
+      <nav class="sidebar-standalone">
+        <a
+          href="workspace.html?file=content/workspace/Padlet.md"
+          class="sidebar-main-link"
+        >
+          <i data-lucide="layout-dashboard" class="nav-icon"></i>
+          <span>Workspace</span>
+        </a>
+      </nav>
+
+      <nav class="sidebar-standalone">
+        <a href="snippets.html" class="sidebar-main-link">
+          <i data-lucide="file-code-2" class="nav-icon"></i>
+          <span>Snippets</span>
+        </a>
+      </nav>
+
+      <nav class="sidebar-standalone">
+        <a href="usage.html" class="sidebar-main-link">
+          <i data-lucide="book-open" class="nav-icon"></i>
+          <span>Usage</span>
+        </a>
+      </nav>
+
+      <nav class="topic-tree" aria-label="Topic navigation">
+        <!-- HTML -->
+        <div class="topic-group">
+          <a href="#" class="sidebar-main-link">
+            <i class="devicon-html5-plain nav-icon tech-icon"></i>
+            <span>HTML</span>
+          </a>
+
+          <div class="topic-submenu">
+            <a
+              href="content.html?file=content/html/01-getting-started/html-cheat-sheet.md"
+              class="topic-file-link"
+            >
+              <i data-lucide="file-text" class="submenu-icon"></i>
+              <span>Cheat Sheet</span>
+            </a>
+
+            <a
+              href="content.html?file=content/html/01-getting-started/resources.md"
+              class="topic-file-link"
+            >
+              <i data-lucide="link" class="submenu-icon"></i>
+              <span>Resources</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- CSS -->
+        <div class="topic-group">
+          <a href="#" class="sidebar-main-link">
+            <i class="devicon-css3-plain nav-icon tech-icon"></i>
+            <span>CSS</span>
+          </a>
+
+          <div class="topic-submenu">
+            <a
+              href="content.html?file=content/css/01-getting-started/css-cheat-sheet.md"
+              class="topic-file-link"
+            >
+              <i data-lucide="file-text" class="submenu-icon"></i>
+              <span>Cheat Sheet</span>
+            </a>
+
+            <a
+              href="content.html?file=content/css/01-getting-started/resources.md"
+              class="topic-file-link"
+            >
+              <i data-lucide="link" class="submenu-icon"></i>
+              <span>Resources</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- JavaScript -->
+        <div class="topic-group">
+          <a href="#" class="sidebar-main-link">
+            <i class="devicon-javascript-plain nav-icon tech-icon"></i>
+            <span>JavaScript</span>
+          </a>
+
+          <div class="topic-submenu">
+            <a
+              href="content.html?file=content/javascript/01-getting-started/js-cheat-sheet.md"
+              class="topic-file-link"
+            >
+              <i data-lucide="file-text" class="submenu-icon"></i>
+              <span>Cheat Sheet</span>
+            </a>
+
+            <a
+              href="content.html?file=content/javascript/01-getting-started/resources.md"
+              class="topic-file-link"
+            >
+              <i data-lucide="link" class="submenu-icon"></i>
+              <span>Resources</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- SQL -->
+        <div class="topic-group">
+          <a href="#" class="sidebar-main-link">
+            <i data-lucide="database" class="nav-icon"></i>
+            <span>SQL</span>
+          </a>
+
+          <div class="topic-submenu">
+            <a
+              href="content.html?file=content/sql/01-getting-started/sql-cheat-sheet.md"
+              class="topic-file-link"
+            >
+              <i data-lucide="file-text" class="submenu-icon"></i>
+              <span>Cheat Sheet</span>
+            </a>
+
+            <a
+              href="content.html?file=content/sql/01-getting-started/resources.md"
+              class="topic-file-link"
+            >
+              <i data-lucide="link" class="submenu-icon"></i>
+              <span>Resources</span>
+            </a>
+          </div>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Right Tool Sidebar -->
+    <aside class="tool-sidebar">
+      <div class="prompt-menu">
+        <button class="tool-link prompt-toggle" type="button">
+          <i data-lucide="message-circle-code" class="tool-icon"></i>
+          <!-- <span>Prompt</span> -->
+        </button>
+
+        <div class="prompt-dropdown">
+          <button
+            class="prompt-option"
+            data-prompt="Act as a senior front-end developer. Help me debug this HTML, CSS, or JavaScript issue. Explain what is wrong, why it is happening, and give me the smallest fix possible."
+          >
+            <i data-lucide="bug" class="prompt-icon"></i>
+            <span>Debug</span>
+          </button>
+
+          <button
+            class="prompt-option"
+            data-prompt="Act as a senior UI designer. Review this page layout and suggest small improvements to spacing, hierarchy, typography, and visual consistency. Do not redesign it from scratch."
+          >
+            <i data-lucide="palette" class="prompt-icon"></i>
+            <span>UI Review</span>
+          </button>
+
+          <button
+            class="prompt-option"
+            data-prompt="Act as a front-end code reviewer. Refactor this code to reduce duplication, use design tokens, and keep the same visual result. Explain only the key changes."
+          >
+            <i data-lucide="wand-sparkles" class="prompt-icon"></i>
+            <span>Refactor</span>
+          </button>
+
+          <button
+            class="prompt-option"
+            data-prompt="Act as a coding tutor. Explain this code clearly for a beginner, step by step, without overcomplicating it."
+          >
+            <i data-lucide="graduation-cap" class="prompt-icon"></i>
+            <span>Explain Code</span>
+          </button>
+        </div>
+      </div>
+
+      <a
+        href="https://chat.openai.com"
+        class="tool-link"
+        onclick="
+          window.open(this.href, 'chatgpt', 'width=520,height=720');
+          return false;
+        "
+      >
+        <i data-lucide="sparkle" class="tool-icon"></i>
+        <!-- <span>ChatGPT</span> -->
+      </a>
+    </aside>
+
+    <!-- Main Markdown Workspace -->
+     
+    <main class="page-shell-content">
+      <section class="markdown-viewer">
+        <article id="markdownContent" class="layout-standard workspace-content">
+          <h1>Workspace</h1>
+          <p>Choose HTML, CSS, JavaScript or SQL from the sidebar.</p>
+        </article>
+      </section>
+    </main>
+
+    <!-- Fixed Footer -->
+    <footer class="workspace-footer auto-hide-footer">
+      <p>Codeflix Workspace · HTML · CSS · JavaScript · SQL</p>
+    </footer>
+
+    <!-- Markdown parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <!-- Your markdown loader -->
+    <script src="assets/js/app.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Lucide: clean UI icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+      lucide.createIcons();
+    </script>
+
+    <script>
+      const sidebarToggle = document.getElementById("sidebarToggle");
+
+      if (sidebarToggle && window.matchMedia("(max-width: 640px)").matches) {
+          sidebarToggle.checked = true;
+      }
+    </script>
+
+  </body>
+</html>

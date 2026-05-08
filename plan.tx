@@ -1,0 +1,1350 @@
+
+================================================================================================================================================================================================================================================================================================================================================
+
+    REFRACTOR 
+================================================================================================================================================================================================================================================================================================================================================
+
+💡 Smart next step
+
+Refactor in this order:
+
+Sidebar → Bootstrap layout
+Buttons → Bootstrap classes
+Inputs → Bootstrap forms
+Spacing → remove manual padding/margin CSS
+THEN clean unused CSS
+
+-------
+
+Realistically: 1,576 lines → about 650–850 lines.
+
+If you were ruthless and used Bootstrap well, I’d expect:
+
+Conservative refactor
+
+~1,000–1,100 lines
+Mostly removing repeated flex, spacing, button, form, and card layout rules.
+
+Strong Bootstrap hybrid
+
+~750–900 lines
+This is the realistic sweet spot. Still keeps your custom identity.
+
+Very ruthless refactor
+
+~550–700 lines
+Possible, but you’d need to standardise hard:
+
+shared .app-card
+shared .scroll-row
+shared .icon-btn
+shared .panel
+Bootstrap utilities everywhere
+remove repeated comments/section dividers
+
+I would aim for:
+
+~800 lines
+
+That’s a good target because it cuts almost 50% without making the code cryptic.
+
+Biggest savings:
+
+Section comments: probably 100+ lines
+Repeated flex/spacing styles: 200–300 lines
+Buttons: 100+ lines
+Cards/panels: 150+ lines
+Responsive duplication: 80–120 lines
+
+Keep custom CSS for:
+
+hero gradients
+Netflix rows
+top-ten cards
+floating command bar
+layout dropdown
+hover animations
+dark theme identity
+ 
+================================================================================================================================================================================================================================================================================================================================================
+
+    FILE STRUCUTRE
+================================================================================================================================================================================================================================================================================================================================================
+
+I need to understand it        → overview.md
+I need to see it working       → examples.md
+I need to reuse code quickly   → snippets.md
+I need a fast reminder         → cheat-sheet.md
+I broke something / fixed it   → bugs-and-fixes.md
+I used it in a real project    → project-patterns.md
+I found a useful link/video    → resources.md
+
+overview.md          = understand the concept
+examples.md          = see small learning examples
+snippets.md          = copy-paste reusable code
+cheat-sheet.md       = quick reminders and syntax
+bugs-and-fixes.md    = problems, causes, fixes
+project-patterns.md  = how you used it in real projects
+resources.md         = useful links, videos, docs
+
+
+QUESTIONS TO ASK MYSELF?
+---------------------------------------------------------------------------
+
+“I finally understand grid-template-columns”
+→ overview.md
+
+“Here is a basic 3-column layout example”
+→ examples.md
+
+“Here is a reusable responsive card grid”
+→ snippets.md
+
+“I keep forgetting repeat(auto-fit, minmax())”
+→ cheat-sheet.md
+
+“My grid columns overflowed on mobile”
+→ bugs-and-fixes.md
+
+“This is the card row pattern from Codeflix”
+→ project-patterns.md
+
+“This CSS-Tricks guide helped me”
+→ resources.md
+
+
+MENTAL MODEL
+---------------------------------------------------------------------------
+
+overview.md
+= What is this? Why does it matter? How does it work?
+
+examples.md
+= Small learning examples that explain the concept.
+
+snippets.md
+= Copy-paste reusable code blocks.
+
+cheat-sheet.md
+= Fast lookup: properties, syntax, rules, reminders.
+
+bugs-and-fixes.md
+= Problems you hit, why they happened, how you fixed them.
+
+project-patterns.md
+= Real patterns from your own projects.
+
+resources.md
+= Useful links, videos, docs, references.
+
+
+
+FILE ORDER
+---------------------------------------------------------------------------
+
+-------
+html
+-------
+
+content/
+  html/
+    _index.md
+
+    01-getting-started/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      resources.md
+
+    02-core-elements/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      resources.md
+
+    03-text-content/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      resources.md
+
+    04-links-and-assets/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      resources.md
+
+    05-document-structure/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      project-patterns.md
+      resources.md
+
+    06-styling-and-css/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      resources.md
+
+    07-tables-and-lists/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      resources.md
+
+    08-forms/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      project-patterns.md
+      resources.md
+
+    09-graphics/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      resources.md
+
+    10-media/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      resources.md
+
+    11-web-apis/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      resources.md
+
+    12-accessibility-and-quality/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      project-patterns.md
+      resources.md
+
+    13-practice-and-learning-path/
+      overview.md
+      exercises.md
+      project-tasks.md
+      checklist.md
+      resources.md
+
+    14-project-patterns/
+      overview.md
+      semantic-layout-patterns.md
+      form-patterns.md
+      media-embed-patterns.md
+      navigation-patterns.md
+      accessibility-patterns.md
+      reusable-page-structures.md
+      bugs-and-fixes.md
+
+    99-reference/
+      tag-list.md
+      attributes-reference.md
+      global-attributes.md
+      entities-symbols-reference.md
+      character-sets-reference.md
+      media-reference.md
+      canvas-svg-reference.md
+      http-messages-and-methods.md
+      px-to-em-converter.md
+      keyboard-shortcuts.md
+      browser-support.md
+
+-------
+css
+-------
+
+content/
+  css/
+    _index.md
+
+    01-getting-started/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      resources.md
+
+    02-selectors-and-cascade/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      resources.md
+
+    03-box-model-and-sizing/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      resources.md
+
+    04-text-fonts-and-visual-styling/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      resources.md
+
+    05-layout-foundations/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      resources.md
+
+    06-flexbox/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      project-patterns.md
+      resources.md
+
+    07-grid/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      project-patterns.md
+      resources.md
+
+    08-responsive-design/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      project-patterns.md
+      resources.md
+
+    09-components-and-interface-patterns/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      project-patterns.md
+      resources.md
+
+    10-images-and-media-styling/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      resources.md
+
+    11-effects-motion-and-advanced-styling/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      project-patterns.md
+      resources.md
+
+    12-sass-and-tooling/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      resources.md
+
+    13-practice-and-learning-path/
+      overview.md
+      exercises.md
+      project-tasks.md
+      checklist.md
+      resources.md
+
+    14-project-patterns/
+      overview.md
+      reusable-components.md
+      dashboard-patterns.md
+      navigation-patterns.md
+      card-patterns.md
+      table-patterns.md
+      form-patterns.md
+      bugs-and-fixes.md
+
+    99-reference/
+      css-reference.md
+      selectors-reference.md
+      properties-reference.md
+      at-rules-reference.md
+      functions-reference.md
+      units-reference.md
+      colours-reference.md
+      browser-support.md
+
+
+-------
+js
+-------
+
+content/
+  javascript/
+    _index.md
+
+    01-getting-started/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      resources.md
+
+    02-variables-and-data-types/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      resources.md
+
+    03-logic-and-control-flow/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      resources.md
+
+    04-functions-scope-and-objects/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      project-patterns.md
+      resources.md
+
+    05-collections-and-built-in-tools/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      resources.md
+
+    06-browser-javascript/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      project-patterns.md
+      resources.md
+
+    07-advanced-javascript/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      project-patterns.md
+      resources.md
+
+    08-debugging-and-code-quality/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      resources.md
+
+    09-projects-and-practice/
+      overview.md
+      exercises.md
+      project-tasks.md
+      checklist.md
+      resources.md
+
+    10-versions-and-updates/
+      overview.md
+      cheat-sheet.md
+      resources.md
+
+    11-project-patterns/
+      overview.md
+      dom-event-patterns.md
+      markdown-loader-pattern.md
+      localstorage-patterns.md
+      filter-and-search-patterns.md
+      dropdown-and-toggle-patterns.md
+      form-handling-patterns.md
+      fetch-and-api-patterns.md
+      bugs-and-fixes.md
+
+    99-reference/
+      javascript-reference.md
+      syntax-reference.md
+      operators-reference.md
+      data-types-reference.md
+      string-methods-reference.md
+      array-methods-reference.md
+      object-methods-reference.md
+      date-reference.md
+      dom-reference.md
+      events-reference.md
+      web-apis-reference.md
+      versions-reference.md
+
+Codeflix Markdown loader
+→ javascript/11-project-patterns/markdown-loader-pattern.md
+
+Saving notes per topic
+→ javascript/11-project-patterns/localstorage-patterns.md
+
+Sidebar click behaviour
+→ javascript/11-project-patterns/dropdown-and-toggle-patterns.md
+
+content/
+  sql/
+    _index.md
+
+    01-getting-started/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      resources.md
+
+    02-reading-data/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      resources.md
+
+    03-filtering-conditions/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      resources.md
+
+    04-creating-and-changing-data/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      project-patterns.md
+      resources.md
+
+    05-aggregate-queries/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      project-patterns.md
+      resources.md
+
+    06-joins-and-combining-results/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      project-patterns.md
+      resources.md
+
+    07-database-and-table-management/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      project-patterns.md
+      resources.md
+
+    08-constraints-and-relationships/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      project-patterns.md
+      resources.md
+
+    09-procedures-security-and-deployment/
+      overview.md
+      examples.md
+      snippets.md
+      cheat-sheet.md
+      bugs-and-fixes.md
+      project-patterns.md
+      resources.md
+
+    10-sql-platforms/
+      overview.md
+      mysql-notes.md
+      sql-server-notes.md
+      ms-access-notes.md
+      platform-differences.md
+      resources.md
+
+    11-practice-and-learning-path/
+      overview.md
+      exercises.md
+      project-tasks.md
+      checklist.md
+      resources.md
+
+    12-project-patterns/
+      overview.md
+      select-query-patterns.md
+      filtering-patterns.md
+      join-patterns.md
+      aggregate-report-patterns.md
+      crud-patterns.md
+      schema-design-patterns.md
+      security-patterns.md
+      bugs-and-fixes.md
+
+    99-reference/
+      sql-reference.md
+      syntax-reference.md
+      operators-reference.md
+      data-types-reference.md
+      keywords-reference.md
+      aggregate-functions-reference.md
+      join-types-reference.md
+      constraint-reference.md
+      mysql-functions-reference.md
+      sql-server-functions-reference.md
+      ms-access-functions-reference.md
+      quick-reference.md
+
+A reusable SELECT query structure
+→ sql/12-project-patterns/select-query-patterns.md
+
+A common INNER JOIN / LEFT JOIN comparison
+→ sql/12-project-patterns/join-patterns.md
+
+A report query using COUNT, GROUP BY, HAVING
+→ sql/12-project-patterns/aggregate-report-patterns.md
+
+Insert, update, delete examples
+→ sql/12-project-patterns/crud-patterns.md
+
+Primary key / foreign key table setup
+→ sql/12-project-patterns/schema-design-patterns.md
+
+Prepared statements and injection prevention
+→ sql/12-project-patterns/security-patterns.md
+
+
+================================================================================================================================================================================================================================================================================================================================================
+    Master Prompt
+================================================================================================================================================================================================================================================================================================================================================
+
+You are helping me build a personal learning archive called Codeflix.
+
+Codeflix is a structured, developer-style learning library where topics are organised into clean folders, groups, and Markdown files. The aim is to make learning easier by separating:
+
+- HTML = page structure
+- CSS = visual style
+- Markdown = lesson/snippet content
+- JavaScript = minimal content loading only
+
+Your task is to take any subject I give you and organise it into a practical Codeflix content structure.
+
+The output should be useful for a developer learning the subject, not just an alphabetical list.
+
+When I give you a subject and topic list, create:
+
+1. A clear topic title
+2. A Level 1 folder/group structure
+3. Optional Level 2 subgroups if useful
+4. A clean learning order
+5. A Markdown file/folder structure
+6. Sensible file names using lowercase kebab-case
+7. A short explanation of why the grouping works
+
+Rules:
+
+- Group topics by how someone would actually learn or use the subject.
+- Separate learning content from reference content.
+- Put beginner/foundation content first.
+- Put practical/project content after core concepts.
+- Put advanced/API/tooling content later.
+- Put quizzes, exercises, examples, and interview prep into a practice/learning path group.
+- Put lookup tables, lists, specs, and converters into a reference group.
+- Remove duplicates or rename duplicate topics clearly.
+- Do not overcomplicate the structure.
+- Keep folder names numbered so the learning order is obvious.
+- Use clear developer-friendly names.
+
+Use this style of output:
+
+SUBJECT
+├── 01 Getting Started
+│   ├── Topic name
+│   └── Topic name
+│
+├── 02 Core Concepts
+│   ├── Topic name
+│   └── Topic name
+│
+├── 03 Practical Usage
+│   ├── Topic name
+│   └── Topic name
+│
+└── 99 Reference
+    ├── Topic name
+    └── Topic name
+
+Then also output the matching file/folder version like this:
+
+content/
+  subject-name/
+    01-getting-started/
+      introduction.md
+      setup.md
+
+    02-core-concepts/
+      core-topic.md
+      another-topic.md
+
+    99-reference/
+      reference-list.md
+      glossary.md
+
+Finally, explain the grouping briefly using this structure:
+
+Why this structure works:
+- Start:
+- Build:
+- Apply:
+- Extend:
+- Reference:
+
+Here is the subject and topic list to organise:
+
+[PASTE SUBJECT AND TOPIC LIST HERE]
+
+================================================
+    HTML
+================================================
+
+
+HTML
+├── 01 Getting Started
+│   ├── HTML HOME
+│   ├── HTML Introduction
+│   ├── HTML Editors
+│   ├── HTML Basic
+│   └── HTML vs. XHTML
+│
+├── 02 Core Elements
+│   ├── HTML Elements
+│   ├── HTML Attributes
+│   ├── HTML Headings
+│   ├── HTML Paragraphs
+│   ├── HTML Block & Inline
+│   ├── HTML Div
+│   ├── HTML Classes
+│   ├── HTML Id
+│   ├── HTML Buttons
+│   └── HTML Computercode
+│
+├── 03 Text Content
+│   ├── HTML Formatting
+│   ├── HTML Quotations
+│   ├── HTML Comments
+│   ├── HTML Entities
+│   ├── HTML Symbols
+│   ├── HTML Emojis
+│   ├── HTML Charsets
+│   └── HTML URL Encode
+│
+├── 04 Links and Assets
+│   ├── HTML Links
+│   ├── HTML Images
+│   ├── HTML Favicon
+│   ├── HTML Page Title
+│   ├── HTML File Paths
+│   └── HTML Iframes
+│
+├── 05 Document Structure
+│   ├── HTML Head
+│   ├── HTML Semantics
+│   ├── HTML Layout
+│   ├── HTML Responsive
+│   └── HTML Style Guide
+│
+├── 06 Styling and CSS
+│   ├── HTML Styles
+│   ├── HTML Colors
+│   └── HTML CSS
+│
+├── 07 Tables and Lists
+│   ├── HTML Tables
+│   └── HTML Lists
+│
+├── 08 Forms
+│   ├── HTML Forms
+│   ├── HTML Form Attributes
+│   ├── HTML Form Elements
+│   ├── HTML Input Types
+│   ├── HTML Input Attributes
+│   └── Input Form Attributes
+│
+├── 09 Graphics
+│   ├── HTML Graphics
+│   ├── HTML Canvas
+│   └── HTML SVG
+│
+├── 10 Media
+│   ├── HTML Media
+│   ├── HTML Video
+│   ├── HTML Audio
+│   ├── HTML Plug-ins
+│   └── HTML YouTube
+│
+├── 11 Web APIs
+│   ├── HTML APIs
+│   ├── HTML Web APIs
+│   ├── HTML Geolocation
+│   ├── HTML Drag and Drop
+│   ├── HTML Web Storage
+│   ├── HTML Web Workers
+│   └── HTML SSE
+│
+├── 12 Accessibility and Quality
+│   ├── HTML Accessibility
+│   ├── HTML Browser Support
+│   ├── HTML Doctypes
+│   ├── HTML Lang Codes
+│   └── HTML Events
+│
+├── 13 Practice and Learning Path
+│   ├── HTML Examples
+│   ├── HTML Editor
+│   ├── HTML Quiz
+│   ├── HTML Exercises
+│   ├── HTML Challenges
+│   ├── HTML Website
+│   ├── HTML Syllabus
+│   ├── HTML Study Plan
+│   ├── HTML Interview Prep
+│   ├── HTML Bootcamp
+│   ├── HTML Summary
+│   ├── HTML Cert
+│   └── HTML Certificate
+│
+└── 14 Reference
+    ├── HTML Tag List
+    ├── HTML Attributes
+    ├── HTML Global Attributes
+    ├── HTML Colors
+    ├── HTML Canvas
+    ├── HTML Audio/Video
+    ├── HTML Character Sets
+    ├── HTTP Messages
+    ├── HTTP Methods
+    ├── PX to EM Converter
+    └── Keyboard Shortcuts
+
+
+    ACTUAL 
+=================
+
+    content/
+  html/
+    _index.md
+    01-getting-started/
+      overview.md
+      introduction-and-basics.md
+      editors-and-workflow.md
+
+    02-core-elements/
+      elements-and-attributes.md
+      headings-and-paragraphs.md
+      block-inline-divs.md
+      classes-ids-buttons.md
+      computer-code.md
+
+    03-text-content/
+      formatting-and-quotes.md
+      comments.md
+      entities-symbols-emojis.md
+      charsets-and-url-encoding.md
+
+    04-links-and-assets/
+      links.md
+      images.md
+      favicons-and-page-title.md
+      file-paths.md
+      iframes.md
+
+    05-document-structure/
+      head.md
+      metadata-and-seo.md
+      semantics.md
+      layout-and-responsive.md
+      style-guide.md
+
+    06-styling-and-css/
+      inline-styles.md
+      colours.md
+      linking-css.md
+
+    07-tables-and-lists/
+      tables.md
+      lists.md
+
+    08-forms/
+      forms-overview.md
+      form-attributes.md
+      form-elements.md
+      input-types.md
+      input-attributes.md
+      forms-validation.md
+
+    09-graphics/
+      graphics-overview.md
+      canvas.md
+      svg.md
+
+    10-media/
+      media-overview.md
+      video.md
+      audio.md
+      plugins.md
+      youtube.md
+
+    11-web-apis/
+      web-apis-overview.md
+      geolocation.md
+      drag-and-drop.md
+      web-storage.md
+      web-workers.md
+      sse.md
+
+    12-accessibility-and-quality/
+      accessibility.md
+      validation-and-debugging.md
+      browser-support.md
+      doctypes.md
+      language-codes.md
+      events.md
+
+    13-practice-and-learning-path/
+      examples.md
+      exercises-and-challenges.md
+      website-project.md
+      syllabus-and-study-plan.md
+      interview-prep.md
+      summary.md
+      certificate.md
+
+    14-reference/
+      tag-list.md
+      attributes.md
+      global-attributes.md
+      colours.md
+      canvas-reference.md
+      audio-video-reference.md
+      character-sets.md
+      http-messages-and-methods.md
+      px-to-em-converter.md
+      keyboard-shortcuts.md
+
+================================================
+    CSS
+================================================
+
+CSS
+├── 01 Getting Started
+│   ├── CSS HOME
+│   ├── CSS Introduction
+│   ├── CSS How To
+│   ├── CSS Syntax
+│   ├── CSS Comments
+│   ├── CSS Errors
+│   └── CSS Optimization
+│
+├── 02 Selectors and Cascade
+│   ├── CSS Selectors
+│   ├── CSS Combinators
+│   ├── CSS Attribute Selectors
+│   ├── CSS Pseudo-classes
+│   ├── CSS Pseudo-elements
+│   ├── CSS Inheritance
+│   ├── CSS Specificity
+│   └── CSS !important
+│
+├── 03 Box Model and Sizing
+│   ├── CSS Box Model
+│   ├── CSS Box Sizing
+│   ├── CSS Margins
+│   ├── CSS Padding
+│   ├── CSS Borders
+│   ├── CSS Outline
+│   ├── CSS Height / Width
+│   ├── CSS Max-width
+│   ├── CSS Units
+│   └── CSS Math Functions
+│
+├── 04 Text, Fonts, and Visual Styling
+│   ├── CSS Colors
+│   ├── CSS Backgrounds
+│   ├── CSS Gradients
+│   ├── CSS Text
+│   ├── CSS Text Effects
+│   ├── CSS Fonts
+│   ├── CSS Custom Fonts
+│   ├── CSS Web Safe Fonts
+│   ├── CSS Icons
+│   ├── CSS Links
+│   ├── CSS Lists
+│   ├── CSS Tables
+│   ├── CSS Opacity
+│   └── CSS Shadows
+│
+├── 05 Layout Foundations
+│   ├── CSS Display
+│   ├── CSS Position
+│   ├── CSS Position Offsets
+│   ├── CSS Z-index
+│   ├── CSS Overflow
+│   ├── CSS Float
+│   ├── CSS Inline-block
+│   ├── CSS Align
+│   ├── CSS Multiple Columns
+│   └── CSS Website Layout
+│
+├── 06 Flexbox
+│   ├── Flexbox Intro
+│   ├── Flex Container
+│   ├── Flex Items
+│   └── Flex Responsive
+│
+├── 07 Grid
+│   ├── Grid Intro
+│   ├── Grid Container
+│   ├── Grid Items
+│   └── Grid 12-column Layout
+│
+├── 08 Responsive Design
+│   ├── RWD Intro
+│   ├── RWD Viewport
+│   ├── RWD Grid View
+│   ├── RWD Media Queries
+│   ├── CSS Media Queries
+│   ├── RWD Images
+│   ├── RWD Videos
+│   ├── RWD Frameworks
+│   └── RWD Templates
+│
+├── 09 Components and Interface Patterns
+│   ├── CSS Navigation Bars
+│   ├── CSS Dropdowns
+│   ├── CSS Forms
+│   ├── CSS Buttons
+│   ├── CSS Tooltips
+│   ├── CSS Pagination
+│   ├── CSS Counters
+│   ├── CSS User Interface
+│   └── CSS Accessibility
+│
+├── 10 Images and Media Styling
+│   ├── CSS Image Gallery
+│   ├── CSS Image Sprites
+│   ├── CSS Image Styling
+│   ├── CSS Image Modal
+│   ├── CSS Image Centering
+│   ├── CSS Image Filters
+│   ├── CSS Image Shapes
+│   ├── CSS object-fit
+│   ├── CSS object-position
+│   └── CSS Masking
+│
+├── 11 Effects, Motion, and Advanced Styling
+│   ├── CSS Rounded Corners
+│   ├── CSS Border Images
+│   ├── CSS 2D Transforms
+│   ├── CSS 3D Transforms
+│   ├── CSS Transitions
+│   ├── CSS Animations
+│   ├── CSS Variables
+│   ├── CSS @property
+│   └── CSS @supports
+│
+├── 12 Sass and Tooling
+│   └── SASS Tutorial
+│
+├── 13 Practice and Learning Path
+│   ├── CSS Templates
+│   ├── CSS Examples
+│   ├── CSS Editor
+│   ├── CSS Snippets
+│   ├── CSS Quiz
+│   ├── CSS Exercises
+│   ├── CSS Code Challenges
+│   ├── CSS Website
+│   ├── CSS Syllabus
+│   ├── CSS Study Plan
+│   ├── CSS Interview Prep
+│   ├── CSS Bootcamp
+│   ├── CSS Certificate
+│   └── CSS Cert
+│
+└── 99 Reference
+    ├── CSS Reference
+    ├── CSS Selectors Reference
+    ├── CSS Combinators Reference
+    ├── CSS Pseudo-classes Reference
+    ├── CSS Pseudo-elements Reference
+    ├── CSS At-rules
+    ├── CSS Functions
+    ├── CSS Reference Aural
+    ├── CSS Animatable
+    ├── CSS Units Reference
+    ├── CSS PX-EM Converter
+    ├── CSS Colors Reference
+    ├── CSS Color Values
+    ├── CSS Default Values
+    └── CSS Browser Support
+
+================================================
+    JavaScript
+================================================
+
+
+    Basic JavaScript
+├── 01 Getting Started
+│   ├── JS Tutorial
+│   ├── JS Introduction
+│   ├── JS Where To
+│   ├── JS Output
+│   ├── JS Syntax
+│   ├── JS Statements
+│   └── JS Comments
+│
+├── 02 Variables and Data Types
+│   ├── JS Variables
+│   ├── JS Let
+│   ├── JS Const
+│   ├── JS Types
+│   ├── JS Data Types
+│   ├── JS Numbers
+│   ├── JS Strings
+│   ├── JS Dates
+│   └── JS Temporal
+│
+├── 03 Logic and Control Flow
+│   ├── JS Operators
+│   ├── JS If Else
+│   ├── JS If Conditions
+│   ├── JS Loops
+│   └── JS Iterations
+│
+├── 04 Functions, Scope, and Objects
+│   ├── JS Functions
+│   ├── JS Scope
+│   ├── JS Objects
+│   └── JS Classes
+│
+├── 05 Collections and Built-in Tools
+│   ├── JS Arrays
+│   ├── JS Sets
+│   ├── JS Maps
+│   ├── JS Math
+│   ├── JS RegExp
+│   └── JS Typed Arrays
+│
+├── 06 Browser JavaScript
+│   ├── JS HTML
+│   ├── JS HTML DOM
+│   ├── JS Events
+│   ├── JS DOM Navigation
+│   ├── JS Windows
+│   ├── JS Web APIs
+│   ├── JS AJAX
+│   └── JS JSON
+│
+├── 07 Advanced JavaScript
+│   ├── JS Asynchronous
+│   ├── JS Modules
+│   ├── JS Meta & Proxy
+│   └── JS jQuery
+│
+├── 08 Debugging and Code Quality
+│   ├── JS Errors
+│   ├── JS Debugging
+│   ├── JS Conventions
+│   └── JS Style Guide
+│
+├── 09 Projects and Practice
+│   ├── JS Projects
+│   ├── JS Graphics
+│   └── JS Examples
+│
+├── 10 Versions and Updates
+│   └── JS 2026
+│
+└── 99 Reference
+    ├── JS Reference
+    └── JS Versions
+
+
+================================================
+    SQL
+================================================
+
+
+    SQL
+├── 01 Getting Started
+│   ├── SQL HOME
+│   ├── SQL Intro
+│   ├── SQL Syntax
+│   ├── SQL Comments
+│   └── SQL Operators
+│
+├── 02 Reading Data
+│   ├── SQL Select
+│   ├── SQL Select Distinct
+│   ├── SQL Where
+│   ├── SQL Order By
+│   ├── SQL Select Top
+│   └── SQL Aliases
+│
+├── 03 Filtering Conditions
+│   ├── SQL And
+│   ├── SQL Or
+│   ├── SQL Not
+│   ├── SQL Like
+│   ├── SQL Wildcards
+│   ├── SQL In
+│   ├── SQL Between
+│   ├── SQL Exists
+│   ├── SQL Any
+│   └── SQL All
+│
+├── 04 Creating and Changing Data
+│   ├── SQL Insert Into
+│   ├── SQL Update
+│   ├── SQL Delete
+│   ├── SQL Null Values
+│   ├── SQL Null Functions
+│   ├── SQL Select Into
+│   ├── SQL Insert Into Select
+│   └── SQL Case
+│
+├── 05 Aggregate Queries
+│   ├── SQL Aggregate Functions
+│   ├── SQL Min()
+│   ├── SQL Max()
+│   ├── SQL Count()
+│   ├── SQL Sum()
+│   ├── SQL Avg()
+│   ├── SQL Group By
+│   └── SQL Having
+│
+├── 06 Joins and Combining Results
+│   ├── SQL Joins
+│   ├── SQL Inner Join
+│   ├── SQL Left Join
+│   ├── SQL Right Join
+│   ├── SQL Full Join
+│   ├── SQL Self Join
+│   ├── SQL Union
+│   └── SQL Union All
+│
+├── 07 Database and Table Management
+│   ├── SQL Create DB
+│   ├── SQL Drop DB
+│   ├── SQL Backup DB
+│   ├── SQL Create Table
+│   ├── SQL Drop Table
+│   ├── SQL Alter Table
+│   ├── SQL Create Index
+│   ├── SQL Auto Increment
+│   ├── SQL Dates
+│   └── SQL Views
+│
+├── 08 Constraints and Relationships
+│   ├── SQL Constraints
+│   ├── SQL Not Null
+│   ├── SQL Unique
+│   ├── SQL Primary Key
+│   ├── SQL Foreign Key
+│   ├── SQL Check
+│   └── SQL Default
+│
+├── 09 Procedures, Security, and Deployment
+│   ├── SQL Stored Procedures
+│   ├── SQL Injection
+│   ├── SQL Parameters
+│   ├── SQL Prepared Statements
+│   └── SQL Hosting
+│
+├── 10 SQL Platforms
+│   ├── SQL Server
+│   ├── MySQL Functions
+│   ├── SQL Server Functions
+│   └── MS Access Functions
+│
+├── 11 Practice and Learning Path
+│   ├── SQL Examples
+│   ├── SQL Editor
+│   ├── SQL Quiz
+│   ├── SQL Exercises
+│   ├── SQL Syllabus
+│   ├── SQL Study Plan
+│   ├── SQL Bootcamp
+│   ├── SQL Training
+│   ├── SQL Cert
+│   └── SQL Certificate
+│
+└── 99 Reference
+    ├── SQL References
+    ├── SQL Data Types
+    ├── SQL Keywords
+    └── SQL Quick Ref
