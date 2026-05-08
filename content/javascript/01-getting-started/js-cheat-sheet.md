@@ -1,10 +1,12 @@
-# JAVASCRIPT CHEAT SHEET — FINAL (TOUGH VERSION)
+# JAVASCRIPT CHEAT SHEET
 
 CORE: SELECT → STORE → LISTEN → CHANGE → DEBUG
 
 JAVASCRIPT = BEHAVIOUR + INTERACTION
 
 THINK:
+
+```text
 What do I want the policy intelligence knowledge graph to do?
 
 Find something? → querySelector()

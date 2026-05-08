@@ -1,17 +1,12 @@
-# CSS CHEAT SHEET — FINAL (TOUGH VERSION)
-
-<iframe 
-  src="https://miro.com/app/board/uXjVIYMV-c8=/"
-  width="50%"
-  height="500"
-  style="border:none; border-radius:12px;">
-</iframe>
+# CSS CHEAT SHEET
 
 CORE: TARGET → STYLE → LAYOUT → RESPONSIVE → DEBUG
 
 CSS = SELECT AN ELEMENT + APPLY PROPERTY: VALUE;
 
 THINK:
+
+```text
 What do I want?
 Target? → selector
 Colour/text? → typography

@@ -1,6 +1,6 @@
 # Codeflix Coding Workspace
 
-Codeflix is a simple, organised, Netflix-style coding learning website. It is designed to help users browse coding topics, read notes, review snippets, and access useful learning resources in one clear place.
+Codeflix is a simple, organised, streaming-style coding learning website. It is designed to help users browse coding topics, read notes, review snippets, and access useful learning resources in one clear place.
 
 The goal of the project is to make coding information easier to store, organise, and reuse over time.
 
@@ -101,28 +101,33 @@ These files can be used to store:
 - Common bugs and fixes
 - Useful resources
 
-## Suggested File Structure
+## File Structure
 
 ```text
 codeflix/
+│
 ├── index.html
-├── usage.html
-├── snippets.html
-├── content.html
 ├── workspace.html
-├── css/
-│   ├── style.css
-│   └── pages.css
-├── js/
-│   └── script.js
+├── snippets.html
+├── usage.html
+├── content.html
+│
 ├── content/
 │   ├── cheat-sheet.md
 │   ├── snippets.md
 │   └── resources.md
+│
 ├── assets/
 │   ├── images/
 │   ├── icons/
-│   └── videos/
+│   └── css/
+│       ├── style.css
+│       └── pages.css
+│
+├── js/
+│   └── script.js
+│
+│
 └── README.md
 ```
 
@@ -163,6 +168,10 @@ Design goals:
 - Accessible and readable content
 - No unnecessary clutter
 
+## Wireframes
+
+![Alt text](assets/images/codeflix-wireframes.png)
+
 ## CSS Structure Reference
 
 The CSS is organised into clear sections so the design stays consistent and easier to maintain.
@@ -176,6 +185,8 @@ Main CSS systems:
 - `HOME-*` — streaming layout, hero section, video state, and content rows
 - `DASH-*` — workspace dashboard and widget grid
 - `RESP-*` — responsive layout overrides
+
+>More information: [id-class-map.xlsx]([URL](https://docs.google.com/spreadsheets/d/1fyj7uiPlhO1ztOMTVsF7pcj02F0SGqsQvYQtRaFk6x0/edit?gid=0#gid=0))
 
 Main CSS files:
 

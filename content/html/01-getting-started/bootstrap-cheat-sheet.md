@@ -5,9 +5,9 @@ CORE: STRUCTURE → CLASS → COMPONENT → RESPONSIVE → DEBUG
 
 BOOTSTRAP = HTML + READY-MADE CSS CLASSES
 
-THINK:
-What do I want?
+THINK: What do I want?
 
+```text
 Page wrapper? → container
 Layout? → row / col
 Spacing? → m-* / p-* / gap-*
@@ -18,6 +18,7 @@ Form? → form-control / form-label
 Navbar? → navbar / nav-link
 Responsive? → sm / md / lg / xl / xxl
 Debug? → Bootstrap linked? class spelling? correct structure?
+```
 
 ## 1) CORE THINKING PATTERN
 

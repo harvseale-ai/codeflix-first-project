@@ -1,25 +1,44 @@
+/* WHY: Confirms the script file has loaded; useful while developing, but can be removed for production. */
 console.log("app.js loaded");
 
+/* WHY: Waits until the HTML exists before selecting page elements and attaching events. */
 document.addEventListener("DOMContentLoaded", () => {
+  /* WHY: Main markdown output container; all loaded markdown and saved notes are rendered here. */
   const markdownContent = document.getElementById("markdownContent");
+
+  /* WHY: Text input/textarea where the user writes a note for the current markdown topic. */
   const topicInput = document.getElementById("topicInput");
+
+  /* WHY: Button that saves the typed note to the current topic. */
   const addNoteBtn = document.getElementById("addNoteBtn");
+
+  /* WHY: Second button that currently reuses the same note-saving behaviour. */
   const askBtn = document.getElementById("askBtn");
+
+  /* WHY: These are selected but not currently used; possible refactor/removal candidates. */
   const floatingBarToggle = document.getElementById("floatingBarToggle");
   const barCloseBtn = document.getElementById("barCloseBtn");
+
+  /* WHY: Reads the URL query string so pages can load a markdown file from ?file=... */
   const params = new URLSearchParams(window.location.search);
+
+  /* WHY: Stores the markdown file path passed in the URL. */
   const fileFromUrl = params.get("file");
 
+  /* WHY: Tracks the active markdown file so notes can be saved separately per topic. */
   let currentMarkdownFile = "";
 
+  /* WHY: Warns when this script runs on a page without a markdown area instead of crashing immediately. */
   if (!markdownContent) {
     console.log("No markdown content on this page.");
   }
 
+  /* WHY: Creates a unique localStorage key for the current markdown file so each topic keeps its own notes. */
   function getStorageKey() {
     return `codeflix-notes-${currentMarkdownFile || "default-topic"}`;
   }
 
+  /* WHY: Reads saved notes from localStorage and appends them under the loaded markdown content. */
   function renderSavedNotes() {
     const savedNotes = JSON.parse(localStorage.getItem(getStorageKey())) || [];
 
@@ -46,6 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
     markdownContent.appendChild(notesSection);
   }
 
+  /* WHY: Adds one new note to the page immediately after saving, without reloading all markdown content. */
   function renderSingleNote(noteText) {
     let notesSection = document.querySelector(".user-notes-section");
 
@@ -71,6 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
     notesList.appendChild(noteCard);
   }
 
+  /* WHY: Validates the note input, saves it to localStorage, clears the field, and renders it on the page. */
   function saveNoteToCurrentTopic() {
     if (!topicInput) return;
 
@@ -89,6 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
     renderSingleNote(noteText);
   }
 
+  /* WHY: Loads a markdown file, converts it with marked.js if available, and shows saved notes for that file. */
   async function loadMarkdown(filePath) {
     currentMarkdownFile = filePath;
 
@@ -134,19 +156,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  /* WHY: Automatically loads markdown when a page URL contains ?file=... */
   if (fileFromUrl) {
     loadMarkdown(fileFromUrl);
   }
 
-  document.addEventListener("click", (event) => {
-    const link = event.target.closest("[data-file]");
-
-    if (!link) return;
-
-    event.preventDefault();
-    loadMarkdown(link.dataset.file);
-  });
-
+  /* WHY: Lets any element with data-file load markdown without a full page reload. */
   document.addEventListener("click", (event) => {
     const link = event.target.closest("[data-file]");
 
@@ -157,14 +172,17 @@ document.addEventListener("DOMContentLoaded", () => {
     loadMarkdown(link.dataset.file);
   });
 
+  /* WHY: Saves the current note when the add-note button is clicked. */
   if (addNoteBtn) {
     addNoteBtn.addEventListener("click", saveNoteToCurrentTopic);
   }
 
+  /* WHY: Reuses note saving for askBtn; check later whether this should do something different. */
   if (askBtn) {
     askBtn.addEventListener("click", saveNoteToCurrentTopic);
   }
 
+  /* WHY: Allows Enter to save a note while Shift+Enter still creates a new line. */
   if (topicInput) {
     topicInput.addEventListener("keydown", (event) => {
       if (event.key === "Enter" && !event.shiftKey) {
@@ -176,8 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-
-
+/* DUPLICATION FLAG: Widget size changing is defined three times below; this first version is the simplest. */
 document.addEventListener("click", (event) => {
   const sizeButton = event.target.closest("[data-size]");
 
@@ -191,9 +208,7 @@ document.addEventListener("click", (event) => {
 });
 
 
-
-
-
+/* DUPLICATION FLAG: Second widget size handler repeats the first but also resets other widgets when one becomes large. */
 document.addEventListener("click", (event) => {
   const sizeButton = event.target.closest("[data-size]");
   if (!sizeButton) return;
@@ -213,7 +228,7 @@ document.addEventListener("click", (event) => {
 });
 
 
-
+/* DUPLICATION FLAG: Third widget size handler repeats sizing again and moves large widgets to the top of the grid. */
 document.addEventListener("click", (event) => {
   const sizeButton = event.target.closest("[data-size]");
   if (!sizeButton) return;
@@ -231,11 +246,11 @@ document.addEventListener("click", (event) => {
 });
 
 
-
-// Updates the hero section on the main page to play selected videos
+/* WHY: Selects the homepage hero and active iframe so clicking cards can play videos in the hero. */
 const heroPromo = document.getElementById("heroPromo");
 const heroVideo = document.getElementById("heroVideo");
 
+/* WHY: If the hero exists, video cards update the iframe source and switch the hero into playing mode. */
 if (heroPromo && heroVideo) {
   document
   .querySelectorAll(".video-content-card, .top-ten-card[data-video]")
@@ -256,7 +271,7 @@ if (heroPromo && heroVideo) {
   });
 }
 
-// copy and paste prompt-option content
+/* WHY: Copies prompt text from data-prompt to the clipboard and shows a temporary copied state. */
 document.querySelectorAll(".prompt-option").forEach((button) => {
   button.dataset.label = button.textContent;
 
@@ -282,12 +297,18 @@ document.querySelectorAll(".prompt-option").forEach((button) => {
 });
 
 
-// FOOTER MOVEMENT AND FIXED POPOUT
+/* ==========================================================================================
+   FOOTER MOVEMENT AND FIXED POPOUT
+   WHY: Shows the auto-hide footer while scrolling or when the mouse is near the bottom.
+========================================================================================== */
 
+/* WHY: Selects the footer that CSS hides by default with .auto-hide-footer. */
 const footer = document.querySelector(".auto-hide-footer");
 
+/* WHY: Stores the timeout so each scroll/mouse event can reset the hide delay. */
 let footerTimer;
 
+/* WHY: Shows the footer during scrolling, then hides it after 5 seconds of no scroll activity. */
 if (footer) {
   window.addEventListener("scroll", () => {
     footer.classList.add("is-visible");
@@ -300,6 +321,7 @@ if (footer) {
   });
 }
 
+/* WHY: Shows the footer when the mouse gets close to the bottom edge, then hides it after a delay. */
 if (footer) {
   window.addEventListener("mousemove", (event) => {
     const nearBottom = window.innerHeight - event.clientY < 90;
@@ -317,8 +339,10 @@ if (footer) {
 }
 
 
+/* WHY: Selects the decorative homepage preview iframe/video behind the hero text. */
 const heroPreviewVideo = document.getElementById("heroPreviewVideo");
 
+/* WHY: Stores the rotating list of preview videos used in the hero background. */
 const heroPreviewVideos = [
   "https://www.youtube.com/embed/qz0aGYrrlhU",
   "https://www.youtube.com/embed/yfoY53QXEnI",
@@ -326,8 +350,10 @@ const heroPreviewVideos = [
   "https://www.youtube.com/embed/5fb2aPlgoys",
 ];
 
+/* WHY: Tracks which preview video should play next. */
 let heroPreviewIndex = 0;
 
+/* WHY: Updates the hero preview video source and cycles to the next preview URL. */
 function playHeroPreview() {
   if (!heroPreviewVideo) return;
 
@@ -338,16 +364,18 @@ function playHeroPreview() {
   heroPreviewIndex = (heroPreviewIndex + 1) % heroPreviewVideos.length;
 }
 
+/* WHY: Starts the hero preview rotation only on pages that include the preview video element. */
 if (heroPreviewVideo) {
   playHeroPreview();
   setInterval(playHeroPreview, 40000);
 }
 
 
+/* CLEANUP FLAG: This commented-out line repeats the iframe URL format above and can probably be removed. */
 // heroPreviewVideo.src = `${videoUrl}?autoplay=1&mute=1&controls=0&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&disablekb=1`;
 
 
-// Row pill scroll buttons
+/* WHY: Scrolls the nearest horizontal content row left or right when a row pill button calls this function. */
 function scrollRow(button, direction) {
   const section = button.closest(".content-row-section, .top-ten-section");
 

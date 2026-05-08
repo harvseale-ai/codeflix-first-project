@@ -1,29 +1,16 @@
-
 /* ==========================================================================================
-
    3. PAGE SHELLS
-
-   Page shell rule:
-   - shell covers the full screen/background
-   - direct child sections create the content safe area
-   - inner wrappers control readable width
-
+   WHY: Page shells separate full-screen backgrounds, screen padding, and readable content width.
 ========================================================================================== */
 
-/* Wide pages are used for homepage/dashboard-style layouts. */
+/* WHY: Gives wide/home/dashboard-style pages full viewport height, screen padding, and footer clearance. */
 .page-shell-wide {
   min-height: 100vh;
   padding: var(--space-13) var(--page-padding-x) var(--footer-height-space);
   color: var(--color-text);
 }
 
-/*
-   Main content-page shell.
-
-   IMPORTANT:
-   This element owns the background only.
-   Do not add left/right padding here, or the background will stop touching the screen edges.
-*/
+/* WHY: Content pages own the full-width background; padding is avoided here so the background reaches screen edges. */
 .page-shell-content {
   min-height: 100vh;
   padding: 0 0 var(--footer-height-space);
@@ -42,49 +29,36 @@
   color: var(--color-text);
 }
 
-/*
-   Content safe area.
-
-   This is where screen padding belongs.
-   Desktop also adds the sidebar offset.
-*/
+/* WHY: Direct child sections create the safe content area and include desktop space for the fixed sidebar. */
 .page-shell-content > section {
   padding-right: var(--page-padding-x);
   padding-left: calc(var(--content-sidebar-offset) + var(--page-padding-x));
 }
 
-/*
-   Markdown pages use the same safe area system, but with a larger sidebar offset.
-*/
+/* WHY: Markdown pages need the same safe-area pattern but with a wider left offset for reading layout. */
 .page-shell-content.markdown-shell > section {
   padding-left: calc(var(--markdown-sidebar-offset) + var(--page-padding-x));
 }
 
-/*
-   Layout containers only control max readable width.
-   They should not create screen padding.
-*/
+/* WHY: Standard containers limit content width only; they do not create screen padding. */
 .layout-standard {
   width: min(100%, var(--container-standard));
   margin-inline: auto;
 }
 
+/* WHY: Reading containers keep long text comfortable without changing page shell alignment. */
 .layout-reading {
   width: min(100%, var(--container-reading));
   margin-inline: auto;
 }
 
+/* WHY: Wide containers stop large layouts from becoming unlimited while still allowing dashboard-style width. */
 .layout-wide {
   width: min(100%, var(--container-wide));
   margin-inline: auto;
 }
 
-/*
-   Shared page hero.
-
-   The hero background should stretch full width because it is a section background.
-   The section itself already has safe-area padding from .page-shell-content > section.
-*/
+/* WHY: Shared content-page hero creates consistent top page introduction sections across About/Snippets/etc. */
 .hero-promo-pages {
   min-height: 340px;
   padding-top: 120px;
@@ -107,59 +81,18 @@
 
 
 /* ======================================================================================================================
-
    8. PAGES
-
-   DESCRIPTION:
-   This section contains page-specific styling for Snippets, About, and Markdown/Reading pages.
-
-   IMPORTANT:
-   Page alignment is controlled by the page shell system from the foundation section:
-
-   .page-shell-content > section {
-     padding-left: var(--content-sidebar-offset);
-   }
-
-   .page-shell-content.markdown-shell > section {
-     padding-left: var(--markdown-sidebar-offset);
-   }
-
-   Do not create new left-offset systems inside individual page sections unless a page genuinely
-   needs a special layout. This keeps all pages responsive and aligned consistently.
-
+   WHY: Page-specific styles live here, while major alignment still comes from the page shell system.
+   REFACTOR CHECK: Avoid adding new page-level left offsets here; use .page-shell-content > section instead.
 ====================================================================================================================== */
 
 
 /* ==========================================================================================
-
    8.1 SHARED PAGE INNER WIDTHS
-
-   DESCRIPTION:
-   These inner wrappers keep hero text, snippet forms, and about content aligned to a readable
-   content width after the page shell has already handled sidebar spacing.
-
-   KEY IDEA:
-   The page shell controls sidebar offset.
-   These inner wrappers control readable content width.
-
-   RESPONSIVE NOTE:
-   Using width: min(...) keeps the content fluid while still preventing it from becoming too wide.
-
+   WHY: Inner wrappers control readable width after the shell has already handled screen padding/offsets.
 ========================================================================================== */
 
-/*
-   Shared inner content width for normal content pages.
-
-   USE FOR:
-   - hero content on page headers
-   - snippet page inner content
-   - about page inner content
-
-   DRIFT CHECK:
-   This does not replace .page-shell-content > section.
-   It only controls the width of content inside the already-aligned page section.
-*/
-
+/* WHY: Keeps hero, snippet, and about content readable and centred within their page sections. */
 .hero-content-pages,
 .snippet-page-inner,
 .about-page-inner {
@@ -167,6 +100,7 @@
   margin-inline: auto;
 }
 
+/* WHY: Adds consistent side padding to major page sections; DUPLICATION CHECK: may overlap with shell section padding. */
 .hero-promo,
 .hero-promo-pages,
 .snippet-form-section,
@@ -177,39 +111,21 @@
   padding-left: var(--mobile-page-inset);
 }
 
+
 /* ==========================================================================================
-
    8.2 SNIPPETS PAGE
-
-   DESCRIPTION:
-   Styles for the snippet form page, including labels, inputs, textareas, code fields,
-   form wrapper, and action buttons.
-
-   KEY IDEA:
-   The snippet page should use the same page-shell alignment as other content pages.
-   Only form-specific spacing belongs here.
-
+   WHY: Snippet styles should only handle the form/page content, not global page alignment.
 ========================================================================================== */
 
-/*
-   Snippet form section spacing.
-
-   IMPORTANT:
-   No left padding is set here.
-   Left alignment comes from .page-shell-content > section in the page shell system.
-*/
+/* WHY: Creates vertical rhythm around the snippet form while relying on the shell for horizontal alignment. */
 .snippet-form-section {
   padding-top: var(--space-15);
+  /* REFACTOR CHECK: Commented-out padding can probably be removed if no longer needed. */
   /* padding-right: var(--space-13); */
   padding-bottom: var(--space-19);
 }
 
-/*
-   Main snippet form surface.
-
-   CHANGED:
-   Keeps the existing dark surface, but uses tokens consistently.
-*/
+/* WHY: Makes the form feel like a dark card while using shared colour, border, and radius tokens. */
 .snippet-form {
   width: 100%;
   padding: var(--space-11);
@@ -220,24 +136,13 @@
   border-radius: var(--radius-md);
 }
 
-/*
-   Form labels.
-
-   CHANGED:
-   Replaced raw #f5f5f5 with var(--color-text).
-*/
+/* WHY: Keeps form labels readable and consistent with the main text colour. */
 .snippet-form .form-label {
   color: var(--color-text);
   font-weight: 700;
 }
 
-/*
-   Form controls.
-
-   CHANGED:
-   Replaced raw colour and border values with existing tokens.
-   This keeps the form aligned with the rest of the design system.
-*/
+/* WHY: Overrides Bootstrap form fields so inputs match the dark Codeflix theme. */
 .snippet-form .form-control {
   background: var(--color-surface);
   color: var(--color-text);
@@ -246,23 +151,12 @@
   border-radius: var(--radius-md);
 }
 
-/*
-   Placeholder text.
-
-   NOTE:
-   This is slightly muted so it is visible but does not compete with actual input text.
-*/
+/* WHY: Makes placeholder text visible but visually quieter than real input text. */
 .snippet-form .form-control::placeholder {
   color: var(--color-text-muted);
 }
 
-/*
-   Focus state for form controls.
-
-   IMPORTANT:
-   Focus states are accessibility features, not just decoration.
-   This makes the active field clear when using keyboard navigation.
-*/
+/* WHY: Gives keyboard and mouse users a clear active-field state inside the dark UI. */
 .snippet-form .form-control:focus {
   background: var(--color-surface-dark);
   color: var(--color-white);
@@ -272,15 +166,7 @@
   outline: none;
 }
 
-/*
-   Code input field.
-
-   USE FOR:
-   Larger textarea/code snippets.
-
-   KEY IDEA:
-   Use the mono font token so code styling stays consistent with markdown code blocks.
-*/
+/* WHY: Makes code textareas taller, monospaced, and resizable for practical snippet editing. */
 .code-field {
   min-height: 260px;
 
@@ -291,15 +177,7 @@
   resize: vertical;
 }
 
-/*
-   Snippet form action row.
-
-   DESCRIPTION:
-   Holds buttons such as save, clear, copy, or submit.
-
-   RESPONSIVE NOTE:
-   flex-wrap allows buttons to move onto a new line before the layout breaks.
-*/
+/* WHY: Keeps snippet action buttons aligned in a flexible row that can wrap before breaking layout. */
 .snippet-actions {
   margin-top: var(--space-11);
 
@@ -310,35 +188,17 @@
 
 
 /* ==========================================================================================
-
    8.3 ABOUT PAGE
-
-   DESCRIPTION:
-   Styles for the About page content area.
-
-   KEY IDEA:
-   The About page uses the same page-shell alignment system as other content pages.
-   This section only controls vertical spacing and reading comfort.
-
+   WHY: About page styles control reading comfort only; alignment still belongs to the page shell.
 ========================================================================================== */
 
-/*
-   About page content wrapper.
-
-   IMPORTANT:
-   No left padding is set here.
-   The shared page shell handles left alignment across desktop/tablet/mobile.
-*/
+/* WHY: Adds vertical breathing room around About content without creating a separate layout system. */
 .about-content-wrap {
   padding-top: var(--space-15);
-  padding-bottom: var(--space-19);}
+  padding-bottom: var(--space-19);
+}
 
-/*
-   About page text.
-
-   CHANGED:
-   Uses typography tokens instead of raw values where appropriate.
-*/
+/* WHY: Makes About copy softer and easier to read with the shared reading line-height. */
 .about-content {
   color: var(--color-text-soft);
   font-size: var(--text-base);
@@ -347,28 +207,11 @@
 
 
 /* ==========================================================================================
-
    8.4 MARKDOWN / READING CONTENT PAGE
-
-   DESCRIPTION:
-   Styles for markdown-rendered content, documentation pages, tutorials, and long-form reading.
-
-   IMPORTANT:
-   Markdown pages still use .page-shell-content, but with the .markdown-shell modifier.
-   This lets markdown pages share the same page system while having reading-specific spacing.
-
-   DRIFT CHECK:
-   The old raw 320px left padding has been replaced with:
-   var(--markdown-sidebar-offset)
-
+   WHY: Markdown pages share the content shell but need extra reading-specific spacing and typography.
 ========================================================================================== */
 
-/*
-   Markdown page shell modifier.
-
-   DESCRIPTION:
-   Gives markdown/reading pages a slightly different background direction and full-height layout.
-*/
+/* WHY: Gives markdown pages a reading-focused background and footer clearance while keeping the content shell system. */
 .page-shell-content.markdown-shell {
   min-height: 100vh;
   padding: 0 0 var(--space-19);
@@ -385,24 +228,12 @@
   color: var(--color-text);
 }
 
-/*
-   >>> Markdown desktop alignment <<< 
-
-   IMPORTANT:
-   This must match the page shell system.
-   Do not hardcode 320px here. Use the token from :root.
-*/
+/* WHY: Sets markdown desktop alignment; REFACTOR CHECK: this may conflict with the newer calc() shell rule if both exist. */
 .page-shell-content.markdown-shell > section {
   padding-left: var(--markdown-sidebar-offset);
 }
 
-/*
-   Markdown viewer spacing.
-
-   DESCRIPTION:
-   Adds internal padding around rendered markdown content.
-   This is different from sidebar alignment.
-*/
+/* WHY: Adds internal reading-page spacing around rendered markdown; REFACTOR CHECK: padding-top is declared twice. */
 .markdown-viewer {
   padding-top: var(--space-15);
   padding-bottom: var(--space-19);
@@ -410,24 +241,14 @@
   padding-top: 120px;
 }
 
-/*
-   Main rendered markdown content.
-
-   KEY IDEA:
-   This controls readable text rhythm for generated or static markdown content.
-*/
+/* WHY: Sets the base reading style for all rendered markdown content. */
 .workspace-content {
   color: var(--color-text-soft);
   font-size: var(--text-base);
   line-height: var(--line-reading);
 }
 
-/*
-   Markdown h1 and h2 shared styling.
-
-   DESCRIPTION:
-   Large headings use a border to create clear document sections.
-*/
+/* WHY: Makes major markdown headings feel like clear document section breaks. */
 .workspace-content h1,
 .workspace-content h2 {
   margin: 0 0 var(--space-8);
@@ -438,18 +259,14 @@
   letter-spacing: var(--tracking-heading);
 }
 
-/*
-   Markdown page title.
-*/
+/* WHY: Styles the main markdown page title as the strongest heading. */
 .workspace-content h1 {
   font-size: var(--page-title);
   font-weight: 900;
   line-height: 1;
 }
 
-/*
-   Markdown section heading.
-*/
+/* WHY: Styles markdown section headings with strong weight and spacing from previous content. */
 .workspace-content h2 {
   margin-top: var(--space-13);
 
@@ -457,9 +274,7 @@
   font-weight: 800;
 }
 
-/*
-   Markdown subsection heading.
-*/
+/* WHY: Styles markdown subheadings so they sit below h2 but still stand out from body text. */
 .workspace-content h3 {
   margin: var(--space-12) 0 var(--space-4);
 
@@ -468,62 +283,35 @@
   font-weight: 800;
 }
 
-/*
-   Markdown paragraphs.
-
-   KEY IDEA:
-   Consistent paragraph spacing makes long-form content easier to scan.
-*/
+/* WHY: Gives paragraphs consistent bottom spacing for readable long-form rhythm. */
 .workspace-content p {
   margin: 0 0 var(--space-7);
 }
 
-/*
-   Markdown lists.
-
-   DESCRIPTION:
-   Keeps list indentation and bottom spacing consistent with paragraphs.
-*/
+/* WHY: Keeps markdown lists aligned with paragraph spacing and readable indentation. */
 .workspace-content ul,
 .workspace-content ol {
   margin: 0 0 var(--space-8);
   padding-left: var(--space-10);
 }
 
+/* WHY: Adds small spacing between list items so dense lists remain readable. */
 .workspace-content li {
   margin-bottom: var(--space-2);
 }
 
-/*
-   Markdown links.
-
-   DESCRIPTION:
-   Uses the shared link colour token.
-*/
+/* WHY: Makes markdown links stand out using the shared link token. */
 .workspace-content a {
   color: var(--color-link);
 }
 
-/*
-   Inline code.
-
-   DESCRIPTION:
-   Keeps inline code visible without making it feel like a full code block.
-*/
+/* WHY: Makes inline code visible without turning it into a full block treatment. */
 .workspace-content code {
   color: var(--color-link);
   font-size: 0.95em;
 }
 
-/*
-   Code blocks.
-
-   DESCRIPTION:
-   Full-width code blocks get their own dark surface, border, radius, and horizontal scrolling.
-
-   IMPORTANT:
-   overflow-x: auto prevents long code lines from breaking the page layout.
-*/
+/* WHY: Gives code blocks their own dark surface and horizontal scroll so long lines do not break layout. */
 .workspace-content pre {
   margin: var(--space-9) 0 var(--space-11);
   padding: var(--space-9);
@@ -537,12 +325,7 @@
   border-radius: var(--radius-md);
 }
 
-/*
-   Code inside pre blocks.
-
-   DESCRIPTION:
-   Uses the mono font token and inherits the parent colour.
-*/
+/* WHY: Keeps code inside pre blocks monospaced and consistent with the block colour. */
 .workspace-content pre code {
   color: inherit;
 
@@ -551,12 +334,7 @@
   line-height: 1.55;
 }
 
-/*
-   Blockquotes.
-
-   DESCRIPTION:
-   Used for callouts, notes, quotes, or important teaching points inside markdown content.
-*/
+/* WHY: Creates a clear callout style for notes, quotes, and teaching points inside markdown. */
 .workspace-content blockquote {
   margin: var(--space-10) 0;
   padding: var(--space-6) var(--space-8);
@@ -566,12 +344,7 @@
   border-radius: var(--radius-sm);
 }
 
-/*
-   Embedded media.
-
-   DESCRIPTION:
-   Ensures markdown images, iframes, videos, and audio do not overflow the reading area.
-*/
+/* WHY: Makes markdown media responsive and prevents images/embeds from overflowing the reading area. */
 .workspace-content img,
 .workspace-content iframe,
 .workspace-content video,
@@ -583,12 +356,7 @@
   border-radius: var(--radius-md);
 }
 
-/*
-   Markdown iframe embeds.
-
-   DESCRIPTION:
-   Keeps video embeds in a stable 16:9 ratio.
-*/
+/* WHY: Keeps iframe embeds, especially videos, in a stable responsive 16:9 shape. */
 .workspace-content iframe {
   aspect-ratio: 16 / 9;
   height: auto;
@@ -596,47 +364,13 @@
 
 
 /* ==========================================================================================
-
    9. HOME PAGE / STREAMING LAYOUT
-
-   DESCRIPTION:
-   This section controls the homepage streaming-style experience:
-   - main stream wrapper
-   - hero banner
-   - background preview video
-   - selected hero video player state
-   - horizontal content rows
-   - row controls
-   - content/video cards
-   - Top 10 ranked cards
-
-   KEY IDEA:
-   The home page is more visual and interactive than the content pages, so it has its own
-   layout system. It should not use .page-shell-content because it does not follow the same
-   sidebar-aligned reading-page layout.
-
-   DRIFT CHECK:
-   This keeps the original design intent:
-   - large cinematic hero
-   - video preview behind hero text
-   - horizontal scrolling rows
-   - Netflix-style cards
-   - Top 10 ranking row
-
+   WHY: The home page is a custom streaming layout, separate from the normal page-shell system.
 ========================================================================================== */
 
-
 /* ==========================================================================================
-
    9.1 STREAM MAIN WRAPPER
-
-   DESCRIPTION:
-   The outer wrapper for the home/streaming page.
-
-   KEY IDEA:
-   This page controls its own horizontal overflow because scrolling rows can otherwise
-   create accidental page-wide horizontal scroll.
-
+   WHY: Contains the whole home page and prevents horizontal card rows from creating page overflow.
 ========================================================================================== */
 
 .stream-main {
@@ -649,30 +383,15 @@
 
 
 /* ==========================================================================================
-
    9.2 HERO SECTION
-
-   DESCRIPTION:
-   Large homepage hero area with a gradient background, optional background video preview,
-   text content, action buttons, and selected video playback state.
-
-   IMPORTANT:
-   The hero uses layered z-index:
-   - z-index 0: background preview video
-   - z-index 1: dark readability overlay
-   - z-index 2: text content or active video player
-
+   WHY: Creates the cinematic homepage banner with layered background video, overlay, and foreground content.
 ========================================================================================== */
 
 .hero-promo {
   position: relative;
   min-height: 430px;
 
-  /*
-     DESKTOP DEFAULT:
-     The home hero has its own left padding because it is a cinematic page layout,
-     not a normal .page-shell-content reading page.
-  */
+  /* WHY: Gives the cinematic home hero its own spacing instead of using the content-page shell. */
   padding: var(--space-17) var(--space-13) var(--space-13);
   padding-left: 100px;
 
@@ -692,13 +411,7 @@
   border-bottom: var(--border-soft);
 }
 
-/*
-   Dark overlay above the background preview video.
-
-   CHANGED:
-   The previous overlay existed but had no background, so it did nothing.
-   This version makes hero text more readable while preserving the cinematic background.
-*/
+/* WHY: Adds a dark readability layer above the preview video but below hero text. */
 .hero-promo::after {
   content: "";
   position: absolute;
@@ -716,12 +429,7 @@
     );
 }
 
-/*
-   Hero text content.
-
-   DESCRIPTION:
-   Sits above the background video and overlay.
-*/
+/* WHY: Keeps hero text above the background video and overlay. */
 .hero-content {
   position: relative;
   z-index: 2;
@@ -730,13 +438,7 @@
   margin-top: var(--space-13);
 }
 
-/*
-   Small uppercase text above the hero title.
-
-   CHANGED:
-   Keeps the original blue-grey colour, but stores the rest of the styling in tokens.
-   If this colour is reused elsewhere later, consider adding an eyebrow token.
-*/
+/* WHY: Styles the small uppercase label above the hero title; REFACTOR CHECK: #9fb3d1 could become a token if reused. */
 .eyebrow {
   margin: 0 0 var(--space-4);
 
@@ -747,9 +449,7 @@
   text-transform: uppercase;
 }
 
-/*
-   Main hero title.
-*/
+/* WHY: Makes the home hero title large, tight, and cinematic. */
 .hero-content h1 {
   margin: 0 0 var(--space-6);
 
@@ -759,9 +459,7 @@
   letter-spacing: var(--tracking-tight);
 }
 
-/*
-   Hero supporting text.
-*/
+/* WHY: Keeps hero supporting text readable without stretching too wide. */
 .hero-description {
   max-width: 520px;
   margin: 0 0 var(--space-10);
@@ -771,14 +469,7 @@
   line-height: 1.5;
 }
 
-/*
-   Hero action button row.
-
-   IMPORTANT:
-   .row-controls is no longer grouped here.
-   It has its own layout rules later, which prevents accidental coupling between
-   hero buttons and row controls.
-*/
+/* WHY: Groups hero buttons without coupling them to row controls. */
 .hero-actions {
   display: flex;
   gap: var(--space-5);
@@ -786,20 +477,8 @@
 
 
 /* ==========================================================================================
-
    9.3 HERO BACKGROUND PREVIEW VIDEO
-
-   DESCRIPTION:
-   Silent decorative video shown behind the hero text.
-
-   DRIFT CHECK:
-   The original CSS defined .hero-preview-video twice:
-   - first: 140vw / 78.75vw / opacity 0.16
-   - second: 120vw / 67.5vw / opacity 0.24
-
-   CHANGED:
-   This keeps the later version because it was the one actually winning in the cascade.
-
+   WHY: Places a decorative video behind the hero content without allowing user interaction.
 ========================================================================================== */
 
 .hero-preview-video {
@@ -809,7 +488,7 @@
   z-index: 0;
 
   width: 120vw;
-  height: 67.5vw; /* 16:9 ratio */
+  height: 67.5vw; /* WHY: Keeps the decorative video in a 16:9 shape. */
 
   min-width: 100%;
   min-height: 100%;
@@ -817,29 +496,17 @@
   transform: translate(-50%, -50%);
 
   border: 0;
-  opacity: 0.24;
+  opacity: 0.34;
   pointer-events: none;
 }
 
 
 /* ==========================================================================================
-
    9.4 HERO SELECTED VIDEO PLAYER STATE
-
-   DESCRIPTION:
-   When a selected video is playing, the hero changes from promo mode into video-player mode.
-
-   KEY IDEA:
-   The .is-playing class is a state class, probably added/removed with light vanilla JS.
-
+   WHY: Switches the hero from promo content into an active video player when .is-playing is added.
 ========================================================================================== */
 
-/*
-   Video player wrapper.
-
-   DESCRIPTION:
-   Hidden by default until .hero-promo has .is-playing.
-*/
+/* WHY: Keeps the selected video hidden until the hero enters the playing state. */
 .hero-video-wrap {
   position: relative;
   z-index: 2;
@@ -850,12 +517,7 @@
   margin: 0 auto;
 }
 
-/*
-   Selected video iframe.
-
-   DESCRIPTION:
-   Keeps the active video in a stable 16:9 layout.
-*/
+/* WHY: Keeps the active video responsive and visually consistent with card styling. */
 .hero-video-wrap iframe {
   width: 100%;
 
@@ -866,12 +528,7 @@
   box-shadow: var(--shadow-card);
 }
 
-/*
-   Playing state for the hero.
-
-   DESCRIPTION:
-   Makes the hero taller and centres the selected video player.
-*/
+/* WHY: Makes the hero tall enough to centre the active video player. */
 .hero-promo.is-playing {
   min-height: 620px;
   padding-bottom: var(--space-15);
@@ -879,23 +536,17 @@
   align-items: center;
 }
 
-/*
-   When playing, hide the promo text.
-*/
+/* WHY: Removes promo text so it does not overlap the active video. */
 .hero-promo.is-playing .hero-content {
   display: none;
 }
 
-/*
-   When playing, show the selected video player.
-*/
+/* WHY: Reveals the selected video only in the active playing state. */
 .hero-promo.is-playing .hero-video-wrap {
   display: block;
 }
 
-/*
-   When playing, hide the decorative preview video and its overlay.
-*/
+/* WHY: Hides decorative background layers when the real video player is active. */
 .hero-promo.is-playing .hero-preview-video,
 .hero-promo.is-playing::after {
   display: none;
@@ -903,46 +554,27 @@
 
 
 /* ==========================================================================================
-
    9.5 CONTENT ROW SECTIONS
-
-   DESCRIPTION:
-   Shared layout for horizontal rows on the homepage.
-
-   KEY IDEA:
-   Rows are horizontally scrollable, so spacing belongs to the row section and row padding,
-   not to individual cards.
-
+   WHY: Gives each horizontal row its own spacing so cards can scroll cleanly.
 ========================================================================================== */
 
-/*
-   Shared left alignment for homepage rows.
-
-   NOTE:
-   The homepage intentionally uses its own left padding rather than the page shell offset.
-*/
+/* WHY: Aligns home rows independently from the content-page sidebar shell. */
 .content-row-section,
 .top-ten-section {
   padding-left: var(--space-13);
 }
 
-/*
-   Regular content row vertical spacing.
-*/
+/* WHY: Adds vertical spacing above regular content rows. */
 .content-row-section {
   padding-top: var(--space-11);
 }
 
-/*
-   Top 10 row vertical spacing.
-*/
+/* WHY: Adds stronger vertical spacing above the Top 10 row. */
 .top-ten-section {
   padding-top: var(--space-15);
 }
 
-/*
-   Row header with title and controls.
-*/
+/* WHY: Places row title and controls on one line with spacing from row edge. */
 .row-header {
   margin-bottom: var(--space-7);
   padding-right: var(--space-13);
@@ -952,9 +584,7 @@
   justify-content: space-between;
 }
 
-/*
-   Row title.
-*/
+/* WHY: Styles row headings as compact section titles. */
 .row-header h2 {
   margin: 0;
 
@@ -966,18 +596,11 @@
 
 
 /* ==========================================================================================
-
    9.6 ROW PILL CONTROLS
-
-   DESCRIPTION:
-   Small previous/next controls used for horizontal rows.
-
-   DRIFT CHECK:
-   The original CSS repeated pointer-events on .row-pill-btn.
-   This version keeps pointer-events once, on the actual controls that need it.
-
+   WHY: Creates compact previous/next buttons for horizontal scrolling rows.
 ========================================================================================== */
 
+/* WHY: Builds the shared pill container for row navigation controls. */
 .row-controls {
   position: relative;
   z-index: var(--z-controls);
@@ -997,9 +620,7 @@
   border-radius: var(--radius-pill);
 }
 
-/*
-   Individual row control button.
-*/
+/* WHY: Splits the pill into two equal previous/next clickable areas. */
 .row-pill-btn {
   width: 50%;
   height: 100%;
@@ -1024,41 +645,28 @@
     color var(--transition-fast);
 }
 
-/*
-   Optical alignment for arrow/chevron text inside the button.
-*/
+/* WHY: Optically centres arrow/chevron text inside the small pill button. */
 .row-pill-btn span {
   transform: translateY(-1.5px);
 }
 
+/* WHY: Gives row controls a clear hover response. */
 .row-pill-btn:hover {
   background: rgba(255, 255, 255, 0.14);
 }
 
-/*
-   Divider between the two pill buttons.
-*/
+/* WHY: Separates the previous and next controls inside the shared pill. */
 .row-pill-btn + .row-pill-btn {
   border-left: var(--border-soft);
 }
 
 
 /* ==========================================================================================
-
    9.7 HORIZONTAL SCROLL ROWS
-
-   DESCRIPTION:
-   Scrollable horizontal rows used for regular cards and Top 10 cards.
-
-   IMPORTANT:
-   Scrollbars are intentionally hidden. The original CSS hid scrollbars, then later styled
-   them again, which conflicted.
-
-   CHANGED:
-   This version keeps only the hidden-scrollbar approach.
-
+   WHY: Makes rows scroll horizontally while hiding scrollbars for the streaming-style UI.
 ========================================================================================== */
 
+/* WHY: Turns regular and Top 10 rows into horizontal snap-scroll containers. */
 .content-row,
 .top-ten-row {
   display: flex;
@@ -1071,28 +679,19 @@
   scrollbar-width: none;
 }
 
-/*
-   Hide webkit scrollbars.
-
-   NOTE:
-   This pairs with scrollbar-width: none for better browser coverage.
-*/
+/* WHY: Hides WebKit scrollbars to match the hidden-scrollbar row design. */
 .content-row::-webkit-scrollbar,
 .top-ten-row::-webkit-scrollbar {
   display: none;
 }
 
-/*
-   Regular content row spacing.
-*/
+/* WHY: Sets regular row card gap and edge padding. */
 .content-row {
   gap: var(--space-4);
   padding: var(--space-1) var(--space-13) var(--space-10) 0;
 }
 
-/*
-   Top 10 row spacing.
-*/
+/* WHY: Sets Top 10 row spacing separately because ranked cards need more room. */
 .top-ten-row {
   gap: var(--space-8);
   padding: var(--space-1) var(--space-13) var(--space-11) 0;
@@ -1100,10 +699,8 @@
 
 
 /* ==========================================================================================
-
-   9.8 SHARED CARD FOUNDATIONS // DESCRIPTION: Shared behaviour for regular content cards and Top 10 cards.
-                                  KEY IDEA: Cards are fixed-width flex children inside scroll rows. They should not shrink, and they should snap cleanly when scrolling.
-
+   9.8 SHARED CARD FOUNDATIONS
+   WHY: Gives all home row cards fixed sizing behaviour inside horizontal scroll rows.
 ========================================================================================== */
 
 .content-card,
@@ -1121,13 +718,7 @@
     box-shadow var(--transition-fast);
 }
 
-/*
-   Shared hover scale for cards.
-
-   WATCH OUT:
-   Scaling cards inside scroll rows can overlap neighbours slightly.
-   That is okay for this streaming-style UI, but avoid increasing the scale too much.
-*/
+/* WHY: Adds streaming-style hover movement; REFACTOR CHECK: use carefully because scale can overlap neighbours. */
 .content-card:hover,
 .top-ten-card:hover {
   transform: scale(1.04);
@@ -1135,14 +726,11 @@
 
 
 /* ==========================================================================================
-
    9.9 REGULAR CONTENT CARDS
-
-   DESCRIPTION:
-   Standard horizontal content cards in homepage rows.
-
+   WHY: Styles standard homepage cards used in normal horizontal rows.
 ========================================================================================== */
 
+/* WHY: Creates the fixed-size base card used for regular homepage content. */
 .content-card {
   min-width: 260px;
   height: 145px;
@@ -1157,17 +745,13 @@
   font-weight: 700;
 }
 
+/* WHY: Strengthens card feedback on hover. */
 .content-card:hover {
   background: var(--color-card-hover);
   box-shadow: var(--shadow-soft);
 }
 
-/*
-   Card title.
-
-   DESCRIPTION:
-   Sits above the image/overlay layer on video cards.
-*/
+/* WHY: Places card title above image and overlay layers. */
 .content-card-title {
   position: relative;
   z-index: 2;
@@ -1184,40 +768,23 @@
 
 
 /* ==========================================================================================
-
    9.10 VIDEO CONTENT CARDS
-
-   DESCRIPTION:
-   Image-based video cards with a dark overlay and hover image treatment.
-
-   DRIFT CHECK:
-   The old CSS had repeated .video-content-card::after and .content-card-img rules.
-   This version keeps one final overlay and one final image rule.
-
+   WHY: Creates image-based video cards with readable text overlays.
 ========================================================================================== */
 
-/*
-   Video card wrapper.
-
-   DESCRIPTION:
-   Padding is removed because the image and overlay fill the full card.
-*/
+/* WHY: Removes padding so thumbnail and overlay can fill the whole card. */
 .video-content-card {
   padding: 0;
 }
 
-/*
-   Card image and overlay share the same absolute positioning.
-*/
+/* WHY: Makes both thumbnail image and overlay cover the same full-card area. */
 .content-card-img,
 .video-content-card::after {
   position: absolute;
   inset: 0;
 }
 
-/*
-   Video card thumbnail image.
-*/
+/* WHY: Makes thumbnail images fill the card cleanly and animate on hover. */
 .content-card-img {
   z-index: 0;
 
@@ -1234,12 +801,7 @@
     filter var(--transition-fast);
 }
 
-/*
-   Dark overlay above the image.
-
-   IMPORTANT:
-   This keeps the card title readable over any thumbnail image.
-*/
+/* WHY: Adds a dark overlay so card titles stay readable over any thumbnail. */
 .video-content-card::after {
   content: "";
   z-index: 1;
@@ -1254,17 +816,13 @@
     );
 }
 
-/*
-   Hover image treatment.
-*/
+/* WHY: Makes the thumbnail feel more active on hover. */
 .video-content-card:hover .content-card-img {
   filter: saturate(1) contrast(1);
   transform: scale(1.04);
 }
 
-/*
-   Hover overlay treatment.
-*/
+/* WHY: Lightens the overlay on hover while keeping text readable. */
 .video-content-card:hover::after {
   background:
     linear-gradient(
@@ -1274,13 +832,7 @@
     );
 }
 
-/*
-   Legacy iframe support.
-
-   DESCRIPTION:
-   Keep this only if some older cards still use iframe thumbnails.
-   If all cards now use .content-card-img, you can delete this block later.
-*/
+/* WHY: Supports older cards that still use iframe thumbnails; REFACTOR CHECK: remove if all cards now use .content-card-img. */
 .video-content-card iframe {
   position: absolute;
   inset: 0;
@@ -1297,29 +849,22 @@
 
 
 /* ==========================================================================================
-
    9.11 TOP 10 CARDS
-
-   DESCRIPTION:
-   Ranked streaming-style cards with a large outlined number and a smaller visual card.
-
+   WHY: Builds ranked cards with large outline numbers and layered mini cards.
 ========================================================================================== */
 
+/* WHY: Sets the outer size for each ranked card item. */
 .top-ten-card {
   min-width: 245px;
   height: 170px;
 }
 
+/* WHY: Raises hovered ranked cards so scaled/overlapping content stays visible. */
 .top-ten-card:hover {
   z-index: 5;
 }
 
-/*
-   Large outlined ranking number.
-
-   DESCRIPTION:
-   Positioned behind the rank card to create the Top 10 visual style.
-*/
+/* WHY: Creates the oversized outlined rank number behind the card. */
 .rank-number {
   position: absolute;
   left: 0;
@@ -1336,13 +881,7 @@
   pointer-events: none;
 }
 
-/*
-   Ranked content card.
-
-   KEY IDEA:
-   --rank-from and --rank-to are local custom properties.
-   Each nth-child below changes the gradient without repeating the whole .rank-card rule.
-*/
+/* WHY: Creates the visible ranked content card using local gradient variables. */
 .rank-card {
   --rank-from: var(--color-bg-blue);
   --rank-to: #526071;
@@ -1371,9 +910,7 @@
   font-weight: 800;
 }
 
-/*
-   "New" badge for ranked cards.
-*/
+/* WHY: Adds a generated “New” badge without needing extra HTML. */
 .rank-card-new::after {
   content: "New";
 
@@ -1392,28 +929,25 @@
   text-transform: uppercase;
 }
 
-/*
-   Individual rank gradient variations.
-
-   NOTE:
-   These are allowed to stay as local one-off colours because each rank card
-   intentionally has a unique visual identity.
-*/
+/* WHY: Gives the second ranked card a unique gradient identity. */
 .top-ten-card:nth-child(2) .rank-card {
   --rank-from: #355c7d;
   --rank-to: #6f5f86;
 }
 
+/* WHY: Gives the third ranked card a unique gradient identity. */
 .top-ten-card:nth-child(3) .rank-card {
   --rank-from: #6f8f72;
   --rank-to: var(--color-bg-blue);
 }
 
+/* WHY: Gives the fourth ranked card a unique gradient identity. */
 .top-ten-card:nth-child(4) .rank-card {
   --rank-from: #2f3238;
   --rank-to: #355c7d;
 }
 
+/* WHY: Gives the fifth ranked card a unique gradient identity. */
 .top-ten-card:nth-child(5) .rank-card {
   --rank-from: #4f3f6f;
   --rank-to: #355c7d;
@@ -1421,61 +955,23 @@
 
 
 /* ==========================================================================================
-
    9.12 HOME PAGE END SPACING
-
-   DESCRIPTION:
-   Adds space at the bottom of the stream page so the fixed footer does not visually collide
-   with the final row.
-
+   WHY: Adds bottom breathing room so final rows do not collide with the fixed footer.
 ========================================================================================== */
 
 .page-end {
   padding-bottom: 100px;
 }
 
-
-
-
 /* ==========================================================================================
-
    10. WORKSPACE WIDGET DASHBOARD
-
-   DESCRIPTION:
-   This section controls the draggable/resizable-style dashboard page made of widget cards.
-   It includes the dashboard page wrapper, grid layout, widget base styles, widget sizing
-   classes, preview/embed areas, placeholder states, and widget size controls.
-
-   KEY IDEA:
-   The dashboard uses a 12-column CSS Grid system. Widgets change size by changing their
-   grid-column and grid-row spans.
-
-   DRIFT CHECK:
-   This refactor keeps your original visual design:
-   - dark gradient dashboard background
-   - glass cards
-   - dense 12-column widget grid
-   - small / medium / large / wide / full widget sizes
-   - hover lift
-   - hidden controls that appear on widget hover
-
+   WHY: Creates the app-style dashboard layout where widgets can change size without changing the base card design.
 ========================================================================================== */
 
 
 /* ==========================================================================================
-
    10.1 DASHBOARD PAGE WRAPPER
-
-   DESCRIPTION:
-   The outer page wrapper for the workspace dashboard.
-
-   KEY IDEA:
-   This page is closer to an app dashboard than a reading page, so it uses its own layout
-   instead of the standard .page-shell-content system.
-
-   CHANGED:
-   Raw background colours were replaced with root tokens to avoid design drift.
-
+   WHY: Gives the workspace page its own full-screen dashboard background and spacing separate from reading pages.
 ========================================================================================== */
 
 .workspace-dashboard {
@@ -1496,25 +992,8 @@
 
 
 /* ==========================================================================================
-
    10.2 WIDGET GRID
-
-   DESCRIPTION:
-   Main dashboard grid that positions all widgets.
-
-   KEY IDEA:
-   The dashboard uses 12 columns because 12 divides cleanly into many useful layouts:
-   - 3 columns wide
-   - 4 columns wide
-   - 6 columns wide
-   - 9 columns wide
-   - 12 columns wide
-
-   IMPORTANT:
-   grid-auto-flow: dense lets later widgets fill gaps when earlier widgets span multiple rows
-   or columns. This is useful for dashboard layouts, but it can visually reorder how items fill
-   empty spaces.
-
+   WHY: Uses a 12-column grid so widgets can fit many useful sizes: small, medium, wide, large, full.
 ========================================================================================== */
 
 .widget-grid {
@@ -1531,21 +1010,8 @@
 
 
 /* ==========================================================================================
-
    10.3 BASE WIDGET CARD
-
-   DESCRIPTION:
-   Base visual and layout style for every dashboard widget.
-
-   KEY IDEA:
-   Every widget starts as a glass card with flexible vertical content. Size variations are
-   handled separately by the widget size classes.
-
-   CHANGED:
-   The old .widget repeated raw values for background, blur, border, radius, shadow, and
-   transition. This version uses your design tokens so it stays aligned with .glass-card
-   and .card-hover.
-
+   WHY: Gives every widget the same glass card foundation before size classes change its grid span.
 ========================================================================================== */
 
 .widget {
@@ -1574,12 +1040,7 @@
     box-shadow var(--transition-fast);
 }
 
-/*
-   Widget hover state.
-
-   DRIFT CHECK:
-   This keeps your original hover behaviour but replaces raw values with tokens.
-*/
+/* WHY: Gives widgets the same lift/stronger-glass hover language as the rest of the card system. */
 .widget:hover {
   transform: translateY(-3px);
   background: var(--color-card-hover);
@@ -1589,20 +1050,11 @@
 
 
 /* ==========================================================================================
-
    10.4 WIDGET TYPOGRAPHY
-
-   DESCRIPTION:
-   Text styles used inside dashboard widgets.
-
-   KEY IDEA:
-   Widget text should be compact, high-contrast, and readable inside cards of different sizes.
-
+   WHY: Keeps text inside widgets compact and readable across different widget sizes.
 ========================================================================================== */
 
-/*
-   Shared heading styles for widget titles.
-*/
+/* WHY: Removes default heading spacing and gives widget headings a tight dashboard feel. */
 .widget h2,
 .widget h3 {
   margin: 0 0 var(--space-3);
@@ -1612,26 +1064,17 @@
   letter-spacing: var(--tracking-tight);
 }
 
-/*
-   Larger widget heading.
-*/
+/* WHY: Makes main widget headings responsive without needing breakpoint-specific sizes. */
 .widget h2 {
   font-size: clamp(26px, 3vw, 38px);
 }
 
-/*
-   Smaller widget heading.
-*/
+/* WHY: Makes secondary widget headings responsive but smaller than h2. */
 .widget h3 {
   font-size: clamp(22px, 2vw, 28px);
 }
 
-/*
-   Widget body text.
-
-   CHANGED:
-   Replaced raw #c8ced8 and font-size 14px with existing text tokens.
-*/
+/* WHY: Sets soft, compact body text inside widgets. */
 .widget p {
   margin: 0;
 
@@ -1640,12 +1083,7 @@
   line-height: var(--line-normal);
 }
 
-/*
-   Widget links.
-
-   DESCRIPTION:
-   Uses the global link colour so links match markdown/content pages.
-*/
+/* WHY: Makes widget links match the global site link colour and stand out as actions. */
 .widget a {
   margin-top: var(--space-5);
 
@@ -1654,23 +1092,18 @@
   font-weight: 700;
 }
 
+/* WHY: Restores underline on hover so widget links clearly behave like links. */
 .widget a:hover {
   text-decoration: underline;
 }
 
 
 /* ==========================================================================================
-
    10.5 WIDGET PREVIEW / EMBED AREA
-
-   DESCRIPTION:
-   The preview area is used for iframes, images, embedded tools, videos, or live previews.
-
-   KEY IDEA:
-   flex: 1 lets the preview fill remaining space inside larger widget cards.
-
+   WHY: Creates a reusable area for iframes, tools, images, videos, and live previews inside widgets.
 ========================================================================================== */
 
+/* WHY: Lets preview/embed content fill available widget space without overflowing. */
 .widget-preview {
   width: 100%;
   height: 100%;
@@ -1686,30 +1119,18 @@
   overflow: hidden;
 }
 
-/*
-   Tool widgets start content from the top.
-
-   USE FOR:
-   Widgets where a title or controls sit above an embedded preview.
-*/
+/* WHY: Starts tool widgets from the top because embedded tools usually need title/controls above the preview. */
 .widget-tool {
   justify-content: flex-start;
 }
 
-/*
-   Tool widget preview fills the remaining vertical space.
-*/
+/* WHY: Makes embedded tool previews fill the remaining height inside tool widgets. */
 .widget-tool .widget-preview {
   flex: 1 1 auto;
   min-height: 0;
 }
 
-/*
-   Placeholder cards.
-
-   DESCRIPTION:
-   Keeps placeholder text sitting cleanly toward the bottom of a widget.
-*/
+/* WHY: Places placeholder text toward the bottom so empty/small widgets still feel designed. */
 .widget-placeholder {
   min-height: 100%;
 
@@ -1720,45 +1141,35 @@
 
 
 /* ==========================================================================================
-
    10.6 WIDGET SIZE SYSTEM
-
-   DESCRIPTION:
-   These classes control how much grid space a widget occupies.
-
-   KEY IDEA:
-   Do not put visual styling in size classes. Size classes should only control grid span
-   and size-related behaviour.
-
-   GRID REFERENCE:
-   - .widget-small  = 3 columns wide, 2 rows tall
-   - .widget-medium = 6 columns wide, 5 rows tall
-   - .widget-large  = 12 columns wide, 7 rows tall
-   - .widget-wide   = 9 columns wide, 2 rows tall
-   - .widget-full   = 12 columns wide, 9 rows tall
-
+   WHY: Size classes only control grid span, so visual styling stays in .widget.
 ========================================================================================== */
 
+/* WHY: Small widget takes 3 columns and 2 grid rows. */
 .widget-small {
   grid-column: span 3;
   grid-row: span 2;
 }
 
+/* WHY: Medium widget takes 6 columns and 5 grid rows. */
 .widget-medium {
   grid-column: span 6;
   grid-row: span 5;
 }
 
+/* WHY: Large widget takes full width and 7 grid rows. */
 .widget-large {
   grid-column: span 12;
   grid-row: span 7;
 }
 
+/* WHY: Wide widget takes 9 columns and 2 grid rows. */
 .widget-wide {
   grid-column: span 9;
   grid-row: span 2;
 }
 
+/* WHY: Full widget takes full width and the tallest grid span. */
 .widget-full {
   grid-column: span 12;
   grid-row: span 9;
@@ -1766,37 +1177,23 @@
 
 
 /* ==========================================================================================
-
    10.7 MEDIUM / LARGE EMBED MODE
-
-   DESCRIPTION:
-   Medium and large widgets behave more like embedded tools than text cards.
-   Their preview fills the card, and placeholder text is hidden.
-
-   KEY IDEA:
-   This keeps embedded tools from looking cramped by giving the preview maximum space.
-
+   WHY: Larger widgets prioritise embedded previews/tools instead of placeholder text.
 ========================================================================================== */
 
-/*
-   Medium and large widgets use tighter padding so embedded tools have more room.
-*/
+/* WHY: Reduces padding on medium/large widgets so embeds have more usable space. */
 .widget-medium,
 .widget-large {
   padding: var(--space-4);
 }
 
-/*
-   Hide placeholder content when widgets are large enough to show their preview/tool.
-*/
+/* WHY: Hides placeholder text once the widget is large enough to show an embed properly. */
 .widget-medium .widget-placeholder,
 .widget-large .widget-placeholder {
   display: none;
 }
 
-/*
-   Preview fills medium and large widgets.
-*/
+/* WHY: Lets previews fully occupy medium/large widgets. */
 .widget-medium .widget-preview,
 .widget-large .widget-preview {
   height: 100%;
@@ -1806,17 +1203,11 @@
 
 
 /* ==========================================================================================
-
    10.8 WIDGET SIZE CONTROLS
-
-   DESCRIPTION:
-   Small control buttons that appear when hovering a widget.
-
-   KEY IDEA:
-   Controls are hidden by default to keep the dashboard clean, then shown on widget hover.
-
+   WHY: Keeps resize controls hidden until needed so the dashboard stays clean.
 ========================================================================================== */
 
+/* WHY: Positions hidden widget control buttons in the top-right corner of each widget. */
 .widget-size-controls {
   position: absolute;
   top: var(--space-5);
@@ -1832,20 +1223,13 @@
   transition: opacity var(--transition-fast);
 }
 
-/*
-   Show widget controls on hover.
-*/
+/* WHY: Reveals widget controls only when the user is interacting with a widget. */
 .widget:hover .widget-size-controls {
   opacity: 1;
   pointer-events: auto;
 }
 
-/*
-   Individual size control button.
-
-   DESCRIPTION:
-   Small circular buttons for changing widget size/state.
-*/
+/* WHY: Styles each resize/control action as a compact circular button. */
 .widget-size-controls button {
   width: 26px;
   height: 26px;
@@ -1863,51 +1247,34 @@
   cursor: pointer;
 }
 
+/* WHY: Makes widget control buttons visibly interactive on hover. */
 .widget-size-controls button:hover {
   background: rgba(255, 255, 255, 0.26);
 }
 
 
 /* ==========================================================================================
-
    10.9 SMALL / MEDIUM / LARGE CONTENT VISIBILITY RULES
-
-   DESCRIPTION:
-   These rules decide whether a widget shows placeholder text or the preview area
-   depending on its current size.
-
-   KEY IDEA:
-   Small widgets show text/placeholder only.
-   Medium and large widgets show the embedded preview.
-
+   WHY: Controls whether a widget shows placeholder content or the embedded preview based on size.
 ========================================================================================== */
 
-/*
-   Small widgets hide previews because there is not enough space for embedded content.
-*/
+/* WHY: Hides previews in small widgets because embeds are too cramped at this size. */
 .widget-small .widget-preview {
   display: none;
 }
 
-/*
-   Medium and large widgets show previews.
-*/
+/* WHY: Shows previews in medium and large widgets where there is enough space. */
 .widget-medium .widget-preview,
 .widget-large .widget-preview {
   display: block;
 }
 
-/*
-   Small placeholder fills the widget height.
-*/
+/* WHY: Lets small widget placeholder content use the full widget height. */
 .widget-small .widget-placeholder {
   min-height: 100%;
 }
 
-/*
-   Medium and large placeholders are reduced, although they are normally hidden
-   by the embed-mode rules above.
-*/
+/* WHY: Keeps medium/large placeholder sizing safe, although these placeholders are normally hidden above. */
 .widget-medium .widget-placeholder,
 .widget-large .widget-placeholder {
   min-height: auto;
@@ -1915,36 +1282,35 @@
 }
 
 /* ==========================================================================================
-
    12. RESPONSIVE SYSTEM
-
-   Simple responsive system:
-   - 1200px: dashboard compresses
-   - 900px: mobile/tablet layout starts
-   - 640px: phone layout
-   - 480px: small phone layout
-
+   WHY: Keeps desktop as the default, then only overrides what must change at smaller widths.
 ========================================================================================== */
+
 
 /* ==========================================================================================
    12.1 LARGE TABLET / SMALL DESKTOP
+   WHY: Compresses only the dashboard grid before the full tablet layout begins.
 ========================================================================================== */
 
 @media (max-width: 1200px) {
+  /* WHY: Reduces dashboard side padding so the grid has more usable space. */
   .workspace-dashboard {
     padding: 100px var(--space-9) var(--footer-height-space);
   }
 
+  /* WHY: Changes the dashboard from 12 columns to 6 columns so widgets stay readable. */
   .widget-grid {
     width: min(100%, 980px);
     grid-template-columns: repeat(6, minmax(0, 1fr));
     gap: var(--space-7);
   }
 
+  /* WHY: Small widgets still take half the row on the 6-column grid. */
   .widget-small {
     grid-column: span 3;
   }
 
+  /* WHY: Larger widget types become full-width in the compressed dashboard layout. */
   .widget-medium,
   .widget-wide,
   .widget-large,
@@ -1954,25 +1320,25 @@
 }
 
 /* ==========================================================================================
-
    12.2 TABLET
-
-   Keep the main sidebar exactly the same. Only adjust page content and tool buttons.
-
+   WHY: Keeps the main sidebar stable, while content pages and right-side tools adapt.
 ========================================================================================== */
 
 @media (max-width: 900px) {
 
+  /* WHY: Prevents viewport-width elements from creating horizontal scroll. */
   html,
   body {
     width: 100%;
     overflow-x: hidden;
   }
 
+  /* WHY: Allows the body to shrink naturally instead of forcing a minimum width. */
   body {
     min-width: 0;
   }
 
+  /* WHY: Keeps all major page wrappers inside the viewport on tablet/mobile. */
   .page-shell-wide,
   .page-shell-content,
   .page-shell-content.markdown-shell,
@@ -1982,30 +1348,19 @@
     overflow-x: hidden;
   }
 
-  /* Content pages stop reserving desktop sidebar offset. */
-
+  /* WHY: Removes desktop sidebar offset and gives content pages tablet-safe side padding. */
   .page-shell-content > section,
   .page-shell-content.markdown-shell > section {
     padding-right: var(--space-12);
     padding-left: var(--space-12);
   }
 
-  /*
-
-     IMPORTANT:
-
-     Do not redefine .topic-sidebar here.
-
-     It keeps the main desktop size and position from the base nav CSS.
-
-  */
-
+  /* WHY: Makes the sidebar toggle visible on touch screens where hover is unreliable. */
   .sidebar-toggle-btn {
     opacity: 1;
   }
 
-  /* Keep right tools fixed, but do not change the sidebar. */
-
+  /* WHY: Keeps the right-side tools fixed and stable without changing the main sidebar. */
   .tool-sidebar {
     position: fixed;
     top: var(--space-8);
@@ -2016,6 +1371,7 @@
     gap: var(--space-2);
   }
 
+  /* WHY: Keeps tool buttons compact and icon-only at tablet sizes. */
   .tool-link {
     width: 60px;
     height: 60px;
@@ -2026,22 +1382,26 @@
     font-size: 0;
   }
 
+  /* WHY: Keeps tool icons at the same readable size as desktop. */
   .tool-icon {
     width: 18px;
     height: 18px;
   }
 
+  /* WHY: Prevents the prompt dropdown from overflowing the viewport. */
   .prompt-dropdown {
     width: min(220px, calc(100vw - 40px));
 
   }
 
+  /* WHY: Gives content-page heroes enough height and top space below the fixed nav. */
   .hero-promo-pages {
     min-height: 340px;
     padding-top: 120px;
     padding-bottom: var(--space-13);
   }
 
+  /* WHY: Gives the homepage hero tablet-safe padding while preserving the cinematic layout. */
   .hero-promo {
     min-height: 430px;
     padding-top: 120px;
@@ -2049,12 +1409,14 @@
     padding-left: var(--space-10);
   }
 
+  /* WHY: Scales large page titles so they do not overwhelm tablet layouts. */
   .hero-content-pages h1,
   .workspace-content h1 {
     font-size: clamp(34px, 11vw, 46px);
     line-height: 1;
   }
 
+  /* WHY: Keeps content-page vertical spacing consistent on tablet. */
   .snippet-form-section,
   .about-content-wrap,
   .markdown-viewer {
@@ -2062,6 +1424,7 @@
     padding-bottom: var(--space-19);
   }
 
+  /* WHY: Gives markdown pages extra top clearance like a page hero. */
   .markdown-viewer {
     padding-top: var(--space-18);
     min-height: 340px;
@@ -2069,6 +1432,7 @@
     
   }
 
+  /* WHY: Lets inner page wrappers use the full available content width after shell padding is applied. */
   .hero-content-pages,
   .snippet-page-inner,
   .about-page-inner,
@@ -2080,25 +1444,30 @@
     margin-inline: auto;
   }
 
+  /* WHY: Prevents long markdown words/URLs from pushing the page sideways. */
   .workspace-content {
     max-width: 100%;
     overflow-wrap: anywhere;
   }
 
+  /* WHY: Lets long code lines scroll inside the code block instead of breaking the page layout. */
   .workspace-content pre {
     max-width: 100%;
     overflow-x: auto;
   }
 
+  /* WHY: Aligns home row sections with tablet page spacing. */
   .content-row-section,
   .top-ten-section {
     padding-left: var(--space-10);
   }
 
+  /* WHY: Keeps row titles and controls away from the right edge. */
   .row-header {
     padding-right: var(--space-8);
   }
 
+  /* WHY: Keeps horizontal rows and scroll snap aligned with tablet spacing. */
   .content-row,
   .top-ten-row {
     scroll-padding-left: var(--space-8);
@@ -2107,11 +1476,14 @@
 
 }
 
+
 /* ==========================================================================================
    12.3 PHONE
+   WHY: Switches to phone-safe spacing, smaller type, stacked forms, fixed video playback, and one-column widgets.
 ========================================================================================== */
 
 @media (max-width: 640px) {
+  /* WHY: Overrides mobile nav/tool variables for phone-sized screens. */
   :root {
     --mobile-nav-inset: 8px;
     --mobile-nav-width: 270px;
@@ -2120,102 +1492,131 @@
     --mobile-tool-gap: 8px;
   }
 
-  /* Page shell content spacing */
+  /* WHY: Tightens content-page side padding for phone screens. */
   .page-shell-content > section,
   .page-shell-content.markdown-shell > section {
     padding-right: var(--space-7);
     padding-left: var(--space-7);
   }
   
+  /* WHY: Slightly reduces tool icon size for phone buttons. */
   .tool-icon {
     width: 17px;
     height: 17px;
   }
 
-  /* Phone default: closed */
-  .topic-sidebar-moble {
-    height: 60px;
-    overflow: hidden;
-    top: var(--mobile-nav-inset);
-  }
-
+  /* WHY: Collapses the sidebar when the hidden checkbox is checked. */
   .topic-sidebar:has(.sidebar-toggle-checkbox:checked) {
     height: 60px;
     overflow: hidden;
   }
 
+  /* WHY: Hides sidebar navigation links while the sidebar is collapsed. */
   .sidebar-toggle-checkbox:checked ~ .sidebar-standalone,
   .sidebar-toggle-checkbox:checked ~ .topic-tree {
     display: none;
   }
 
+  /* WHY: Moves the mobile sidebar closer to the left screen edge when the mobile class is present. */
   .topic-sidebar.topic-sidebar-mobile {
     left: 8px;
   }
 
+  .topic-sidebar {
+    height: 650px;
+  }
+
+  /* WHY: Moves the right-side tools closer to the screen edge on phone. */
   .tool-sidebar {
     right: 9px;
   }
 
-  /* Page hero */
+
+  /* WHY: Makes content-page heroes shorter and tighter on phone. */
   .hero-promo-pages {
     min-height: 320px;
     padding-top: 104px;
     padding-bottom: var(--space-12);
   }
 
-  /* Home hero */
+  /* WHY: Makes the homepage hero fit phone screens while keeping enough visual height. */
   .hero-promo {
     min-height: 420px;
     padding-top: 104px;
     padding-right: var(--space-7);
     padding-left: var(--space-7);
+    overflow: hidden
   }
 
+
+  /* WHY: Scales the homepage hero title for phone screens. */
   .hero-content h1 {
     font-size: clamp(40px, 12vw, 52px);
   }
 
+  /* WHY: Scales content-page and markdown titles for phone screens. */
   .hero-content-pages h1,
   .workspace-content h1 {
     font-size: clamp(34px, 11vw, 46px);
     line-height: 1;
   }
 
+  /* WHY: Scales markdown section headings for phone screens. */
   .workspace-content h2 {
     font-size: clamp(26px, 8vw, 34px);
   }
 
+  /* WHY: Keeps markdown text readable on smaller screens. */
   .workspace-content {
     font-size: var(--text-base);
     line-height: 1.65;
   }
 
-  /* Forms */
+  /* WHY: Reduces form padding so the snippet form fits better on phone. */
   .snippet-form {
     padding: var(--space-9);
   }
 
+  /* WHY: Shortens the code field so it does not dominate the first phone viewport. */
   .code-field {
     min-height: 200px;
   }
 
+  /* WHY: Stacks snippet action buttons vertically for easier tapping. */
   .snippet-actions {
     flex-direction: column;
   }
 
+  /* WHY: Makes snippet action buttons full-width for phone usability. */
   .snippet-actions button,
   .snippet-actions .primary-btn,
   .snippet-actions .secondary-btn {
     width: 100%;
   }
 
-  /* Home rows */
+  /* WHY: Aligns home rows with phone page padding. */
   .content-row-section,
   .top-ten-section {
     padding-left: var(--space-7);
   }
 
+  /* WHY: Makes the background video larger than the hero so the iframe black edges are cropped away. */
+  .hero-preview-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 0;
+
+    width: 960px;
+    height: 430px;
+
+    transform: translate(-50%, -50%);
+    border: 0;
+    opacity: 0.48;
+    pointer-events: none;
+  }
+
+  /* WHY: Fixes the active video hero to the top of the phone screen while playing. */
   .hero-promo.is-playing {
     position: fixed;
     top: 0;
@@ -2229,56 +1630,66 @@
     justify-content: center;
   }
 
+  /* WHY: Lets the active video player use the full available phone width. */
   .hero-promo.is-playing .hero-video-wrap {
     width: 100%;
   }
 
+  /* WHY: Adds page space while the hero is fixed so rows are not hidden underneath it. */
   .stream-main:has(.hero-promo.is-playing) {
     padding-top: 400px;
   }
 
+  /* WHY: Keeps row headers spaced correctly on phone. */
   .row-header {
     padding-right: var(--space-7);
     gap: var(--space-5);
   }
 
+  /* WHY: Reduces row title size on phone. */
   .row-header h2 {
     font-size: var(--text-lg);
   }
 
+  /* WHY: Aligns horizontal scroll rows and snap spacing with phone padding. */
   .content-row,
   .top-ten-row {
     scroll-padding-left: var(--space-7);
     padding-right: var(--space-7);
   }
 
+  /* WHY: Shrinks standard content cards for phone row scrolling. */
   .content-card {
     min-width: 210px;
     height: 118px;
   }
 
+  /* WHY: Shrinks Top 10 cards for phone row scrolling. */
   .top-ten-card {
     min-width: 210px;
     height: 150px;
   }
 
+  /* WHY: Reduces the decorative rank number so it fits the smaller Top 10 card. */
   .rank-number {
     font-size: 145px;
   }
 
+  /* WHY: Reduces the visible rank card and keeps it aligned over the rank number. */
   .rank-card {
     width: 120px;
     height: 132px;
     margin-left: 82px;
   }
 
-  /* Dashboard */
+  /* WHY: Collapses the dashboard grid to one column on phone. */
   .widget-grid {
     grid-template-columns: 1fr;
     grid-auto-rows: auto;
     gap: var(--space-6);
   }
 
+  /* WHY: Makes every widget size class behave as a single-column phone card. */
   .widget,
   .widget-small,
   .widget-medium,
@@ -2290,20 +1701,23 @@
     min-height: 160px;
   }
 
+  /* WHY: Gives medium, large, and full widgets enough height for embedded content on phone. */
   .widget-medium,
   .widget-large,
   .widget-full {
     min-height: 420px;
   }
 
+  /* WHY: Gives the largest widget states extra phone height for full embedded tools. */
   .widget-large,
   .widget-full {
     min-height: 740px;
   }
 
-  /* Footer */
+  /* WHY: Tightens fixed footer spacing and text size on phone. */
   .workspace-footer {
     padding: var(--space-4) var(--space-7);
     font-size: var(--text-sm);
   }
+
 }
