@@ -251,7 +251,9 @@ Possible future improvements could include:
 
 ## Project Status
 
-This project is a simple front-end coding workspace. The focus is on clear structure, clean design, reusable content, and beginner-friendly organisation.
+The Codeflix site has been deployed and no major issues are currently known.
+
+The project is a simple front-end coding workspace focused on clear structure, clean design, reusable content, and beginner-friendly organisation.
 
 ## Author
 

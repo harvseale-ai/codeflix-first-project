@@ -4,9 +4,9 @@ CORE: STRUCTURE → SEMANTICS → CONTENT → ACCESSIBILITY → DEBUG
 
 HTML = THE STRUCTURE OF THE WEB PAGE
 
-THINK:
-What am I building?
+## THINK: What am I building?
 
+```text
 Page structure? → html / head / body
 Main layout? → header / nav / main / section / footer
 Text? → h1-h6 / p / strong / em

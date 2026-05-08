@@ -23,14 +23,12 @@
     <link rel="stylesheet" href="assets/css/pages.css" />
   </head>
 
-  <body>
-    <!-- Workspace Sidebar -->
     <aside class="topic-sidebar topic-sidebar-mobile">
       <input
         type="checkbox"
         id="sidebarToggle"
         class="sidebar-toggle-checkbox" 
-        
+        checked
       />
         <!-- checked -->
       <div class="sidebar-header">
@@ -40,7 +38,7 @@
           class="sidebar-toggle-btn"
           aria-label="Toggle sidebar"
         >
-          ☰
+        <i data-lucide="panel-right" class="nav-icon" style="transform: scaleX(-1);"></i>
         </label>
       </div>
 
@@ -50,14 +48,14 @@
           href="workspace.html?file=content/workspace/Padlet.md"
           class="sidebar-main-link"
         >
-          <i data-lucide="layout-dashboard" class="nav-icon"></i>
-          <span>Workspace</span>
+        <i data-lucide="box" class="nav-icon"></i>          
+        <span>Workspace</span>
         </a>
       </nav>
 
       <nav class="sidebar-standalone">
         <a href="snippets.html" class="sidebar-main-link">
-          <i data-lucide="file-code-2" class="nav-icon"></i>
+          <i data-lucide="Blend" class="nav-icon"></i>
           <span>Snippets</span>
         </a>
       </nav>
@@ -180,8 +178,7 @@
     <aside class="tool-sidebar">
       <div class="prompt-menu">
         <button class="tool-link prompt-toggle" type="button">
-          <i data-lucide="message-circle-code" class="tool-icon"></i>
-          <!-- <span>Prompt</span> -->
+          <i data-lucide="bot" class="tool-icon"></i>
         </button>
 
         <div class="prompt-dropdown">
@@ -203,7 +200,41 @@
 
           <button
             class="prompt-option"
-            data-prompt="Act as a front-end code reviewer. Refactor this code to reduce duplication, use design tokens, and keep the same visual result. Explain only the key changes."
+            data-prompt="Act as a front-end code reviewer.
+
+            Review and refactor this CSS with one guiding rule:
+
+            If a rule does not fix a visible problem, create a reusable pattern, or support an intentional system decision, it probably does not need to stay.
+
+            Your goals:
+
+            1. Reduce duplication and remove drift.
+            2. Keep the same visual result.
+            3. Use existing design tokens wherever possible.
+            4. Do not rename classes unless absolutely necessary.
+            5. Do not reinvent the structure or design system.
+            6. Keep page shell, navigation, component, and responsive responsibilities clearly separated.
+            7. Remove dead, repeated, or conflicting rules.
+            8. Preserve any rule that is required for layout, responsiveness, accessibility, or a clear visual decision.
+
+            When reviewing the code, check for:
+
+            * Repeated selectors doing the same job.
+            * Raw colours, spacing, shadows, or sizes that should use tokens.
+            * Responsive rules that override each other unnecessarily.
+            * Page-specific rules leaking into shared components.
+            * Shared component rules becoming too page-specific.
+            * CSS that only exists because of an old bug or previous experiment.
+            * Comments that describe obvious code instead of explaining why the rule exists.
+
+            Return:
+
+            1. The cleaned/refactored CSS.
+            2. A short explanation of the key changes only.
+            3. Any rules you removed and why.
+            4. Any areas that still look risky or worth checking in the browser.
+
+            Do not over-explain. Keep the visual design the same."
           >
             <i data-lucide="wand-sparkles" class="prompt-icon"></i>
             <span>Refactor</span>
@@ -227,7 +258,7 @@
           return false;
         "
       >
-        <i data-lucide="sparkle" class="tool-icon"></i>
+        <i data-lucide="astroid" class="tool-icon"></i>
         <!-- <span>ChatGPT</span> -->
       </a>
     </aside>
