@@ -457,7 +457,6 @@ button {
   position: relative;
 }
 
-
 /* ==========================================================================================
    7.4 MAIN SIDEBAR LINKS
    WHY: Styles top-level sidebar links so they are bold, tappable, and easy to scan.
@@ -486,6 +485,20 @@ button {
   color: var(--color-white);
 }
 
+/* WHY: Resets topic menu buttons so they behave visually like sidebar links, not browser buttons. */
+button.sidebar-main-link {
+  width: 100%;
+
+  border: 0;
+  background: transparent;
+
+  font: inherit;
+  text-align: left;
+
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
 
 /* ==========================================================================================
    7.5 SIDEBAR SUBMENUS
@@ -731,23 +744,6 @@ button {
 .prompt-option:hover .prompt-icon,
 .tool-link:hover .tool-icon {
   color: var(--color-white);
-}
-
-/* 
-WHY:
-  The topic headings were changed from fake links to real buttons for better semantic HTML.
-  Because buttons have browser default styling, this reset removes the default button background,
-  border, and appearance so the topic buttons look exactly like the other sidebar links.
-*/
-button.sidebar-main-link {
-  width: 100%;
-
-  border: 0;
-  background: transparent;
-
-  cursor: pointer;
-  appearance: none;
-  -webkit-appearance: none;
 }
 
 /* ==========================================================================================
