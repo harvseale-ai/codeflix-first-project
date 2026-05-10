@@ -1,8 +1,13 @@
 # Codeflix Coding Workspace
 
-Codeflix is a simple, organised, streaming-style coding learning website. It is designed to help users browse coding topics, read notes, review snippets, and access useful learning resources in one clear place.
+Codeflix is a simple, organised, streaming-style coding learning website. It is designed to help users browse coding topics, read notes, review snippets, watch learning videos, and access useful coding tools in one clear place.
 
-The goal of the project is to make coding information easier to store, organise, and reuse over time.
+The goal of the project is to make coding information easier to store, organise, revisit, and reuse over time.
+
+## Live Project
+
+- Live site: `ADD YOUR DEPLOYED SITE LINK HERE`
+- Repository: `ADD YOUR GITHUB REPOSITORY LINK HERE`
 
 ## Project Purpose
 
@@ -11,9 +16,11 @@ Codeflix provides a visual workspace for learning and reviewing coding content. 
 Users can use the site to:
 
 - Browse coding topics
-- Read learning notes
-- View reusable code snippets
-- Access useful resources
+- Read Markdown learning notes
+- Watch selected coding videos
+- View and submit reusable code snippets
+- Access useful learning resources
+- Use embedded workspace tools
 - Revisit coding content later
 
 ## Target Audience
@@ -23,9 +30,34 @@ This project is aimed at:
 - Coding students
 - Beginner developers
 - People learning HTML, CSS, JavaScript, or SQL
-- Anyone who wants a simple place to organise coding notes
+- Self-taught learners
+- Anyone who wants a simple place to organise coding notes and resources
+
+## User Value
+
+Codeflix helps learners avoid scattering notes, links, snippets, and project tools across different places. It brings learning content into one structured interface so users can quickly find resources, review topics, and continue working without losing context.
+
+## Features
+
+- Streaming-style home page with topic rows
+- Sidebar navigation for key learning sections
+- Quick tool rail with prompt buttons and ChatGPT popup link
+- Markdown content viewer
+- Saved note support for Markdown topics using local storage
+- Snippet submission form
+- Workspace dashboard with embedded tools
+- Widget size controls on the workspace page
+- Video cards that load selected videos into the hero player
+- Prompt copy buttons with copied feedback
+- Auto-hide footer interaction
+- Responsive layout for desktop, tablet, and mobile
+- Accessible labels, alt text, iframe titles, and keyboard-friendly controls
 
 ## Website Pages
+
+![Alt text](assets/images/codeflix-wireframes.png)
+
+>More information: [id-class-map.xlsx]([URL](https://docs.google.com/spreadsheets/d/1fyj7uiPlhO1ztOMTVsF7pcj02F0SGqsQvYQtRaFk6x0/edit?gid=0#gid=0))
 
 ### Home Page
 
@@ -35,11 +67,12 @@ The home page introduces the Codeflix platform and includes:
 
 - A platform overview
 - Featured coding topics
-- Content links
-- Video lesson area
+- Content rows
+- Video lesson cards
+- Hero video player
+- Popular skills section
 - Fixed navigation
 - Learning sections
-- Top content areas
 
 ### Usage Page
 
@@ -47,7 +80,7 @@ File: `usage.html`
 
 The usage page explains:
 
-- The purpose of the project
+- The purpose of Codeflix
 - How the website helps users learn
 - How users can browse and reuse coding content
 - Who the website is designed for
@@ -56,15 +89,15 @@ The usage page explains:
 
 File: `snippets.html`
 
-The snippets page provides useful code examples and reusable snippets.
+The snippets page provides a form for submitting reusable snippets.
 
-It can include:
+It includes fields for:
 
-- HTML snippets
-- CSS snippets
-- JavaScript snippets
-- SQL examples
-- Notes about how each snippet works
+- Snippet title
+- Snippet description
+- HTML code
+- CSS code
+- JavaScript code
 
 ### Content Page
 
@@ -72,200 +105,72 @@ File: `content.html`
 
 The content page is used to display organised learning content from Markdown files.
 
+It supports:
+
+- Loading content from URL file parameters
+- Markdown rendering
+- Topic-specific saved notes
+- Sidebar topic navigation
+
 ### Workspace Page
 
 File: `workspace.html`
 
-The workspace page provides a dashboard-style area for viewing learning tools, widgets, previews, or coding resources.
+The workspace page provides a dashboard-style area for embedded learning and planning tools.
+
+Example tools include:
+
+- Google Calendar
+- Excalidraw
+- Miro
+- Figma
+- Padlet
+- Cal.com
+- JSFiddle
+- Ophir whiteboard
 
 ## Content Files
 
 Learning content is stored using Markdown files inside the `content` folder.
 
-Example files:
+The intended content pattern is:
 
 ```text
 content/
-├── cheat-sheet.md
-├── resources.md
-└── snippets.md # to be confirmed
+├── html/
+│   └── 01-getting-started/
+│       ├── html-cheat-sheet.md
+│       └── resources.md
+├── css/
+│   └── 01-getting-started/
+│       ├── css-cheat-sheet.md
+│       └── resources.md
+├── javascript/
+│   └── 01-getting-started/
+│       ├── js-cheat-sheet.md
+│       └── resources.md
+├── sql/
+│   └── 01-getting-started/
+│       ├── sql-cheat-sheet.md
+│       └── resources.md
+└── workspace/
+    └── tool-space.md
 ```
 
-These files can be used to store:
+## AI Reflection
 
-- HTML notes
-- CSS notes
-- JavaScript notes
-- SQL notes
-- Code examples
-- Common bugs and fixes
-- Useful resources
+AI was used as a support tool throughout the Codeflix project to help improve planning, debugging, accessibility, validation, and documentation.
 
-## File Structure
+During the project, AI helped me:
 
-```text
-codeflix/
-│
-├── index.html
-├── workspace.html
-├── snippets.html
-├── usage.html
-├── content.html
-│
-├── content/
-│   ├── cheat-sheet.md
-│   ├── snippets.md
-│   └── resources.md
-│
-├── assets/
-│   ├── images/
-│   ├── icons/
-│   └── css/
-│       ├── style.css
-│       └── pages.css
-│
-├── js/
-│   └── script.js
-│
-│
-└── README.md
-```
+- Plan the structure of the website and organise the main pages.
+- Review my HTML for semantic structure, heading order, and validation issues.
+- Improve accessibility by adding clearer labels, hidden headings, iframe titles, alt text checks, and decorative icon handling.
+- Debug layout and sidebar behaviour, especially around the mobile and desktop sidebar states.
+- Refactor JavaScript carefully by removing duplicated widget-size logic and reducing repeated footer code without changing the intended behaviour.
+- Improve CSS validation by identifying unsupported syntax and helping replace it with validator-friendly alternatives.
+- Review the project against the bootcamp assessment criteria before submission.
 
-## Future File Pattern
+AI affected my workflow by helping me spot problems faster and giving me safer, smaller fixes instead of large rewrites. I still checked each suggestion manually in the browser and validator before keeping it. This helped me keep the project stable while improving the quality of the final submission.
 
-```text
-I need to understand it        → overview.md
-I need to see it working       → examples.md
-I need to reuse code quickly   → snippets.md
-I need a fast reminder         → cheat-sheet.md
-I broke something / fixed it   → bugs-and-fixes.md
-I used it in a real project    → project-patterns.md
-I found a useful link/video    → resources.md
-
-overview.md          = understand the concept
-examples.md          = see small learning examples
-snippets.md          = copy-paste reusable code
-cheat-sheet.md       = quick reminders and syntax
-bugs-and-fixes.md    = problems, causes, fixes
-project-patterns.md  = how you used it in real projects
-resources.md         = useful links, videos, docs
-```
-
-## Design Requirements
-
-The website should use a clean and minimal streaming-style design.
-
-Design goals:
-
-- Netflix-style layout
-- Apple-style transparent fixed navigation
-- Clear spacing
-- Consistent colours and fonts
-- Simple buttons and icons
-- Smooth hover effects
-- Smooth page transitions
-- Mobile-responsive layout
-- Accessible and readable content
-- No unnecessary clutter
-
-## Wireframes
-
-![Alt text](assets/images/codeflix-wireframes.png)
-
-## CSS Structure Reference
-
-The CSS is organised into clear sections so the design stays consistent and easier to maintain.
-
-Main CSS systems:
-
-- `TOK-*` — design tokens such as colours, spacing, radius, shadows, and typography
-- `SHELL-*` — shared page layout and content alignment
-- `NAV-*` — fixed sidebar, tool buttons, dropdowns, and navigation behaviour
-- `PAGE-*`, `SNIP-*`, `ABOUT-*`, `MD-*` — page-specific styling
-- `HOME-*` — streaming layout, hero section, video state, and content rows
-- `DASH-*` — workspace dashboard and widget grid
-- `RESP-*` — responsive layout overrides
-
->More information: [id-class-map.xlsx]([URL](https://docs.google.com/spreadsheets/d/1fyj7uiPlhO1ztOMTVsF7pcj02F0SGqsQvYQtRaFk6x0/edit?gid=0#gid=0))
-
-Main CSS files:
-
-```text
-css/
-├── style.css   # global tokens, reset, shared components, buttons, navigation, footer
-└── pages.css   # page shells, content pages, home layout, workspace dashboard, responsive rules
-```
-
-The CSS follows this basic model:
-
-```text
-Tokens define values.
-Page shells control layout.
-Components use tokens.
-State classes change behaviour.
-Media queries override only what needs to change.
-```
-
-## Competitor Inspiration
-
-This project takes inspiration from learning websites such as:
-
-- MDN Web Docs
-- W3Schools
-- freeCodeCamp
-
-The aim is not to copy these websites, but to create a simple learning workspace inspired by their clear educational structure.
-
-## Project Scope
-
-### Included in Scope
-
-This project includes:
-
-- HTML structure
-- CSS styling
-- Simple page layouts
-- Responsive design
-- Markdown-based content files
-- Light vanilla JavaScript
-- Clear file organisation
-
-### Outside Scope
-
-This project does not include:
-
-- Floating toolbar
-- Advanced workspace features
-- Complex JavaScript functionality
-- Backend database
-- User login system
-- Frameworks or libraries
-
-## Technologies Used
-
-- HTML
-- CSS
-- Light vanilla JavaScript
-- Markdown
-
-## Future Improvements
-
-Possible future improvements could include:
-
-- Search functionality
-- Topic filtering
-- Dark and light mode
-- Saved favourite topics
-- More coding categories
-- Better Markdown rendering
-- Progress tracking
-
-## Project Status
-
-The Codeflix site has been deployed and no major issues are currently known.
-
-The project is a simple front-end coding workspace focused on clear structure, clean design, reusable content, and beginner-friendly organisation.
-
-## Author
-
-Created as a coding learning project.
+The main outcome of using AI was that Codeflix became more accessible, better documented, easier to validate, and more consistent across its pages.

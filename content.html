@@ -1,68 +1,81 @@
 <!doctype html>
 <html lang="en">
+
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Codeflix | Workspace</title>
 
-    <!-- Bootstrap -->
+    <link rel="icon" type="image/png" href="./assets/favicon/codeflix-logo.png">
+
+    <meta
+      name="description"
+      content="Codeflix is a personal coding dashboard for notes, snippets, cheat sheets, videos, and project resources.">
+    <meta name="author" content="Codeflix">
+    <meta property="og:title" content="Codeflix | Workspace">
+    
+    <meta
+      property="og:description"
+      content="A personal coding dashboard for learning resources, snippets, notes, videos, and embedded tools.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Codeflix">
+    <meta name="theme-color" content="#111318">
+
+    <meta name="apple-mobile-web-app-title" content="Codeflix">
+
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
+      rel="stylesheet">
 
-    <!-- Devicon: tech icons for HTML / CSS / JavaScript -->
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
-    />
+      href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="assets/css/style.css" />
-    <link rel="stylesheet" href="assets/css/pages.css" />
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/pages.css">
+
   </head>
 
-    <aside class="topic-sidebar topic-sidebar-mobile">
+  <body>
+    <!-- Workspace Sidebar -->
+    <aside class="topic-sidebar topic-sidebar-mobile" aria-label="Main site navigation">
       <input
         type="checkbox"
         id="sidebarToggle"
         class="sidebar-toggle-checkbox" 
-        checked
-      />
+        >
         <!-- checked -->
       <div class="sidebar-header">
         <a href="index.html" class="sidebar-brand">Codeflix</a>
         <label
           for="sidebarToggle"
           class="sidebar-toggle-btn"
-          aria-label="Toggle sidebar"
+          title="Toggle sidebar"
         >
-        <i data-lucide="panel-right" class="nav-icon" style="transform: scaleX(-1);"></i>
+        <span class="visually-hidden">Toggle sidebar</span>
+        <i data-lucide="panel-right" class="nav-icon" style="transform: scaleX(-1);" aria-hidden="true"></i>
         </label>
       </div>
 
       <!-- Standalone workspace button -->
-      <nav class="sidebar-standalone">
+      <nav class="sidebar-standalone" aria-label="Main workspace links">
         <a
-          href="workspace.html?file=content/workspace/Padlet.md"
+          href="workspace.html?file=content/workspace/tool-space.md"
           class="sidebar-main-link"
         >
-        <i data-lucide="box" class="nav-icon"></i>          
+        <i data-lucide="box" class="nav-icon" aria-hidden="true"></i>          
         <span>Workspace</span>
         </a>
-      </nav>
 
-      <nav class="sidebar-standalone">
         <a href="snippets.html" class="sidebar-main-link">
-          <i data-lucide="Blend" class="nav-icon"></i>
+          <i data-lucide="blend" class="nav-icon" aria-hidden="true"></i>
           <span>Snippets</span>
         </a>
-      </nav>
 
-      <nav class="sidebar-standalone">
         <a href="usage.html" class="sidebar-main-link">
-          <i data-lucide="book-open" class="nav-icon"></i>
+          <i data-lucide="book-open" class="nav-icon" aria-hidden="true"></i>
           <span>Usage</span>
         </a>
       </nav>
@@ -70,17 +83,17 @@
       <nav class="topic-tree" aria-label="Topic navigation">
         <!-- HTML -->
         <div class="topic-group">
-          <a href="#" class="sidebar-main-link">
-            <i class="devicon-html5-plain nav-icon tech-icon"></i>
+          <button type="button" class="sidebar-main-link" aria-label="HTML topic menu">
+            <i class="devicon-html5-plain nav-icon tech-icon" aria-hidden="true"></i>
             <span>HTML</span>
-          </a>
+          </button>
 
           <div class="topic-submenu">
             <a
               href="content.html?file=content/html/01-getting-started/html-cheat-sheet.md"
               class="topic-file-link"
             >
-              <i data-lucide="file-text" class="submenu-icon"></i>
+              <i data-lucide="file-text" class="submenu-icon" aria-hidden="true"></i>
               <span>Cheat Sheet</span>
             </a>
 
@@ -88,7 +101,7 @@
               href="content.html?file=content/html/01-getting-started/resources.md"
               class="topic-file-link"
             >
-              <i data-lucide="link" class="submenu-icon"></i>
+              <i data-lucide="link" class="submenu-icon" aria-hidden="true"></i>
               <span>Resources</span>
             </a>
           </div>
@@ -96,17 +109,17 @@
 
         <!-- CSS -->
         <div class="topic-group">
-          <a href="#" class="sidebar-main-link">
-            <i class="devicon-css3-plain nav-icon tech-icon"></i>
+          <button type="button" class="sidebar-main-link" aria-label="CSS topic menu">
+            <i class="devicon-css3-plain nav-icon tech-icon" aria-hidden="true"></i>
             <span>CSS</span>
-          </a>
+          </button>
 
           <div class="topic-submenu">
             <a
               href="content.html?file=content/css/01-getting-started/css-cheat-sheet.md"
               class="topic-file-link"
             >
-              <i data-lucide="file-text" class="submenu-icon"></i>
+              <i data-lucide="file-text" class="submenu-icon" aria-hidden="true"></i>
               <span>Cheat Sheet</span>
             </a>
 
@@ -114,7 +127,7 @@
               href="content.html?file=content/css/01-getting-started/resources.md"
               class="topic-file-link"
             >
-              <i data-lucide="link" class="submenu-icon"></i>
+              <i data-lucide="link" class="submenu-icon" aria-hidden="true"></i>
               <span>Resources</span>
             </a>
           </div>
@@ -122,17 +135,17 @@
 
         <!-- JavaScript -->
         <div class="topic-group">
-          <a href="#" class="sidebar-main-link">
-            <i class="devicon-javascript-plain nav-icon tech-icon"></i>
+          <button type="button" class="sidebar-main-link" aria-label="JavaScript topic menu">
+            <i class="devicon-javascript-plain nav-icon tech-icon" aria-hidden="true"></i>
             <span>JavaScript</span>
-          </a>
+          </button>
 
           <div class="topic-submenu">
             <a
               href="content.html?file=content/javascript/01-getting-started/js-cheat-sheet.md"
               class="topic-file-link"
             >
-              <i data-lucide="file-text" class="submenu-icon"></i>
+              <i data-lucide="file-text" class="submenu-icon" aria-hidden="true"></i>
               <span>Cheat Sheet</span>
             </a>
 
@@ -140,7 +153,7 @@
               href="content.html?file=content/javascript/01-getting-started/resources.md"
               class="topic-file-link"
             >
-              <i data-lucide="link" class="submenu-icon"></i>
+              <i data-lucide="link" class="submenu-icon" aria-hidden="true"></i>
               <span>Resources</span>
             </a>
           </div>
@@ -148,17 +161,17 @@
 
         <!-- SQL -->
         <div class="topic-group">
-          <a href="#" class="sidebar-main-link">
-            <i data-lucide="database" class="nav-icon"></i>
+          <button type="button" class="sidebar-main-link" aria-label="SQL topic menu">
+            <i data-lucide="database" class="nav-icon" aria-hidden="true"></i>
             <span>SQL</span>
-          </a>
+          </button>
 
           <div class="topic-submenu">
             <a
               href="content.html?file=content/sql/01-getting-started/sql-cheat-sheet.md"
               class="topic-file-link"
             >
-              <i data-lucide="file-text" class="submenu-icon"></i>
+              <i data-lucide="file-text" class="submenu-icon" aria-hidden="true"></i>
               <span>Cheat Sheet</span>
             </a>
 
@@ -166,7 +179,7 @@
               href="content.html?file=content/sql/01-getting-started/resources.md"
               class="topic-file-link"
             >
-              <i data-lucide="link" class="submenu-icon"></i>
+              <i data-lucide="link" class="submenu-icon" aria-hidden="true"></i>
               <span>Resources</span>
             </a>
           </div>
@@ -175,31 +188,34 @@
     </aside>
 
     <!-- Right Tool Sidebar -->
-    <aside class="tool-sidebar">
+    <aside class="tool-sidebar" aria-label="Quick tools">
       <div class="prompt-menu">
-        <button class="tool-link prompt-toggle" type="button">
-          <i data-lucide="bot" class="tool-icon"></i>
+        <button class="tool-link" type="button" aria-label="Open prompt menu">
+          <i data-lucide="bot" class="tool-icon" aria-hidden="true"></i>
         </button>
 
         <div class="prompt-dropdown">
           <button
             class="prompt-option"
+            aria-label="Copy debug prompt"
             data-prompt="Act as a senior front-end developer. Help me debug this HTML, CSS, or JavaScript issue. Explain what is wrong, why it is happening, and give me the smallest fix possible."
           >
-            <i data-lucide="bug" class="prompt-icon"></i>
+            <i data-lucide="bug" class="prompt-icon" aria-hidden="true"></i>
             <span>Debug</span>
           </button>
 
           <button
             class="prompt-option"
+            aria-label="Copy UI review prompt"
             data-prompt="Act as a senior UI designer. Review this page layout and suggest small improvements to spacing, hierarchy, typography, and visual consistency. Do not redesign it from scratch."
           >
-            <i data-lucide="palette" class="prompt-icon"></i>
+            <i data-lucide="palette" class="prompt-icon" aria-hidden="true"></i>
             <span>UI Review</span>
           </button>
 
           <button
             class="prompt-option"
+            aria-label="Copy refactor prompt"
             data-prompt="Act as a front-end code reviewer.
 
             Review and refactor this CSS with one guiding rule:
@@ -236,15 +252,16 @@
 
             Do not over-explain. Keep the visual design the same."
           >
-            <i data-lucide="wand-sparkles" class="prompt-icon"></i>
+            <i data-lucide="wand-sparkles" class="prompt-icon" aria-hidden="true"></i>
             <span>Refactor</span>
           </button>
 
           <button
             class="prompt-option"
+            aria-label="Copy explain code prompt"
             data-prompt="Act as a coding tutor. Explain this code clearly for a beginner, step by step, without overcomplicating it."
           >
-            <i data-lucide="graduation-cap" class="prompt-icon"></i>
+            <i data-lucide="graduation-cap" class="prompt-icon" aria-hidden="true"></i>
             <span>Explain Code</span>
           </button>
         </div>
@@ -253,22 +270,24 @@
       <a
         href="https://chat.openai.com"
         class="tool-link"
+        aria-label="Open ChatGPT in a popup window"
         onclick="
           window.open(this.href, 'chatgpt', 'width=520,height=720');
           return false;
         "
       >
-        <i data-lucide="astroid" class="tool-icon"></i>
-        <!-- <span>ChatGPT</span> -->
+        <i data-lucide="astroid" class="tool-icon" aria-hidden="true"></i>
       </a>
     </aside>
 
     <!-- Main Markdown Workspace -->
      
     <main class="page-shell-content">
+      <h1 class="visually-hidden">Codeflix content workspace</h1>
       <section class="markdown-viewer">
+        <h2 class="visually-hidden">Markdown content viewer</h2>
         <article id="markdownContent" class="layout-standard workspace-content">
-          <h1>Workspace</h1>
+          <h2>Workspace</h2>
           <p>Choose HTML, CSS, JavaScript or SQL from the sidebar.</p>
         </article>
       </section>
@@ -298,7 +317,7 @@
       const sidebarToggle = document.getElementById("sidebarToggle");
 
       if (sidebarToggle && window.matchMedia("(max-width: 640px)").matches) {
-          sidebarToggle.checked = true;
+        sidebarToggle.checked = true;
       }
     </script>
 

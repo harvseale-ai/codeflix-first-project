@@ -1,6 +1,3 @@
-/* WHY: Confirms the script file has loaded; useful while developing, but can be removed for production. */
-console.log("app.js loaded");
-
 /* WHY: Waits until the HTML exists before selecting page elements and attaching events. */
 document.addEventListener("DOMContentLoaded", () => {
   /* WHY: Main markdown output container; all loaded markdown and saved notes are rendered here. */
@@ -15,10 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
   /* WHY: Second button that currently reuses the same note-saving behaviour. */
   const askBtn = document.getElementById("askBtn");
 
-  /* WHY: These are selected but not currently used; possible refactor/removal candidates. */
-  const floatingBarToggle = document.getElementById("floatingBarToggle");
-  const barCloseBtn = document.getElementById("barCloseBtn");
-
   /* WHY: Reads the URL query string so pages can load a markdown file from ?file=... */
   const params = new URLSearchParams(window.location.search);
 
@@ -27,11 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* WHY: Tracks the active markdown file so notes can be saved separately per topic. */
   let currentMarkdownFile = "";
-
-  /* WHY: Warns when this script runs on a page without a markdown area instead of crashing immediately. */
-  if (!markdownContent) {
-    console.log("No markdown content on this page.");
-  }
 
   /* WHY: Creates a unique localStorage key for the current markdown file so each topic keeps its own notes. */
   function getStorageKey() {
@@ -114,12 +102,8 @@ document.addEventListener("DOMContentLoaded", () => {
   async function loadMarkdown(filePath) {
     currentMarkdownFile = filePath;
 
-    console.log("Clicked markdown link:", filePath);
-
     try {
       const response = await fetch(filePath);
-
-      console.log("Fetch response:", response.status, response.statusText);
 
       if (!response.ok) {
         throw new Error(`Could not load file: ${filePath}`);
@@ -194,48 +178,24 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-/* DUPLICATION FLAG: Widget size changing is defined three times below; this first version is the simplest. */
+/* WHY: Resizes workspace widgets and keeps only one large widget active at a time. */
 document.addEventListener("click", (event) => {
   const sizeButton = event.target.closest("[data-size]");
 
   if (!sizeButton) return;
 
   const widget = sizeButton.closest(".widget");
+  const grid = widget?.closest(".widget-grid");
   const newSize = sizeButton.dataset.size;
 
-  widget.classList.remove("widget-small", "widget-medium", "widget-large");
-  widget.classList.add(`widget-${newSize}`);
-});
-
-
-/* DUPLICATION FLAG: Second widget size handler repeats the first but also resets other widgets when one becomes large. */
-document.addEventListener("click", (event) => {
-  const sizeButton = event.target.closest("[data-size]");
-  if (!sizeButton) return;
-
-  const widget = sizeButton.closest(".widget");
-  const newSize = sizeButton.dataset.size;
+  if (!widget || !grid || !newSize) return;
 
   if (newSize === "large") {
-    document.querySelectorAll(".widget").forEach((card) => {
+    grid.querySelectorAll(".widget").forEach((card) => {
       card.classList.remove("widget-large", "widget-medium");
       card.classList.add("widget-small");
     });
   }
-
-  widget.classList.remove("widget-small", "widget-medium", "widget-large");
-  widget.classList.add(`widget-${newSize}`);
-});
-
-
-/* DUPLICATION FLAG: Third widget size handler repeats sizing again and moves large widgets to the top of the grid. */
-document.addEventListener("click", (event) => {
-  const sizeButton = event.target.closest("[data-size]");
-  if (!sizeButton) return;
-
-  const widget = sizeButton.closest(".widget");
-  const grid = widget.closest(".widget-grid");
-  const newSize = sizeButton.dataset.size;
 
   widget.classList.remove("widget-small", "widget-medium", "widget-large");
   widget.classList.add(`widget-${newSize}`);
@@ -250,25 +210,37 @@ document.addEventListener("click", (event) => {
 const heroPromo = document.getElementById("heroPromo");
 const heroVideo = document.getElementById("heroVideo");
 
+/* WHY: Reuses one video-play function for mouse clicks and keyboard activation. */
+function playSelectedVideo(card) {
+  const videoUrl = card.dataset.video;
+
+  if (!videoUrl || !heroPromo || !heroVideo) return;
+
+  heroVideo.src = videoUrl;
+  heroPromo.classList.add("is-playing");
+
+  heroPromo.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
+}
+
 /* WHY: If the hero exists, video cards update the iframe source and switch the hero into playing mode. */
 if (heroPromo && heroVideo) {
   document
-  .querySelectorAll(".video-content-card, .top-ten-card[data-video]")
-  .forEach((card) => {
-    card.addEventListener("click", () => {
-      const videoUrl = card.dataset.video;
+    .querySelectorAll(".video-content-card, .top-ten-card[data-video]")
+    .forEach((card) => {
+      card.addEventListener("click", () => {
+        playSelectedVideo(card);
+      });
 
-      if (!videoUrl) return;
+      card.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter" && event.key !== " ") return;
 
-      heroVideo.src = videoUrl;
-      heroPromo.classList.add("is-playing");
-
-      heroPromo.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
+        event.preventDefault();
+        playSelectedVideo(card);
       });
     });
-  });
 }
 
 /* WHY: Copies prompt text from data-prompt to the clipboard and shows a temporary copied state. */
@@ -308,9 +280,9 @@ const footer = document.querySelector(".auto-hide-footer");
 /* WHY: Stores the timeout so each scroll/mouse event can reset the hide delay. */
 let footerTimer;
 
-/* WHY: Shows the footer during scrolling, then hides it after 5 seconds of no scroll activity. */
+/* WHY: Shows the footer briefly during scrolling or when the mouse reaches the bottom edge. */
 if (footer) {
-  window.addEventListener("scroll", () => {
+  function showFooterTemporarily() {
     footer.classList.add("is-visible");
 
     clearTimeout(footerTimer);
@@ -318,26 +290,23 @@ if (footer) {
     footerTimer = setTimeout(() => {
       footer.classList.remove("is-visible");
     }, 5000);
-  });
-}
+  }
 
-/* WHY: Shows the footer when the mouse gets close to the bottom edge, then hides it after a delay. */
-if (footer) {
+  window.addEventListener("scroll", showFooterTemporarily);
+
   window.addEventListener("mousemove", (event) => {
     const nearBottom = window.innerHeight - event.clientY < 90;
 
     if (nearBottom) {
-      footer.classList.add("is-visible");
-
-      clearTimeout(footerTimer);
-
-      footerTimer = setTimeout(() => {
-        footer.classList.remove("is-visible");
-      }, 5000);
+      showFooterTemporarily();
     }
   });
 }
 
+/* ==========================================================================================
+   HOMEPAGE PREVIEW
+   WHY: Shows the auto-hide footer while scrolling or when the mouse is near the bottom.
+========================================================================================== */
 
 /* WHY: Selects the decorative homepage preview iframe/video behind the hero text. */
 const heroPreviewVideo = document.getElementById("heroPreviewVideo");
@@ -369,10 +338,6 @@ if (heroPreviewVideo) {
   playHeroPreview();
   setInterval(playHeroPreview, 40000);
 }
-
-
-/* CLEANUP FLAG: This commented-out line repeats the iframe URL format above and can probably be removed. */
-// heroPreviewVideo.src = `${videoUrl}?autoplay=1&mute=1&controls=0&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&disablekb=1`;
 
 
 /* WHY: Scrolls the nearest horizontal content row left or right when a row pill button calls this function. */

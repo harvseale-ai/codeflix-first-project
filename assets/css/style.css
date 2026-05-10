@@ -6,11 +6,8 @@
 :root {
   /* WHY: Defines the dark theme palette used across backgrounds, cards, text, links, and alerts. */
   --color-bg: #111318;
-  --color-bg-soft: #171d24;
   --color-bg-blue: #26354a;
 
-  --color-card: rgba(24, 27, 33, 0.76);
-  --color-card-strong: rgba(24, 27, 33, 0.86);
   --color-card-hover: rgba(32, 36, 44, 0.88);
 
   --color-surface: #20242c;
@@ -26,12 +23,10 @@
   --color-danger: #e50914;
 
   --color-white: #ffffff;
-  --color-black: #111318;
 
   /* WHY: Keeps borders consistent across glass panels, cards, forms, buttons, dividers, and page sections. */
   --border-soft: 1px solid rgba(255, 255, 255, 0.08);
   --border-medium: 1px solid rgba(255, 255, 255, 0.12);
-  --border-strong: 1px solid rgba(255, 255, 255, 0.18);
 
   /* WHY: Creates a shared radius scale so cards, buttons, sidebars, pills, and circles feel related. */
   --radius-xs: 6px;
@@ -58,17 +53,13 @@
   --space-11: 28px;
   --space-12: 32px;
   --space-13: 40px;
-  --space-14: 48px;
   --space-15: 56px;
-  --space-16: 64px;
   --space-17: 80px;
-  --space-18: 96px;
   --space-19: 120px;
 
   /* WHY: Stores major layout measurements so sidebar spacing, containers, page padding, and footer clearance stay predictable. */
   --sidebar-width: 260px;
   --sidebar-offset: 16px;
-  --sidebar-gap: 48px;
 
   /* WHY: Offsets normal content pages away from the fixed sidebar on desktop. */
   --content-sidebar-offset: 200px;
@@ -83,34 +74,22 @@
 
   /* WHY: Controls default page breathing room and fixed-footer clearance. */
   --page-padding-x: 48px;
-  --page-padding-y: 56px;
   --footer-height-space: 96px;
-
-  /* WHY: Stores mobile navigation sizing values so phone nav tweaks can be changed from one place. */
-  --mobile-nav-inset: 20px;
-  --mobile-nav-width: 320px;
-  --mobile-nav-height: 50px;
-  --mobile-tool-size: 50px;
-  --mobile-tool-gap: 10px;
 
   /* WHY: Defines shared font families, text sizes, heading scales, line heights, and tracking values. */
   --font-main: Arial, sans-serif;
   --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 
-  --text-xs: 11px;
   --text-sm: 12px;
   --text-md: 14px;
   --text-base: 15px;
   --text-lg: 16px;
   --text-xl: 18px;
   --text-2xl: 22px;
-  --text-3xl: 24px;
-  --text-4xl: 28px;
 
   --hero-title: clamp(42px, 7vw, 76px);
   --page-title: clamp(34px, 4vw, 54px);
   --section-title: 24px;
-  --card-title: 20px;
 
   --line-tight: 0.95;
   --line-normal: 1.45;
@@ -130,7 +109,6 @@
   --glass-bg: rgba(24, 27, 33, 0.72);
   --glass-bg-strong: rgba(24, 27, 33, 0.86);
   --glass-blur: saturate(180%) blur(24px);
-  --glass-blur-heavy: saturate(180%) blur(40px);
 
   /* WHY: Keeps animation timing consistent so hover and state changes feel intentional. */
   --transition-fast: 0.2s ease;
@@ -467,11 +445,6 @@ button {
   border-bottom: var(--border-medium);
 }
 
-/* WHY: Provides an optional divider when a standalone group needs an ending border. */
-.sidebar-standalone-end {
-  border-bottom: var(--border-medium);
-}
-
 /* WHY: Stacks all topic groups vertically with a small consistent gap. */
 .topic-tree {
   display: flex;
@@ -538,15 +511,6 @@ button {
   opacity: 1;
 }
 
-/* WHY: Adds a small heading label inside nested topic groups if needed. */
-.topic-folder-label {
-  margin: var(--space-4) 0 var(--space-1);
-
-  color: var(--color-text-soft);
-  font-size: var(--text-sm);
-  font-weight: 800;
-}
-
 /* WHY: Styles nested links smaller and softer so the hierarchy is clear. */
 .topic-file-link {
   display: flex;
@@ -575,7 +539,9 @@ button {
    WHY: Uses the hidden checkbox to collapse the sidebar without JavaScript.
 ========================================================================================== */
 
-/* WHY: When checked, the sidebar becomes a compact header-only panel. */
+/* WHY: Lets the sidebar react to its hidden checkbox state. 
+   HOW: :has() checks whether .topic-sidebar contains a checked .sidebar-toggle-checkbox.
+   IMPORTANCE: This makes the whole sidebar collapse using CSS only, without JavaScript. */
 .topic-sidebar:has(.sidebar-toggle-checkbox:checked) {
   height: 60px;
   overflow: hidden;
@@ -766,6 +732,24 @@ button {
 .tool-link:hover .tool-icon {
   color: var(--color-white);
 }
+
+/* 
+WHY:
+  The topic headings were changed from fake links to real buttons for better semantic HTML.
+  Because buttons have browser default styling, this reset removes the default button background,
+  border, and appearance so the topic buttons look exactly like the other sidebar links.
+*/
+button.sidebar-main-link {
+  width: 100%;
+
+  border: 0;
+  background: transparent;
+
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
 /* ==========================================================================================
    11. FIXED FOOTER
    WHY: Keeps the footer fixed to the bottom while making sure page content has enough bottom space.
