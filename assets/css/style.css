@@ -463,19 +463,20 @@ button {
 ========================================================================================== */
 
 /* WHY: Makes primary sidebar links large enough to scan and aligned with their icons. */
+/* WHY: Keeps sidebar links compact and consistent across local and deployed builds. */
 .sidebar-main-link {
   min-height: 42px;
-  padding: var(--space-5) var(--space-4);
+  padding: var(--space-4) var(--space-4);
 
   display: flex;
   align-items: center;
-  gap: var(--space-4);
+  gap: var(--space-3);
 
   border-radius: var(--radius-md);
 
   color: var(--color-text);
   font-size: var(--text-md);
-  font-weight: 800;
+  font-weight: 700;
   text-decoration: none;
 }
 
@@ -492,6 +493,7 @@ button.sidebar-main-link {
   border: 0;
   background: transparent;
 
+  font-size: var(--text-md);
   text-align: left;
 
   cursor: pointer;
