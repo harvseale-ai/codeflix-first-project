@@ -157,6 +157,67 @@ content/
     └── tool-space.md
 ```
 
+---
+
+# Lighthouse Performance Review
+
+## Overview
+
+Codeflix was reviewed and optimised using Google Lighthouse to improve:
+
+- Performance
+- Accessibility
+- Best Practices
+- SEO
+
+The optimisation process focused on improving loading efficiency and runtime performance while preserving the existing architecture, layout system, responsive behaviour, and user experience.
+
+---
+
+## Final Lighthouse Scores
+
+| Page | Performance | Accessibility | Best Practices | SEO |
+|---|---|---|---|---|
+| Homepage (`index.html`) | 96 | 100 | 96 | 91 |
+| Workspace (`workspace.html`) | 92 | 100 | 96 | 100 |
+| Snippets (`snippets.html`) | 97 | 100 | 96 | 90 |
+
+---
+
+# Optimisation Goals
+
+The main goal was to improve Lighthouse performance WITHOUT causing architectural drift.
+
+This meant preserving:
+
+- existing UI and layout
+- DOM structure
+- responsive behaviour
+- iframe functionality
+- JavaScript interaction flow
+- accessibility behaviour
+- navigation structure
+- Bootstrap layout system
+- dataset-driven interaction patterns
+
+---
+
+## Safe Performance Optimisations Applied
+
+## Lazy Loading
+
+Added native lazy loading for:
+
+- YouTube thumbnails
+- inactive iframes
+- embedded media
+
+Example:
+
+```html
+<img loading="lazy" decoding="async">
+<iframe loading="lazy"></iframe>
+
 ## AI Reflection
 
 AI was used as a support tool throughout the Codeflix project to help improve planning, debugging, accessibility, validation, and documentation.

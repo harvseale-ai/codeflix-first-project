@@ -1690,7 +1690,7 @@
   padding-inline: var(--space-6);
   }
 
-  /* WHY: fixdd the very-small-phone menu in place to not move up the screen. */
+  /* WHY: fixd the very-small-phone menu in place to not move up the screen. */
   .tool-sidebar {
     position: fixed;
     top: 8px;

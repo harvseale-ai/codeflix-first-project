@@ -53,6 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
     markdownContent.appendChild(notesSection);
   }
 
+  // this can go
   /* WHY: Adds one new note to the page immediately after saving, without reloading all markdown content. */
   function renderSingleNote(noteText) {
     let notesSection = document.querySelector(".user-notes-section");
@@ -79,6 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
     notesList.appendChild(noteCard);
   }
 
+  // this can go
   /* WHY: Validates the note input, saves it to localStorage, clears the field, and renders it on the page. */
   function saveNoteToCurrentTopic() {
     if (!topicInput) return;
@@ -225,22 +227,27 @@ function playSelectedVideo(card) {
   });
 }
 
-/* WHY: If the hero exists, video cards update the iframe source and switch the hero into playing mode. */
+/* WHY: If the hero exists, delegated events avoid attaching duplicate listeners to every video card.
+   Safe because the same card selector, same keys, same autoplay URL, and same playSelectedVideo flow are preserved. */
 if (heroPromo && heroVideo) {
-  document
-    .querySelectorAll(".video-content-card, .top-ten-card[data-video]")
-    .forEach((card) => {
-      card.addEventListener("click", () => {
-        playSelectedVideo(card);
-      });
+  document.addEventListener("click", (event) => {
+    const card = event.target.closest(".video-content-card, .top-ten-card[data-video]");
 
-      card.addEventListener("keydown", (event) => {
-        if (event.key !== "Enter" && event.key !== " ") return;
+    if (!card) return;
 
-        event.preventDefault();
-        playSelectedVideo(card);
-      });
-    });
+    playSelectedVideo(card);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+
+    const card = event.target.closest(".video-content-card, .top-ten-card[data-video]");
+
+    if (!card) return;
+
+    event.preventDefault();
+    playSelectedVideo(card);
+  });
 }
 
 /* WHY: Copies prompt text from data-prompt to the clipboard and shows a temporary copied state. */
@@ -292,7 +299,7 @@ if (footer) {
     }, 5000);
   }
 
-  window.addEventListener("scroll", showFooterTemporarily);
+  window.addEventListener("scroll", showFooterTemporarily, { passive: true });
 
   window.addEventListener("mousemove", (event) => {
     const nearBottom = window.innerHeight - event.clientY < 90;
@@ -300,7 +307,7 @@ if (footer) {
     if (nearBottom) {
       showFooterTemporarily();
     }
-  });
+  }, { passive: true });
 }
 
 /* ==========================================================================================

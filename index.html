@@ -25,6 +25,10 @@
 
     <meta name="apple-mobile-web-app-title" content="Codeflix">
 
+    <!-- WHY: Warms up only the existing third-party media origins. Safe because it does not change DOM, layout, cascade, or behaviour. -->
+    <link rel="preconnect" href="https://img.youtube.com">
+    <link rel="preconnect" href="https://www.youtube.com">
+
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet">
@@ -312,6 +316,7 @@
           <iframe
             id="heroVideo"
             src="about:blank"
+            loading="lazy"
             title="Featured video player"
             allow="
               accelerometer;
@@ -365,6 +370,8 @@
           >
             <img
               class="content-card-img"
+              loading="lazy"
+              decoding="async"
               src="https://img.youtube.com/vi/qz0aGYrrlhU/hqdefault.jpg"
               alt="HTML Crash Course thumbnail">
 
@@ -381,6 +388,8 @@
           >
             <img
               class="content-card-img"
+              loading="lazy"
+              decoding="async"
               src="https://img.youtube.com/vi/FQdaUv95mR8/hqdefault.jpg"
               alt="HTML Page Structure thumbnail">
 
@@ -397,6 +406,8 @@
           >
             <img
               class="content-card-img"
+              loading="lazy"
+              decoding="async"
               src="https://img.youtube.com/vi/kX3TfdUqpuU/hqdefault.jpg"
               alt="Semantic HTML thumbnail">
 
@@ -413,6 +424,8 @@
           >
             <img
               class="content-card-img"
+              loading="lazy"
+              decoding="async"
               src="https://img.youtube.com/vi/H9zdfZrFUp0/hqdefault.jpg"
               alt="HTML Forms and Inputs thumbnail">
 
@@ -429,6 +442,8 @@
           >
             <img
               class="content-card-img"
+              loading="lazy"
+              decoding="async"
               src="https://img.youtube.com/vi/e23RA_Uo99o/hqdefault.jpg"
               alt="HTML Tables thumbnail">
 
@@ -445,6 +460,8 @@
           >
             <img
               class="content-card-img"
+              loading="lazy"
+              decoding="async"
               src="https://img.youtube.com/vi/QbkN8y0usOE/hqdefault.jpg"
               alt="HTML Embedding Media thumbnail">
 
@@ -490,6 +507,8 @@
           >
             <img
               class="content-card-img"
+              loading="lazy"
+              decoding="async"
               src="https://img.youtube.com/vi/yfoY53QXEnI/hqdefault.jpg"
               alt="CSS Crash Course thumbnail">
 
@@ -506,13 +525,14 @@
           >
             <img
               class="content-card-img"
+              loading="lazy"
+              decoding="async"
               src="https://img.youtube.com/vi/l1mER1bV0N0/hqdefault.jpg"
               alt="CSS Selectors thumbnail">
 
             <h3 class="content-card-title">Selectors</h3>
           </article>
           
-
           <!-- video-content-card -->
           <article
             class="content-card video-content-card"
@@ -522,6 +542,8 @@
           >
             <img
               class="content-card-img"
+              loading="lazy"
+              decoding="async"
               src="https://img.youtube.com/vi/M6coJNLFBWI/hqdefault.jpg"
               alt="CSS Box Model thumbnail">
 
@@ -538,6 +560,8 @@
           >
             <img
               class="content-card-img"
+              loading="lazy"
+              decoding="async"
               src="https://img.youtube.com/vi/3YW65K6LcIA/hqdefault.jpg"
               alt="CSS Flexbox thumbnail">
 
@@ -554,6 +578,8 @@
           >
             <img
               class="content-card-img"
+              loading="lazy"
+              decoding="async"
               src="https://img.youtube.com/vi/9zA8cB-54SA/hqdefault.jpg"
               alt="CSS Grid thumbnail">
 
@@ -570,6 +596,8 @@
           >
             <img
               class="content-card-img"
+              loading="lazy"
+              decoding="async"
               src="https://img.youtube.com/vi/p0bGHP-PXD4/hqdefault.jpg"
               alt="Responsive CSS thumbnail">
 
@@ -615,6 +643,8 @@
           >
             <img
               class="content-card-img"
+              loading="lazy"
+              decoding="async"
               src="https://img.youtube.com/vi/dJvPTRXyc6s/hqdefault.jpg"
               alt="JavaScript Variables thumbnail">
 
@@ -631,6 +661,8 @@
           >
             <img
               class="content-card-img"
+              loading="lazy"
+              decoding="async"
               src="https://img.youtube.com/vi/cMt9U6kCWsM/hqdefault.jpg"
               alt="JavaScript Functions thumbnail">
 
@@ -647,6 +679,8 @@
           >
             <img
               class="content-card-img"
+              loading="lazy"
+              decoding="async"
               src="https://img.youtube.com/vi/5fb2aPlgoys/hqdefault.jpg"
               alt="JavaScript Events thumbnail">
 
@@ -663,6 +697,8 @@
           >
             <img
               class="content-card-img"
+              loading="lazy"
+              decoding="async"
               src="https://img.youtube.com/vi/3_Mrc1vUglg/hqdefault.jpg"
               alt="JavaScript Arrays thumbnail">
 
@@ -679,6 +715,8 @@
           >
             <img
               class="content-card-img"
+              loading="lazy"
+              decoding="async"
               src="https://img.youtube.com/vi/lfmg-EJ8gm4/hqdefault.jpg"
               alt="JavaScript Objects thumbnail">
 
@@ -695,6 +733,8 @@
           >
             <img
               class="content-card-img"
+              loading="lazy"
+              decoding="async"
               src="https://img.youtube.com/vi/WbG86sMd3SU/hqdefault.jpg"
               alt="JavaScript DOM thumbnail">
 
@@ -889,6 +929,8 @@
           >
             <img
               class="content-card-img"
+              loading="lazy"
+              decoding="async"
               src="https://img.youtube.com/vi/tRZGeaHPoaw/hqdefault.jpg"
               alt="Git and GitHub Basics thumbnail">
 
@@ -905,6 +947,8 @@
           >
             <img
               class="content-card-img"
+              loading="lazy"
+              decoding="async"
               src="https://img.youtube.com/vi/WbG86sMd3SU/hqdefault.jpg"
               alt="Git Add thumbnail">
 
@@ -921,6 +965,8 @@
           >
             <img
               class="content-card-img"
+              loading="lazy"
+              decoding="async"
               src="https://img.youtube.com/vi/HVsySz-h9r4/hqdefault.jpg"
               alt="Command Line Git thumbnail">
 
@@ -937,6 +983,8 @@
           >
             <img
               class="content-card-img"
+              loading="lazy"
+              decoding="async"
               src="https://img.youtube.com/vi/Njq0_-YUf-s/hqdefault.jpg"
               alt="Add Commit and Push thumbnail">
 
@@ -953,6 +1001,8 @@
           >
             <img
               class="content-card-img"
+              loading="lazy"
+              decoding="async"
               src="https://img.youtube.com/vi/3rxZNlxD9_E/hqdefault.jpg"
               alt="Branching Workflow thumbnail">
 
@@ -969,6 +1019,8 @@
           >
             <img
               class="content-card-img"
+              loading="lazy"
+              decoding="async"
               src="https://img.youtube.com/vi/8JJ101D3knE/hqdefault.jpg"
               alt="GitHub Workflow thumbnail">
 
@@ -985,6 +1037,8 @@
           >
             <img
               class="content-card-img"
+              loading="lazy"
+              decoding="async"
               src="https://img.youtube.com/vi/rE2zRhZdjFU/hqdefault.jpg"
               alt="Debugging Git Issues thumbnail">
 
@@ -1030,6 +1084,8 @@
           >
             <img
               class="content-card-img"
+              loading="lazy"
+              decoding="async"
               src="https://img.youtube.com/vi/QlZkfmofzHU/hqdefault.jpg"
               alt="Responsive Dashboard thumbnail">
 
@@ -1046,6 +1102,8 @@
           >
             <img
               class="content-card-img"
+              loading="lazy"
+              decoding="async"
               src="https://img.youtube.com/vi/UALn3klXFBM/hqdefault.jpg"
               alt="Admin Dashboard thumbnail">
 
@@ -1062,6 +1120,8 @@
           >
             <img
               class="content-card-img"
+              loading="lazy"
+              decoding="async"
               src="https://img.youtube.com/vi/vAOMZGSsju4/hqdefault.jpg"
               alt="Card Layouts thumbnail">
 
@@ -1078,6 +1138,8 @@
           >
             <img
               class="content-card-img"
+              loading="lazy"
+              decoding="async"
               src="https://img.youtube.com/vi/01YKQmia2Jw/hqdefault.jpg"
               alt="Notes App Pattern thumbnail">
 
@@ -1094,6 +1156,8 @@
           >
             <img
               class="content-card-img"
+              loading="lazy"
+              decoding="async"
               src="https://img.youtube.com/vi/SeKQSQDUMDQ/hqdefault.jpg"
               alt="Checklist App Pattern thumbnail">
 
@@ -1110,6 +1174,8 @@
           >
             <img
               class="content-card-img"
+              loading="lazy"
+              decoding="async"
               src="https://img.youtube.com/vi/5fb2aPlgoys/hqdefault.jpg"
               alt="DOM App Patterns thumbnail">
 

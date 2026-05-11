@@ -73,7 +73,7 @@
   --container-wide: 1480px;
 
   /* WHY: Controls default page breathing room and fixed-footer clearance. */
-  --page-padding-x: 48px;
+  --page-padding-x: 168px; 
   --footer-height-space: 96px;
 
   /* WHY: Defines shared font families, text sizes, heading scales, line heights, and tracking values. */
