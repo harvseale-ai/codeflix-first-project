@@ -3,15 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
   /* WHY: Main markdown output container; all loaded markdown and saved notes are rendered here. */
   const markdownContent = document.getElementById("markdownContent");
 
-  /* WHY: Text input/textarea where the user writes a note for the current markdown topic. */
-  const topicInput = document.getElementById("topicInput");
-
-  /* WHY: Button that saves the typed note to the current topic. */
-  const addNoteBtn = document.getElementById("addNoteBtn");
-
-  /* WHY: Second button that currently reuses the same note-saving behaviour. */
-  const askBtn = document.getElementById("askBtn");
-
   /* WHY: Reads the URL query string so pages can load a markdown file from ?file=... */
   const params = new URLSearchParams(window.location.search);
 
@@ -51,53 +42,6 @@ document.addEventListener("DOMContentLoaded", () => {
     `;    
 
     markdownContent.appendChild(notesSection);
-  }
-
-  // this can go
-  /* WHY: Adds one new note to the page immediately after saving, without reloading all markdown content. */
-  function renderSingleNote(noteText) {
-    let notesSection = document.querySelector(".user-notes-section");
-
-    if (!notesSection) {
-      notesSection = document.createElement("section");
-      notesSection.className = "user-notes-section";
-
-      notesSection.innerHTML = `
-        <h2>My added notes</h2>
-        <div class="user-notes-list"></div>
-      `;
-
-      markdownContent.appendChild(notesSection);
-    }
-
-    const notesList = notesSection.querySelector(".user-notes-list");
-
-    const noteCard = document.createElement("article");
-    noteCard.className = "user-note-card";
-    noteCard.innerHTML =
-      typeof marked !== "undefined" ? marked.parse(noteText) : `<p>${noteText}</p>`;
-
-    notesList.appendChild(noteCard);
-  }
-
-  // this can go
-  /* WHY: Validates the note input, saves it to localStorage, clears the field, and renders it on the page. */
-  function saveNoteToCurrentTopic() {
-    if (!topicInput) return;
-
-    const noteText = topicInput.value.trim();
-
-    if (!noteText) return;
-
-    const savedNotes = JSON.parse(localStorage.getItem(getStorageKey())) || [];
-
-    savedNotes.push(noteText);
-
-    localStorage.setItem(getStorageKey(), JSON.stringify(savedNotes));
-
-    topicInput.value = "";
-
-    renderSingleNote(noteText);
   }
 
   /* WHY: Loads a markdown file, converts it with marked.js if available, and shows saved notes for that file. */
@@ -158,25 +102,6 @@ document.addEventListener("DOMContentLoaded", () => {
     loadMarkdown(link.dataset.file);
   });
 
-  /* WHY: Saves the current note when the add-note button is clicked. */
-  if (addNoteBtn) {
-    addNoteBtn.addEventListener("click", saveNoteToCurrentTopic);
-  }
-
-  /* WHY: Reuses note saving for askBtn; check later whether this should do something different. */
-  if (askBtn) {
-    askBtn.addEventListener("click", saveNoteToCurrentTopic);
-  }
-
-  /* WHY: Allows Enter to save a note while Shift+Enter still creates a new line. */
-  if (topicInput) {
-    topicInput.addEventListener("keydown", (event) => {
-      if (event.key === "Enter" && !event.shiftKey) {
-        event.preventDefault();
-        saveNoteToCurrentTopic();
-      }
-    });
-  }
 });
 
 
@@ -361,4 +286,44 @@ function scrollRow(button, direction) {
     left: direction === "left" ? -500 : 500,
     behavior: "smooth",
   });
+}
+
+/* WHY: Keeps the prompt dropdown visible briefly after mouse leave
+   so users have time to interact with the menu.
+   Safe because it only changes visibility timing. */
+
+const promptMenu = document.querySelector(".prompt-menu");
+
+if (promptMenu) {
+  const promptDropdown = promptMenu.querySelector(".prompt-dropdown");
+  const promptButton = promptMenu.querySelector(".tool-link");
+
+  let promptHideTimer;
+  const isTouchPromptMode = () => window.matchMedia("(hover: none), (pointer: coarse)").matches;
+
+  promptMenu.addEventListener("mouseenter", () => {
+    if (isTouchPromptMode()) return;
+
+    clearTimeout(promptHideTimer);
+
+    promptDropdown.classList.add("is-visible");
+  });
+
+  promptMenu.addEventListener("mouseleave", () => {
+    if (isTouchPromptMode()) return;
+
+    promptHideTimer = setTimeout(() => {
+      promptDropdown.classList.remove("is-visible");
+    }, 2000);
+  });
+
+  if (promptButton) {
+    promptButton.addEventListener("click", () => {
+      if (!isTouchPromptMode()) return;
+
+      clearTimeout(promptHideTimer);
+      promptDropdown.classList.toggle("is-visible");
+    });
+  }
+
 }

@@ -73,7 +73,7 @@
   --container-wide: 1480px;
 
   /* WHY: Controls default page breathing room and fixed-footer clearance. */
-  --page-padding-x: 168px; 
+  --page-padding-x: 160px;
   --footer-height-space: 96px;
 
   /* WHY: Defines shared font families, text sizes, heading scales, line heights, and tracking values. */
@@ -655,8 +655,13 @@ button.sidebar-main-link {
   box-shadow: var(--shadow-card);
 }
 
-/* WHY: Opens the prompt dropdown on desktop hover without JavaScript. */
-.prompt-menu:hover .prompt-dropdown {
+/* WHY: JS controls dropdown visibility timing instead of instant hover removal. */
+.prompt-dropdown {
+  display: none;
+}
+
+/* WHY: Keeps the existing grid layout once JS activates the menu. */
+.prompt-dropdown.is-visible {
   display: grid;
 }
 
